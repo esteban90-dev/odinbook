@@ -12,7 +12,7 @@ feature "user registers" do
     click_on "Sign up"
 
     expect(page).to have_content("You have signed up successfully")
-    expect(page).to have_content("Logged in as somebody@example.com")
+    expect(page).to have_content("signed in as somebody@example.com")
   end
 
 end
