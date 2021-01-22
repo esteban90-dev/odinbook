@@ -11,4 +11,14 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
     end
   end
+
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      user = new(session["devise.user_attributes"])
+      user.valid?
+      return user
+    else
+      super
+    end
+  end
 end

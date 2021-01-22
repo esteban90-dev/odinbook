@@ -31,3 +31,29 @@ describe User, ".from_omniauth" do
   end
 
 end
+
+describe User, ".new_with_session" do
+
+  it "returns a new user object built from data in the session hash" do
+    params_hash = {}
+    session_hash = {}
+    session_hash["devise.user_attributes"] = { email: "somebody@example.com", name: "somebody", uid: "1234", provider: "facebook" }
+
+    new_user_from_session = User.new_with_session(params_hash, session_hash)
+
+    expect(new_user_from_session.email).to eq("somebody@example.com")
+    expect(new_user_from_session.name).to eq("somebody")
+    expect(new_user_from_session.uid).to eq("1234")
+    expect(new_user_from_session.email).to eq("somebody@example.com")
+  end
+
+  it "returns a new user object if the session hash doesn't contain user attribute data" do
+    params_hash = {}
+    session_hash = {}
+
+    new_user_from_session = User.new_with_session(params_hash, session_hash)
+
+    expect(new_user_from_session.attributes).to eq(User.new.attributes)
+  end
+
+end
