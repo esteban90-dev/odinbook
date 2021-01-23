@@ -20,6 +20,7 @@ feature "user signs in with facebook" do
     click_on "Sign in with Facebook"
 
     expect(page).to have_content("Email can't be blank")
+    expect(page).not_to have_content("Password can't be blank")
   end
 
 end
