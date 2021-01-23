@@ -12,7 +12,7 @@ feature "user signs in" do
     click_on "Sign in"
 
     expect(page).to have_content("Signed in successfully")
-    expect(page).to have_content("signed in as #{user.email}")
+    expect(page).to have_content("signed in as #{user.name}")
   end
 
 end
