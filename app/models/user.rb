@@ -23,6 +23,6 @@ class User < ApplicationRecord
   end
 
   def password_required?
-    provider.blank?
+    super && provider.blank?
   end
 end
