@@ -57,3 +57,19 @@ describe User, ".new_with_session" do
   end
 
 end
+
+describe User, "#password_required?" do
+
+  it "returns false if the user object's provider field has a value" do
+    facebook_user = FactoryBot.create(:user, :from_facebook)
+
+    expect(facebook_user.password_required?).to eq(false)
+  end
+
+  it "returns true if the user objects' provider field is blank" do
+    regular_user = FactoryBot.create(:user)
+
+    expect(regular_user.password_required?).to eq(true)
+  end
+
+end 
