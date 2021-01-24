@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "user updates registration" do
+feature "regular user updates registration" do
 
   scenario "changes name and email successfully" do
     user = FactoryBot.create(:user)
@@ -10,7 +10,7 @@ feature "user updates registration" do
 
     fill_in "Name", with: "somebody else"
     fill_in "Email", with: "somebody_else@example.com"
-    fill_in "Current password", with: "#{user.password}"
+    fill_in "Current password", with: "testpassword"
     click_on "Update"
 
     expect(page).to have_content("Your account has been updated successfully")

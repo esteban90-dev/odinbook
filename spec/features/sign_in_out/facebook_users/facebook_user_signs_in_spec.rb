@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "user signs in with facebook" do 
+feature "facebook user signs in" do 
 
   scenario "successfully" do 
     stub_omniauth_successful

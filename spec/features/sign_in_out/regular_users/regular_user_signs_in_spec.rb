@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "user signs in" do 
+feature "regular user signs in" do 
 
   scenario "successfully" do 
     user = FactoryBot.create(:user)

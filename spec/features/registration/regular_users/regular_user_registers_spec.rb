@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "user registers" do
+feature "regular user registers" do
 
   scenario "successfully" do
     visit root_path
