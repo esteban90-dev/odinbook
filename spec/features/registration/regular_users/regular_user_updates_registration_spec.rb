@@ -10,11 +10,11 @@ feature "regular user updates registration" do
 
     fill_in "Name", with: "somebody else"
     fill_in "Email", with: "somebody_else@example.com"
-    fill_in "Current password", with: "testpassword"
+    fill_in "Current password", with: "#{user.password}"
     click_on "Update"
 
     expect(page).to have_content("Your account has been updated successfully")
-    expect(page).to have_content("somebody else")
+    expect(page).to have_content("signed in as somebody else")
   end
 
   scenario "changes password successfully" do
