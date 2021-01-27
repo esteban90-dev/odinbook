@@ -28,6 +28,21 @@ feature "regular user registers" do
     click_on "Sign up"
 
     expect(page).to have_content("Password is too short")
-  end 
+  end
+  
+  scenario "unsuccessfully - email has already been taken" do
+    FactoryBot.create(:user)
+
+    visit root_path
+
+    click_on "sign up"
+    fill_in "Name", with: "somebody"
+    fill_in "Email", with: "somebody@example.com"
+    fill_in "Password", with: "12345678"
+    fill_in "Password confirmation", with: "12345678"
+    click_on "Sign up"
+
+    expect(page).to have_content("Email has already been taken")
+  end
   
 end
