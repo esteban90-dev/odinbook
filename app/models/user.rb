@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable
 
   has_many :incoming_friend_requests, class_name: "FriendRequest", foreign_key: "requestee_id"
+  has_many :friendships
+  has_many :friends, through: :friendships
 
   def self.from_omniauth(auth)
     where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|

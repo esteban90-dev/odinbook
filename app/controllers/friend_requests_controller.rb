@@ -1,4 +1,8 @@
 class FriendRequestsController < ApplicationController
+  def index
+    @incoming_friend_requests = current_user.incoming_friend_requests
+  end
+
   def create
     request = FriendRequest.new(request_params)
 
@@ -6,6 +10,16 @@ class FriendRequestsController < ApplicationController
       flash[:notice] = "Friend request successfully sent to #{request.requestee.name}"
       redirect_to users_path
     end
+  end
+
+  def destroy
+    request = current_user.incoming_friend_requests.find(params[:id])
+    if params[:accept]
+      current_user.friendships.create(friend_id: request.requestor.id)
+      request.destroy
+      flash[:notice] = "Successfully accepted friend request from #{request.requestor.name}"
+    end
+    redirect_to friendships_path
   end
 
   private

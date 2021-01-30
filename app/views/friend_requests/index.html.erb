@@ -1,0 +1,8 @@
+<% @incoming_friend_requests.each do |ifr| %>
+  <div class="incoming">
+    <div id=<%= ifr.requestor.id %>>
+      <%= ifr.requestor.name %>
+      <%= link_to "Accept", friend_request_path(ifr.id, accept: true), method: :delete %>
+    </div>
+  </div>
+<% end %>
