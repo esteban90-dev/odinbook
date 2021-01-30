@@ -14,11 +14,15 @@ class FriendRequestsController < ApplicationController
 
   def destroy
     request = current_user.incoming_friend_requests.find(params[:id])
-    if params[:accept]
+    
+    if params[:accept] == "true"
       current_user.friendships.create(friend_id: request.requestor.id)
-      request.destroy
       flash[:notice] = "Successfully accepted friend request from #{request.requestor.name}"
+    else
+      flash[:notice] = "Successfully ignored friend request from #{request.requestor.name}"
     end
+    
+    request.destroy
     redirect_to friendships_path
   end
 

@@ -13,3 +13,11 @@ def accept_friend_request(user)
     end
   end
 end
+
+def ignore_friend_request(user)
+  within(".incoming") do
+    within("##{user.id}") do
+      click_on "Ignore"
+    end
+  end
+end

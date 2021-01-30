@@ -3,6 +3,7 @@
     <div id=<%= ifr.requestor.id %>>
       <%= ifr.requestor.name %>
       <%= link_to "Accept", friend_request_path(ifr.id, accept: true), method: :delete %>
+      <%= link_to "Ignore", friend_request_path(ifr.id, accept: false), method: :delete %>
     </div>
   </div>
 <% end %>
