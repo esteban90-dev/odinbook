@@ -11,8 +11,6 @@ feature "user ignores friend request" do
     visit friend_requests_path
     ignore_friend_request(bob)
 
-    byebug
-
     expect(page).to have_content("Successfully ignored friend request from bob")
     expect(joe.friends).not_to include(bob)
     expect(bob.friends).not_to include(joe)

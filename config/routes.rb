@@ -4,7 +4,16 @@ Rails.application.routes.draw do
   root to: "static_pages#welcome"
   
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks", registrations: 'registrations' }
+
   resources :users, only: :index
-  resources :friend_requests, only: [:index, :create, :destroy]
+
+  resources :friend_requests, only: [:index, :create] do 
+    member do
+      delete :accept
+      delete :ignore
+    end
+  end
+
   resources :friendships, only: :index
+
 end
