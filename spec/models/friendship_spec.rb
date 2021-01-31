@@ -14,4 +14,19 @@ describe Friendship do
     
   end
 
+  context "when destroyed" do
+
+    it "destroys the inverse record" do
+      joe = FactoryBot.create(:user, name: "joe", email: "joe@mail.com")
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com")
+      friendship = Friendship.create(user: joe, friend: bob)
+      inverse_friendship = Friendship.find_by_user_id(bob.id)
+
+      friendship.destroy
+
+      expect(Friendship.all).not_to include(friendship, inverse_friendship)
+    end
+
+  end
+
 end
