@@ -73,3 +73,19 @@ describe User, "#password_required?" do
   end
 
 end 
+
+describe User, "#requested_friends" do
+
+  it "returns a list of users that the current user has sent friend requests to" do
+
+    bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com")
+    frank = FactoryBot.create(:user, name: "frank", email: "frank@mail.com")
+    cindy = FactoryBot.create(:user, name: "cindy", email: "cindy@mail.com")
+
+    FriendRequest.create(requestor: bob, requestee: frank)
+    FriendRequest.create(requestor: bob, requestee: cindy)
+
+    expect(bob.requested_friends).to include(frank, cindy)
+  end
+
+end

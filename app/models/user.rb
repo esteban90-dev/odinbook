@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable
 
   has_many :incoming_friend_requests, class_name: "FriendRequest", foreign_key: "requestee_id"
+  has_many :sent_friend_requests, class_name: "FriendRequest", foreign_key: "requestor_id"
   has_many :friendships
   has_many :friends, through: :friendships
 
@@ -28,5 +29,9 @@ class User < ApplicationRecord
 
   def password_required?
     super && provider.blank?
+  end
+
+  def requested_friends
+    sent_friend_requests.map{ |fr| fr.requestee }
   end
 end

@@ -12,7 +12,7 @@ feature "user sends friend request" do
     click_add_friend(joe)
 
     expect(page).to have_content("Friend request successfully sent to joe")
-    expect(joe.incoming_friend_requests.first.requestor.name).to eq("bob")
+    expect(request_pending?(joe)).to eq(true)
   end
 
 end

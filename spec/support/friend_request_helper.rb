@@ -21,3 +21,8 @@ def ignore_friend_request(user)
     end
   end
 end
+
+def request_pending?(user)
+  user_section = find("##{user.id}")
+  expect(user_section).to have_no_link("Add friend").and have_content("Request Pending")
+end
