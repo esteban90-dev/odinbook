@@ -26,3 +26,8 @@ def request_pending?(user)
   user_section = find("##{user.id}")
   expect(user_section).to have_no_link("Add friend").and have_content("Request Pending")
 end
+
+def contains_incoming_friend_request?(user)
+  incoming_section = find('.incoming')
+  expect(incoming_section).to have_content(user.name)
+end
