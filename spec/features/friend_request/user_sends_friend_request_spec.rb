@@ -8,8 +8,7 @@ feature "user sends friend request" do
 
     sign_in bob
     visit users_path 
-
-    click_add_friend(joe)
+    add_friend(joe)
 
     expect(page).to have_content("Friend request successfully sent to joe")
     expect(request_pending?(joe)).to eq(true)
