@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-feature "new notification is created" do 
+feature "user receives notification" do 
 
-  scenario "when user receives a friend request" do 
+  scenario "when a new friend request is receieved" do 
     frank = FactoryBot.create(:user, name: "frank", email: "frank@mail.com")
     bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com")
     
