@@ -17,13 +17,19 @@
       </div>
     <% end %>
 
-    <% if current_user %>
-      signed in as <%= current_user.name %>
-      <%= link_to "sign out", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "sign in", new_user_session_path %>
-      <%= link_to "sign up", new_user_registration_path %>
-    <% end %>
+    <div class="nav">
+      <% if current_user %>
+        signed in as <%= current_user.name %>
+        <%= link_to "sign out", destroy_user_session_path, method: :delete %>
+        <% if current_user.notifications.unacked.any? %>
+          new notifications
+        <% end %>
+      <% else %>
+        <%= link_to "sign in", new_user_session_path %>
+        <%= link_to "sign up", new_user_registration_path %>
+      <% end %>
+    </div>
+    
     <%= yield %>
   </body>
 </html>

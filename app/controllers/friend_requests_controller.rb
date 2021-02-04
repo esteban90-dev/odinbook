@@ -11,6 +11,7 @@ class FriendRequestsController < ApplicationController
 
     if request.save
       flash[:notice] = "Friend request successfully sent to #{request.requestee.name}"
+      request.requestee.notifications.create(message: "You have a new friend request from #{request.requestor.name}")
       redirect_to users_path
     end
   end

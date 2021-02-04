@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :sent_friend_requests, class_name: "FriendRequest", foreign_key: "requestor_id"
   has_many :friendships
   has_many :friends, through: :friendships
+  has_many :notifications
 
   def self.from_omniauth(auth)
     where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|
