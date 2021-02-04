@@ -21,6 +21,7 @@ class FriendRequestsController < ApplicationController
     @request.destroy
 
     flash[:notice] = "Successfully accepted friend request from #{@request.requestor.name}"
+    @request.requestor.notifications.create(message: "#{@request.requestee.name} accepted your friend request")
     redirect_to friendships_path
   end
 
