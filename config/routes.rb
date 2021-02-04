@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   end
 
   resources :friendships, only: [:index, :destroy]
+  resources :notifications, only: :index
 
 end
