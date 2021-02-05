@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks", registrations: 'registrations' }
 
-  resources :users, only: :index
+  resources :users, only: :index do 
+    resources :notifications, only: :index
+  end
 
   resources :friend_requests, only: [:index, :create] do 
     member do
@@ -15,6 +17,4 @@ Rails.application.routes.draw do
   end
 
   resources :friendships, only: [:index, :destroy]
-  resources :notifications, only: :index
-
 end

@@ -22,7 +22,7 @@
         signed in as <%= current_user.name %>
         <%= link_to "sign out", destroy_user_session_path, method: :delete %>
         <% if current_user.notifications.unacked.any? %>
-          <%= link_to "new notifications", notifications_path %>
+          <%= link_to "new notifications", user_notifications_path(current_user.id) %>
         <% end %>
       <% else %>
         <%= link_to "sign in", new_user_session_path %>
