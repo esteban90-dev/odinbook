@@ -16,7 +16,7 @@ feature "user sends friend request" do
   end
 
   scenario "and sees 'friend request sent' next to the user in the users index" do 
-    expect(friend_request_pending?(@joe)).to be(true)
+    expect(user_appears_pending?(@joe)).to be(true)
   end
 
   scenario "and sees it appear in the sent section of the friend requests index" do 
