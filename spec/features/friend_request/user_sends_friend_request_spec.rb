@@ -11,15 +11,15 @@ feature "user sends friend request" do
     add_friend(@joe)
   end
 
-  scenario "and sees a flash message" do
+  scenario "they see a flash message" do
     expect(page).to have_content("Friend request successfully sent to joe")
   end
 
-  scenario "and sees 'friend request sent' next to the user in the users index" do 
+  scenario "they see 'friend request sent' next to the user in the users index" do 
     expect(user_appears_pending?(@joe)).to be(true)
   end
 
-  scenario "and sees it appear in the sent section of the friend requests index" do 
+  scenario "they see it appear in the sent section of the friend requests index" do 
     visit friend_requests_path
 
     expect(page).to have_sent_friend_request(@joe)
