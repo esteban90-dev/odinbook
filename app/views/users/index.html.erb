@@ -1,10 +1,19 @@
 <% @users.each do |user| %>
   <div id=<%= user.id %>>
     <%= user.name %>
-    <% if current_user.requested_friends.include?(user) %>
+
+    <% if current_user.sent_friend_requests.map{ |fr| fr.requestee }.include?(user) %>
       friend request sent
+
+    <% elsif current_user.incoming_friend_requests.map{ |fr| fr.requestor }.include?(user) %>
+      <% fr = current_user.incoming_friend_requests.where(requestor: user).first %>
+      <%= link_to "accept", accept_friend_request_path(fr.id), method: :delete %>
+      <%= link_to "ignore", ignore_friend_request_path(fr.id), method: :delete %>
+
     <% else %>
-      <%= link_to "Add friend", friend_requests_path("friend_request" => { requestor_id: current_user.id, requestee_id: user.id }), method: :post %>
+      <%= link_to "add friend", friend_requests_path("friend_request" => { requestor_id: current_user.id, requestee_id: user.id }), method: :post %>
+
     <% end %>
+
   </div>
 <% end %>
