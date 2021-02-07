@@ -2,8 +2,8 @@
   <% @incoming_friend_requests.each do |ifr| %>
     <div id=<%= ifr.requestor.id %>>
       <%= ifr.requestor.name %>
-      <%= link_to "Accept", accept_friend_request_path(ifr.id), method: :delete %>
-      <%= link_to "Ignore", ignore_friend_request_path(ifr.id), method: :delete %>
+      <%= link_to "accept", accept_friend_request_path(ifr.id), method: :delete %>
+      <%= link_to "ignore", ignore_friend_request_path(ifr.id), method: :delete %>
     </div>
   <% end %>
 </div>
