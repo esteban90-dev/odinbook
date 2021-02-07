@@ -89,3 +89,19 @@ describe User, "#requested_users" do
   end
 
 end
+
+describe User, "#acceptable_users" do
+
+  it "returns a list of users that have sent friend requests to the current user" do
+
+    bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com")
+    frank = FactoryBot.create(:user, name: "frank", email: "frank@mail.com")
+    cindy = FactoryBot.create(:user, name: "cindy", email: "cindy@mail.com")
+
+    FriendRequest.create(requestor: frank, requestee: bob)
+    FriendRequest.create(requestor: cindy, requestee: bob)
+
+    expect(bob.acceptable_users).to include(frank, cindy)
+  end
+
+end

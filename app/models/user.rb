@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def requested_users
     sent_friend_requests.map{ |fr| fr.requestee }
   end
+
+  def acceptable_users
+    incoming_friend_requests.map{ |fr| fr.requestor }
+  end
 end
