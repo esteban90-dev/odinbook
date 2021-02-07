@@ -32,7 +32,7 @@ class User < ApplicationRecord
     super && provider.blank?
   end
 
-  def requested_friends
+  def requested_users
     sent_friend_requests.map{ |fr| fr.requestee }
   end
 end

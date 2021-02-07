@@ -74,7 +74,7 @@ describe User, "#password_required?" do
 
 end 
 
-describe User, "#requested_friends" do
+describe User, "#requested_users" do
 
   it "returns a list of users that the current user has sent friend requests to" do
 
@@ -85,7 +85,7 @@ describe User, "#requested_friends" do
     FriendRequest.create(requestor: bob, requestee: frank)
     FriendRequest.create(requestor: bob, requestee: cindy)
 
-    expect(bob.requested_friends).to include(frank, cindy)
+    expect(bob.requested_users).to include(frank, cindy)
   end
 
 end
