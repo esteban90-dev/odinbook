@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "user sends friend request" do
 
-  before do 
+  before(:each) do 
     @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
     @joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
 
@@ -15,14 +15,16 @@ feature "user sends friend request" do
     expect(page).to have_content("Friend request successfully sent to joe")
   end
 
-  scenario "they see 'friend request sent' next to the user in the users index" do 
-    expect(user_appears_pending?(@joe)).to be(true)
+  scenario "they see 'friend request sent' next to the requestee in the users index" do 
+    user_sees_requestee_pending_in_user_index(@joe)
   end
 
   scenario "they see it appear in the sent section of the friend requests index" do 
+    @request = FriendRequest.first
+
     visit friend_requests_path
 
-    expect(page).to have_sent_friend_request(@joe)
+    user_sees_sent_friend_request(@request)
   end
 
 end
