@@ -19,24 +19,16 @@ feature "user receives friend request" do
     user_sees_new_notification
   end
 
-  scenario "they see an 'accept' link next to the user in the users index" do
+  scenario "they see 'accept/ignore' links next to the user in the users index" do
     visit users_path
 
-    user_sees_requestor_acceptable_in_user_index(@bob)
+    user_sees_requestor_in_user_index(@bob)
   end
 
-  scenario "they see an 'ignore' link next to the user in the users index" do
-    visit users_path
-
-    user_sees_requestor_ignorable_in_user_index(@bob)
-  end
-
-  scenario "they see it appear in the incoming section of the friend requests index" do 
-    @request = FriendRequest.first
-
+  scenario "they see 'accept/ignore' links next to the requestor in the sent section of the friend requests index" do 
     visit friend_requests_path
 
-    user_sees_incoming_friend_request(@request)
+    user_sees_requestor_in_friend_request_index(@bob)
   end
 
 end

@@ -16,13 +16,13 @@ feature "user sends friend request" do
   end
 
   scenario "they see 'friend request sent' next to the requestee in the users index" do 
-    user_sees_requestee_pending_in_user_index(@joe)
+    user_sees_requestee_in_user_index(@joe)
   end
 
-  scenario "they see it appear in the sent section of the friend requests index" do 
+  scenario "they see the requestee appear in the sent section of the friend requests index" do 
     visit friend_requests_path
 
-    user_sees_requestee_pending_in_friend_request_index(@joe)
+    user_sees_requestee_in_friend_request_index(@joe)
   end
 
 end
