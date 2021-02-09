@@ -20,11 +20,9 @@ feature "user sends friend request" do
   end
 
   scenario "they see it appear in the sent section of the friend requests index" do 
-    @request = FriendRequest.first
-
     visit friend_requests_path
 
-    user_sees_sent_friend_request(@request)
+    user_sees_requestee_pending_in_friend_request_index(@joe)
   end
 
 end

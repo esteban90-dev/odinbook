@@ -20,9 +20,9 @@ def user_sees_new_notification
   expect(page).to have_css(".nav", text: "new notification")
 end
 
-def user_sees_sent_friend_request(request)
-  user_section = find(".sent ##{request.requestee.id}")
-  expect(user_section).to have_content("#{request.requestee.name}")
+def user_sees_requestee_pending_in_friend_request_index(requestee)
+  user_section = find(".sent ##{requestee.id}")
+  expect(user_section).to have_content("#{requestee.name}")
   expect(user_section).to have_no_link
 end
 
