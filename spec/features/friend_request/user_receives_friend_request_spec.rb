@@ -10,23 +10,26 @@ feature "user receives friend request" do
     visit users_path
     add_friend(@frank)
     sign_out @bob
+    
     sign_in @frank
+    visit root_path
   end
 
   scenario "they receive a new notification" do
-    visit root_path
+    click_on "new notifications"
 
-    user_sees_new_notification
+    expect(page).to have_content("You have a new friend request from bob")
   end
 
   scenario "they see 'accept/ignore' links next to the user in the users index" do
-    visit users_path
+    click_on "users"
 
     user_sees_requestor_in_user_index(@bob)
   end
 
   scenario "they see 'accept/ignore' links next to the requestor in the sent section of the friend requests index" do 
-    visit friend_requests_path
+    click_on "frank"
+    click_on "friend requests"
 
     user_sees_requestor_in_friend_request_index(@bob)
   end

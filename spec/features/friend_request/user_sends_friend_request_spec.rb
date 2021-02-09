@@ -16,17 +16,11 @@ feature "user sends friend request" do
   end
 
   scenario "they see 'friend request sent' next to the requestee in the users index" do 
-    visit root_path
-
-    click_on "users"
-
     user_sees_requestee_in_user_index(@joe)
   end
 
   scenario "they see the requestee appear in the sent section of the friend requests index" do 
-    visit root_path
-
-    click_on "profile"
+    click_on "bob"
     click_on "friend requests"
 
     user_sees_requestee_in_friend_request_index(@joe)

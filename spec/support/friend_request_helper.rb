@@ -16,8 +16,8 @@ def have_incoming_friend_request(request)
   have_css(".incoming", text: request.requestor.name)
 end
 
-def user_sees_new_notification
-  expect(page).to have_css(".nav", text: "new notification")
+def user_sees_new_notification(notification)
+  expect(page).to have_css(".nav", text: "#{notification}")
 end
 
 def user_sees_requestee_in_friend_request_index(requestee)

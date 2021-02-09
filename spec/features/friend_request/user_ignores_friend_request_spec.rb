@@ -12,16 +12,26 @@ feature "user ignores friend request" do
     ignore_friend_request(@bob)
   end
 
-  scenario "they see a flash message" do 
+  scenario "user sees a flash message" do 
     expect(page).to have_content("Successfully ignored friend request from bob")
   end
 
-  scenario "they aren't friends with the requestor" do 
-    expect(@joe.friends).not_to include(@bob)
+  scenario "user doesn't see requestor in their friends list" do 
+    click_on "joe"
+    click_on "friends"
+
+    expect(page).not_to have_content("bob")
   end
 
-  scenario "the requestor isn't friends with them" do
-    expect(@bob.friends).not_to include(@joe)
+  scenario "the requestor doesn't see the requestee in their friends list" do
+    sign_out @joe
+    sign_in @bob
+
+    visit root_path
+    click_on "bob"
+    click_on "friends"
+
+    expect(page).not_to have_content("joe")
   end
 
   scenario "the friend request no longer exists" do 
