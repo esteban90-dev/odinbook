@@ -19,7 +19,8 @@
 
     <div class="nav">
       <% if current_user %>
-        signed in as <%= current_user.name %>
+        signed in as <%= link_to current_user.name, user_profile_path(current_user.id) %>
+        <%= link_to "users", users_path %>
         <%= link_to "sign out", destroy_user_session_path, method: :delete %>
         <% if current_user.notifications.unacked.any? %>
           <%= link_to "new notifications", user_notifications_path(current_user.id) %>
@@ -29,7 +30,6 @@
         <%= link_to "sign up", new_user_registration_path %>
       <% end %>
     </div>
-
     <%= yield %>
   </body>
 </html>
