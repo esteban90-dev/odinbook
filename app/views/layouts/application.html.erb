@@ -23,7 +23,9 @@
         <%= link_to "users", users_path %>
         <%= link_to "sign out", destroy_user_session_path, method: :delete %>
         <% if current_user.notifications.unacked.any? %>
-          <%= link_to "new notifications", user_notifications_path(current_user.id) %>
+          <b><%= link_to "notifications", user_notifications_path(current_user.id) %></b>
+        <% else %>
+          <%= link_to "notifications", user_notifications_path(current_user.id) %>
         <% end %>
       <% else %>
         <%= link_to "sign in", new_user_session_path %>

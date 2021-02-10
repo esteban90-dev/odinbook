@@ -28,7 +28,7 @@ feature "user accepts friend request" do
     sign_in @bob
 
     visit root_path
-    click_on "new notifications"
+    click_on "notifications"
 
     expect(page).to have_content("joe accepted your friend request")
   end

@@ -10,13 +10,13 @@ feature "user receives friend request" do
     visit users_path
     add_friend(@frank)
     sign_out @bob
-    
+
     sign_in @frank
     visit root_path
   end
 
   scenario "they receive a new notification" do
-    click_on "new notifications"
+    click_on "notifications"
 
     expect(page).to have_content("You have a new friend request from bob")
   end
