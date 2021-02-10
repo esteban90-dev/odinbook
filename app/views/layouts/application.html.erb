@@ -27,6 +27,7 @@
         <% else %>
           <%= link_to "notifications", user_notifications_path(current_user.id) %>
         <% end %>
+        <%= link_to "edit account", edit_user_registration_path %>
       <% else %>
         <%= link_to "sign in", new_user_session_path %>
         <%= link_to "sign up", new_user_registration_path %>
