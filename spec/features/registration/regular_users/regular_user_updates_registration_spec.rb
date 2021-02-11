@@ -2,33 +2,66 @@ require 'rails_helper'
 
 feature "regular user updates registration" do
 
-  scenario "changes name and email successfully" do
-    regular_user = FactoryBot.create(:user)
+  context "they change their name and email" do
+  
+    before(:each) do 
+      regular_user = FactoryBot.create(:user)
     
-    sign_in regular_user
-    visit edit_user_registration_path
+      sign_in regular_user
+      visit edit_user_registration_path
+  
+      fill_in "Name", with: "somebody else"
+      fill_in "Email", with: "somebody_else@example.com"
+      fill_in "Current password", with: "#{regular_user.password}"
+      click_on "Update"
+    end
+    
+    scenario "they see a flash message" do 
+      expect(page).to have_content("Your account has been updated successfully")
+    end
+    
+    scenario "they see that they are logged in with their new name" do 
+      expect(page).to have_content("signed in as somebody else")
+    end
 
-    fill_in "Name", with: "somebody else"
-    fill_in "Email", with: "somebody_else@example.com"
-    fill_in "Current password", with: "#{regular_user.password}"
-    click_on "Update"
+    scenario "they see their account credentials change" do 
+      click_on "edit"
 
-    expect(page).to have_content("Your account has been updated successfully")
-    expect(page).to have_content("signed in as somebody else")
+      expect(page).to have_field('user_name', with: "somebody else")
+      expect(page).to have_field('user_email', with: "somebody_else@example.com")
+    end
+
   end
 
-  scenario "changes password successfully" do
-    regular_user = FactoryBot.create(:user)
-    
-    sign_in regular_user
-    visit edit_user_registration_path
+  context "they change their password successfully" do
 
-    fill_in "Password", with: "testpassword2"
-    fill_in "Password confirmation", with: "testpassword2"
-    fill_in "Current password", with: "#{regular_user.password}"
-    click_on "Update"
+    before(:each) do 
+      @regular_user = FactoryBot.create(:user)
+      
+      sign_in @regular_user
+      visit edit_user_registration_path
 
-    expect(page).to have_content("Your account has been updated successfully")
+      fill_in "Password", with: "testpassword2"
+      fill_in "Password confirmation", with: "testpassword2"
+      fill_in "Current password", with: @regular_user.password
+      click_on "Update"
+    end
+
+    scenario "they see a flash message" do 
+      expect(page).to have_content("Your account has been updated successfully")
+    end
+
+    scenario "they are able to log in with their new password" do 
+      sign_out @regular_user
+      visit root_path
+      click_on "sign in"
+      fill_in "Email", with: @regular_user.email
+      fill_in "Password", with: "testpassword2"
+      click_on "Sign in"
+      
+      expect(page).to have_content("signed in as somebody")
+    end
+
   end
 
 end
