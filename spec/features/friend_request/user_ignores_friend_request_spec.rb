@@ -5,10 +5,12 @@ feature "user ignores friend request" do
   before do  
     @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
     @joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
-    @request = FriendRequest.create(requestor: @bob, requestee: @joe)
+    FriendRequest.create(requestor: @bob, requestee: @joe)
 
     sign_in @joe
-    visit friend_requests_path
+    visit root_path
+    click_on "joe"
+    click_on "friend requests"
     ignore_friend_request(@bob)
   end
 
@@ -35,7 +37,7 @@ feature "user ignores friend request" do
   end
 
   scenario "the friend request no longer exists" do 
-    expect{ @request.reload }.to raise_error ActiveRecord::RecordNotFound
+    expect(FriendRequest.all.any?).to eq(false)
   end
 
 end

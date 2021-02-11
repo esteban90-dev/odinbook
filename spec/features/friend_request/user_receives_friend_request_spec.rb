@@ -7,7 +7,9 @@ feature "user receives friend request" do
     @frank = FactoryBot.create(:user, name: "frank", email: "frank@mail.com")
     
     sign_in @bob
-    visit users_path
+    visit root_path
+    click_on "bob"
+    click_on "users"
     add_friend(@frank)
     sign_out @bob
 

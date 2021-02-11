@@ -21,28 +21,28 @@ def user_sees_new_notification(notification)
 end
 
 def user_sees_requestee_in_friend_request_index(requestee)
-  user_section = find(".sent ##{requestee.id}")
-  expect(user_section).to have_content("#{requestee.name}")
-  expect(user_section).to have_no_link
+  requestee_section = find(".sent ##{requestee.id}")
+  expect(requestee_section).to have_content("#{requestee.name}")
+  expect(requestee_section).to have_no_link
 end
 
 def user_sees_requestor_in_friend_request_index(requestor)
-  user_section = find(".incoming ##{requestor.id}")
-  expect(user_section).to have_content("#{requestor.name}")
-  expect(user_section).to have_link("accept")
-  expect(user_section).to have_link("ignore")
+  requestor_section = find(".incoming ##{requestor.id}")
+  expect(requestor_section).to have_content("#{requestor.name}")
+  expect(requestor_section).to have_link("accept", href: "/friend_requests/#{requestor.sent_friend_requests.first.id}/accept")
+  expect(requestor_section).to have_link("ignore", href: "/friend_requests/#{requestor.sent_friend_requests.first.id}/ignore")
 end
 
-def user_sees_requestee_in_user_index(user)
-  user_section = find("##{user.id}")
-  expect(user_section).to have_content("#{user.name}")
-  expect(user_section).to have_content("friend request sent")
-  expect(user_section).to have_no_link
+def user_sees_requestee_in_user_index(requestee)
+  requestee_section = find("##{requestee.id}")
+  expect(requestee_section).to have_content("#{requestee.name}")
+  expect(requestee_section).to have_content("friend request sent")
+  expect(requestee_section).to have_no_link
 end
 
-def user_sees_requestor_in_user_index(user)
-  user_section = find("##{user.id}")
-  expect(user_section).to have_content("#{user.name}")
-  expect(user_section).to have_link("accept")
-  expect(user_section).to have_link("ignore")
+def user_sees_requestor_in_user_index(requestor)
+  requestor_section = find("##{requestor.id}")
+  expect(requestor_section).to have_content("#{requestor.name}")
+  expect(requestor_section).to have_link("accept", href: "/friend_requests/#{requestor.sent_friend_requests.first.id}/accept")
+  expect(requestor_section).to have_link("ignore", href: "/friend_requests/#{requestor.sent_friend_requests.first.id}/ignore")
 end

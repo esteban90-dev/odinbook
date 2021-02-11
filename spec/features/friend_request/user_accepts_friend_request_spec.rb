@@ -8,7 +8,9 @@ feature "user accepts friend request" do
     FriendRequest.create(requestor: @bob, requestee: @joe)
 
     sign_in @joe
-    visit friend_requests_path
+    visit root_path
+    click_on "joe"
+    click_on "friend requests"
     accept_friend_request(@bob)
   end
 

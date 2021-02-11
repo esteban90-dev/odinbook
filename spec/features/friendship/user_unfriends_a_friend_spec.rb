@@ -8,7 +8,9 @@ feature "user unfriends a friend" do
     @joe.friends << @bob
 
     sign_in @bob
-    visit friendships_path
+    visit root_path
+    click_on "bob"
+    click_on "friends"
     unfriend(@joe)
   end
 
