@@ -4,6 +4,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user.persisted?
       sign_in user
+      flash[:notice] = "Signed in successfully"
       redirect_to root_path
     else 
       session["devise.user_attributes"] = user.attributes
