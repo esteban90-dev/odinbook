@@ -17,7 +17,7 @@ feature "facebook user updates registration" do
     expect(page).to have_content("Your account has been updated successfully")
   end
 
-  scenario "they see that they are logged in with a different name" do 
+  scenario "they see that they are signed in with a different name" do 
     expect(page).to have_content("signed in as somebody else")
   end
 

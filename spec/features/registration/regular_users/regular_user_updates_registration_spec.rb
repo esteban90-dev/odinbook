@@ -51,7 +51,7 @@ feature "regular user updates registration" do
       expect(page).to have_content("Your account has been updated successfully")
     end
 
-    scenario "they are able to log in with their new password" do 
+    scenario "they are able to sign in with their new password" do 
       sign_out @regular_user
       visit root_path
       click_on "sign in"

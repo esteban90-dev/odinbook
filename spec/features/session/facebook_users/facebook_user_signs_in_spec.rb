@@ -2,25 +2,44 @@ require 'rails_helper'
 
 feature "facebook user signs in" do 
 
-  scenario "successfully" do 
-    stub_omniauth_successful
+  context "successfully" do 
 
-    visit root_path
-    click_on "sign in"
-    click_on "Sign in with Facebook"
+    before(:each) do
+      stub_omniauth_successful
 
-    expect(page).to have_content("signed in as somebody")
+      visit root_path
+      click_on "sign in"
+      click_on "Sign in with Facebook"
+    end
+
+    scenario "they see a flash message" do 
+      expect(page).to have_content("signed in as somebody")
+    end
+
+    scenario "they see that they are signed in" do 
+      expect(page).to have_content("Signed in successfully")
+    end
+
   end
 
-  scenario "unsuccessfully - auth hash doesn't provide email" do
-    stub_omniauth_unsuccessful
+  context "unsuccessfully - auth hash doesn't provide email" do 
 
-    visit root_path
-    click_on "sign in"
-    click_on "Sign in with Facebook"
+    before(:each) do 
+      stub_omniauth_unsuccessful
 
-    expect(page).to have_content("Email can't be blank")
-    expect(page).not_to have_content("Password can't be blank")
+      visit root_path
+      click_on "sign in"
+      click_on "Sign in with Facebook"
+    end
+
+    scenario "they see that the email field can't be blank" do 
+      expect(page).to have_content("Email can't be blank")
+    end
+      
+    scenario "they do not see 'Password can't be blank'" do 
+      expect(page).not_to have_content("Password can't be blank")
+    end
+
   end
 
 end

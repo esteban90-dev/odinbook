@@ -19,7 +19,7 @@ feature "regular user registers" do
       expect(page).to have_content("You have signed up successfully")
     end
       
-    scenario "they see that they are logged in" do 
+    scenario "they see that they are signed in" do 
       expect(page).to have_content("signed in as somebody")
     end
 
