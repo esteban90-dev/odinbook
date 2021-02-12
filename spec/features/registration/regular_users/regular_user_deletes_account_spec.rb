@@ -6,8 +6,8 @@ feature "regular user deletes account" do
     @regular_user = FactoryBot.create(:user)
     sign_in @regular_user
 
-    visit edit_user_registration_path
-    
+    visit root_path
+    click_on "edit account"
     click_on "Cancel my account"
   end
 

@@ -8,7 +8,8 @@ feature "user sees list of other users" do
     @john = FactoryBot.create(:user, name: "john", email: "john@mail.com")
 
     sign_in @bob
-    visit users_path
+    visit root_path
+    click_on "users"
   end
 
   scenario "user does not see themselves in the list" do 

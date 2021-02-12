@@ -8,8 +8,8 @@ feature "regular user updates registration" do
       regular_user = FactoryBot.create(:user)
     
       sign_in regular_user
-      visit edit_user_registration_path
-  
+      visit root_path
+      click_on "edit account"
       fill_in "Name", with: "somebody else"
       fill_in "Email", with: "somebody_else@example.com"
       fill_in "Current password", with: "#{regular_user.password}"

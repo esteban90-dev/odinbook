@@ -6,7 +6,8 @@ feature "facebook user deletes account" do
     @facebook_user = FactoryBot.create(:user, :from_facebook)
     sign_in @facebook_user
 
-    visit edit_user_registration_path 
+    visit root_path
+    click_on "edit account"
     click_on "Cancel my account"
   end
 
