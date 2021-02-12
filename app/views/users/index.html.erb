@@ -2,7 +2,10 @@
   <div id=<%= user.id %>>
     <%= user.name %>
 
-    <% if current_user.sent_friend_requests.map{ |fr| fr.requestee }.include?(user) %>
+    <% if current_user.friends.include?(user) %>
+      friends
+
+    <% elsif current_user.sent_friend_requests.map{ |fr| fr.requestee }.include?(user) %>
       friend request sent
 
     <% elsif current_user.incoming_friend_requests.map{ |fr| fr.requestor }.include?(user) %>
