@@ -26,7 +26,7 @@ feature "user receives friend request" do
   scenario "they see 'accept/ignore' links next to the user in the users index" do
     click_on "users"
 
-    user_sees_requestor_in_user_index(@bob)
+    user_sees_requestor_acceptable_ignorable_in_user_index(@bob)
   end
 
   scenario "they see 'accept/ignore' links next to the requestor in the sent section of the friend requests index" do 

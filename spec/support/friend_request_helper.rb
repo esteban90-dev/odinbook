@@ -29,20 +29,35 @@ end
 def user_sees_requestor_in_friend_request_index(requestor)
   requestor_section = find(".incoming ##{requestor.id}")
   expect(requestor_section).to have_content("#{requestor.name}")
+  #add href to verify that accept/ignore links are the same as the links in the users index
   expect(requestor_section).to have_link("accept", href: "/friend_requests/#{requestor.sent_friend_requests.first.id}/accept")
   expect(requestor_section).to have_link("ignore", href: "/friend_requests/#{requestor.sent_friend_requests.first.id}/ignore")
 end
 
-def user_sees_requestee_in_user_index(requestee)
+def user_sees_requestee_addable_in_user_index(requestee)
+  requestee_section = find("##{requestee.id}")
+  expect(requestee_section).to have_content("#{requestee.name}")
+  expect(requestee_section).to have_link("add friend")
+end
+
+def user_sees_requestee_pending_in_user_index(requestee)
   requestee_section = find("##{requestee.id}")
   expect(requestee_section).to have_content("#{requestee.name}")
   expect(requestee_section).to have_content("friend request sent")
   expect(requestee_section).to have_no_link
 end
 
-def user_sees_requestor_in_user_index(requestor)
+def user_sees_requestor_acceptable_ignorable_in_user_index(requestor)
   requestor_section = find("##{requestor.id}")
   expect(requestor_section).to have_content("#{requestor.name}")
+  #add href to verify that accept/ignore links are the same as the links in the friend_requests index
   expect(requestor_section).to have_link("accept", href: "/friend_requests/#{requestor.sent_friend_requests.first.id}/accept")
   expect(requestor_section).to have_link("ignore", href: "/friend_requests/#{requestor.sent_friend_requests.first.id}/ignore")
+end
+
+def user_sees_requestor_as_friend_in_user_index(requestor)
+  requestor_section = find("##{requestor.id}")
+  expect(requestor_section).to have_content("#{requestor.name}")
+  expect(requestor_section).to have_content("friend")
+  expect(requestor_section).to have_no_link
 end

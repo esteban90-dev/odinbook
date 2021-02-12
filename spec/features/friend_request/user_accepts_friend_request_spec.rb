@@ -25,6 +25,12 @@ feature "user accepts friend request" do
     expect(page).to have_content("bob")
   end
 
+  scenario "user sees the requestor appear in the user index as a friend" do 
+    click_on "users"
+
+    user_sees_requestor_as_friend_in_user_index(@bob)
+  end
+
   scenario "the requestor receives a new notification" do 
     sign_out @joe
     sign_in @bob

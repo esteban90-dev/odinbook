@@ -40,4 +40,14 @@ feature "user ignores friend request" do
     expect(FriendRequest.all.any?).to eq(false)
   end
 
+  scenario "the requestor sees the requestee as addable in the users index" do 
+    sign_out @joe
+    sign_in @bob
+
+    visit root_path
+    click_on "users"
+
+    user_sees_requestee_addable_in_user_index(@joe)
+  end
+
 end
