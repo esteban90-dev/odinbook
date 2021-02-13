@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, only: :index do 
     resources :notifications, only: :index
-    resource :profile, only: :show
+    resource :profile, only: [:show, :edit]
   end
 
   resources :friend_requests, only: [:index, :create] do 
