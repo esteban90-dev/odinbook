@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :friends, through: :friendships
   has_many :notifications
+  has_one :profile
 
   def self.from_omniauth(auth)
     where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|

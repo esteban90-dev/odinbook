@@ -30,11 +30,15 @@ feature "regular user registers" do
       expect(page).to have_field('user_email', with: "somebody@example.com")
     end
 
-    scenario "they receive a notification with a link that tells them to create their profile" do 
+    scenario "they receive a notification with a link that tells them to edit their profile" do 
       visit root_path
       click_on "notifications"
       
-      user_sees_create_profile_notification
+      user_sees_edit_profile_notification
+    end
+
+    scenario "a blank profile is created for them" do 
+      expect(User.first.profile).not_to eq(nil)
     end
 
   end
