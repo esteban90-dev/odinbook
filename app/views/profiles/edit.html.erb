@@ -1,0 +1,12 @@
+<%= form_with model: [@user, @profile] do |f| %>
+  <%= f.label :location, "Location" %>
+  <%= f.text_field :location %>
+
+  <%= f.label :education, "Education" %>
+  <%= f.select :education, ["High School", "Associate's Degree", "Bachelor's Degree", "Master's Degree", "Doctoral Degree"] %>
+
+  <%= f.label :relationship_status, "Relationship Status" %>
+  <%= f.select :relationship_status, ["Single", "In a Relationship", "Married"] %>
+
+  <%= f.submit "save" %>
+<% end %>
