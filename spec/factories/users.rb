@@ -8,5 +8,9 @@ FactoryBot.define do
       provider { "facebook" }
       uid { "1234" }
     end
+
+    trait :with_blank_profile do 
+      after(:create){ |user| user.create_profile({}) }
+    end
   end
 end
