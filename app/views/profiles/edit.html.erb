@@ -8,5 +8,8 @@
   <%= f.label :relationship_status, "Relationship Status" %>
   <%= f.select :relationship_status, ["Single", "In a Relationship", "Married"] %>
 
+  <%= f.label :picture %>
+  <%= f.file_field :picture %>
+
   <%= f.submit "save" %>
 <% end %>

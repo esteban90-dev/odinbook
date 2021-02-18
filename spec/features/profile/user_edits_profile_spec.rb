@@ -13,6 +13,7 @@ feature "user edits profile" do
     fill_in "Location", with: "New York"
     select("Master's Degree", from: "Education")
     select('Single', from: "Relationship Status")
+    attach_file "Picture", "#{Rails.root}/spec/files/eiffel_tower.jpg"
 
     click_on "save"
   end
@@ -25,6 +26,10 @@ feature "user edits profile" do
     expect(page).to have_content("New York")
     expect(page).to have_content("Master's Degree")
     expect(page).to have_content("Single")
+  end
+
+  scenario "they see their profile picture" do 
+    user_sees_profile_picture
   end
 
 end

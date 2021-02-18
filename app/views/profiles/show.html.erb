@@ -2,6 +2,12 @@
 <%= link_to "friend requests", friend_requests_path %>
 <%= link_to "edit profile", edit_user_profile_path(@profile.user.id) %>
 
+<% if @profile.picture.attached? %>
+  <div class="profile-picture">
+    <%= image_tag @profile.picture %>
+  </div>
+<% end %>
+
 <%= @profile.location %>
 <%= @profile.education %>
 <%= @profile.relationship_status %>
