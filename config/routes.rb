@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, only: :index do 
     resources :notifications, only: :index
+    resources :posts, only: :create
     resource :profile, only: [:show, :edit, :update]
   end
 

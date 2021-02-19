@@ -11,3 +11,14 @@
 <%= @profile.location %>
 <%= @profile.education %>
 <%= @profile.relationship_status %>
+
+<%= @profile.user.posts.each do |post| %>
+  <%= post.body %>
+<% end %>
+
+<%= form_with model: [current_user, current_user.posts.new] do |f| %>
+  <%= f.label :body %>
+  <%= f.text_field :body %>
+  
+  <%= f.submit "create post" %>
+<% end %>
