@@ -5,7 +5,7 @@ feature "regular user signs in" do
   context "successfully" do 
 
     before(:each) do 
-      @user = FactoryBot.create(:user)
+      @user = FactoryBot.create(:user, :with_blank_profile)
 
       visit root_path
       click_on "sign in"
@@ -27,7 +27,7 @@ feature "regular user signs in" do
   context "unsuccessfully" do
 
     scenario "they see an error message" do 
-      user = FactoryBot.create(:user)
+      user = FactoryBot.create(:user, :with_blank_profile)
       
       visit root_path
       click_on "sign in"

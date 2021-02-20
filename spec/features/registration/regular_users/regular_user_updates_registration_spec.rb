@@ -5,7 +5,7 @@ feature "regular user updates registration" do
   context "they change their name and email" do
   
     before(:each) do 
-      regular_user = FactoryBot.create(:user)
+      regular_user = FactoryBot.create(:user, :with_blank_profile)
     
       sign_in regular_user
       visit root_path
@@ -36,7 +36,7 @@ feature "regular user updates registration" do
   context "they change their password successfully" do
 
     before(:each) do 
-      @regular_user = FactoryBot.create(:user)
+      @regular_user = FactoryBot.create(:user, :with_blank_profile)
       
       sign_in @regular_user
       visit edit_user_registration_path

@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "regular user deletes account" do
 
   before(:each) do
-    @regular_user = FactoryBot.create(:user)
+    @regular_user = FactoryBot.create(:user, :with_blank_profile)
     sign_in @regular_user
 
     visit root_path
