@@ -28,7 +28,7 @@ feature "user edits profile" do
   end
 
   scenario "they see their profile picture" do 
-    user_sees_profile_picture
+    user_sees_profile_picture("eiffel_tower.jpg")
   end
 
 end
