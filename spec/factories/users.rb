@@ -12,5 +12,23 @@ FactoryBot.define do
     trait :with_blank_profile do 
       after(:create){ |user| user.create_profile({}) }
     end
+
+    trait :with_example_profile do 
+      after(:create) do |user| 
+        user.create_profile({
+          location: "New York, NY",
+          education: "Bachelor's Degree",
+          relationship_status: "Single",
+        })
+
+        image_path = Rails.root.join('spec','files','eiffel_tower.jpg')
+        image_file = fixture_file_upload(image_path, 'image/jpg')
+        user.profile.picture.attach(image_file)
+
+        user.posts.create(body: "this is the first post")
+        user.posts.create(body: "this is the second post")
+      end
+    end
+
   end
 end
