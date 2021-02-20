@@ -2,22 +2,61 @@ require 'rails_helper'
 
 feature "user makes a post" do 
 
-  before(:each) do 
-    bob = FactoryBot.create(:user, :with_blank_profile, name: "bob", email: "bob@example.com")
-    sign_in bob
+  context "with text only" do 
 
-    visit root_path
-    click_on "bob"
-    fill_in "Body", with: "this is my first post"
-    click_on "create post"
+    before(:each) do 
+      @bob = FactoryBot.create(:user, :with_blank_profile, name: "bob", email: "bob@example.com")
+      sign_in @bob
+
+      visit root_path
+      click_on "bob"
+      fill_in "Body", with: "this is my first post"
+      click_on "create post"
+    end
+
+    scenario "they see a flash message" do 
+      expect(page).to have_content("Successfully made a post")
+    end
+
+    scenario "they see the posted text appear on their profile" do 
+      post = @bob.posts.first
+
+      user_sees_post_text(post)
+    end
+
   end
 
-  scenario "they see a flash message" do 
-    expect(page).to have_content("Successfully made a post")
-  end
+  context "with text and an image" do 
 
-  scenario "they see it appear on their profile" do 
-    expect(page).to have_content("this is my first post")
+    before(:each) do 
+      @bob = FactoryBot.create(:user, :with_blank_profile, name: "bob", email: "bob@example.com")
+      sign_in @bob
+
+      visit root_path
+      click_on "bob"
+      fill_in "Body", with: "this is my first post"
+      attach_file "Picture", "#{Rails.root}/spec/files/empire_state_building.jpg"
+      click_on "create post"
+    end
+
+    scenario "they see a flash message" do 
+      expect(page).to have_content("Successfully made a post")
+    end
+
+    scenario "they see the posted text appear on their profile" do 
+      post = @bob.posts.first
+
+      user_sees_post_text(post)
+    end
+
+    scenario "they see the posted image appear on their profile" do 
+      post = @bob.posts.first
+
+      save_and_open_page
+
+      user_sees_post_picture(post)
+    end
+
   end
 
 end
