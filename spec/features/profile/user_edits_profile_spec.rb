@@ -15,7 +15,6 @@ feature "user edits profile" do
     attach_file "Picture", "#{Rails.root}/spec/files/eiffel_tower.jpg"
 
     click_on "save"
-    byebug
   end
 
   scenario "they receive a flash message" do 

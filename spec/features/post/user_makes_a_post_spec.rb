@@ -52,8 +52,6 @@ feature "user makes a post" do
     scenario "they see the posted image appear on their profile" do 
       post = @bob.posts.first
 
-      save_and_open_page
-
       user_sees_post_picture(post)
     end
 
