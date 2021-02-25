@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "regular user signs in" do 
 
-  context "successfully" do 
+  context "with a valid email/password" do 
 
     before(:each) do 
       @user = FactoryBot.create(:user, :with_blank_profile)
@@ -24,7 +24,7 @@ feature "regular user signs in" do
 
   end
 
-  context "unsuccessfully" do
+  context "with an invalid email/password" do
 
     scenario "they see an error message" do 
       user = FactoryBot.create(:user, :with_blank_profile)
