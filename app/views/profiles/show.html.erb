@@ -30,5 +30,11 @@
       <%= image_tag post.picture %>
     <% end %>
     <%= post.body %>
+    likes: <%= post.likes.count %>
+    <% if post.likers.include?(current_user) %>
+      <%= link_to "unlike", like_path(post.likes.where(liker: current_user).first.id), method: :delete %>
+    <% else %>
+      <%= link_to "like", post_likes_path(post.id), method: :post %>
+    <% end %>
   </div>
 <% end %>
