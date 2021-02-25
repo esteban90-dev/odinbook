@@ -22,9 +22,7 @@ feature "user edits profile" do
   end
 
   scenario "they see their updated profile information" do 
-    expect(page).to have_content("New York")
-    expect(page).to have_content("Master's Degree")
-    expect(page).to have_content("Single")
+    user_sees_profile_information(@bob.reload)
   end
 
   scenario "they see their profile picture" do 

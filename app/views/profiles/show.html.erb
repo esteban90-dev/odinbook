@@ -8,9 +8,12 @@
   </div>
 <% end %>
 
-<%= @profile.location %>
-<%= @profile.education %>
-<%= @profile.relationship_status %>
+<div class="about">
+  <%= @profile.user.name %>
+  <%= @profile.location %>
+  <%= @profile.education %>
+  <%= @profile.relationship_status %>
+</div>
 
 <% if @profile.user == current_user %>
   <%= form_with model: [current_user, current_user.posts.new] do |f| %>

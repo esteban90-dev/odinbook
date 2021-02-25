@@ -15,5 +15,12 @@ def user_doesnt_see_post_form
   expect(page).not_to have_button("create post")
 end
 
+def user_sees_profile_information(user)
+  about_section = find('.about')
+  expect(about_section).to have_content(user.name)
+  expect(about_section).to have_content(user.profile.location)
+  expect(about_section).to have_content(user.profile.education)
+  expect(about_section).to have_content(user.profile.relationship_status)
+end
 
 
