@@ -22,12 +22,13 @@ describe User, ".from_omniauth" do
   end
 
   it "creates a new user if a user can't be found that matches the provider and uid from the auth hash" do 
-    User.from_omniauth(@auth)
+    new_user = User.from_omniauth(@auth)
 
-    expect(User.first.email).to eq(@auth[:info][:email])
-    expect(User.first.name).to eq(@auth[:info][:name])
-    expect(User.first.provider).to eq(@auth[:provider])
-    expect(User.first.uid).to eq(@auth[:uid])
+    expect(new_user.email).to eq(@auth[:info][:email])
+    expect(new_user.name).to eq(@auth[:info][:name])
+    expect(new_user.provider).to eq(@auth[:provider])
+    expect(new_user.uid).to eq(@auth[:uid])
+    expect(new_user.new_record?).to be(true)
   end
 
 end
