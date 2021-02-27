@@ -5,7 +5,7 @@ feature "user makes a post" do
   context "with text only" do 
 
     before(:each) do 
-      @bob = FactoryBot.create(:user, :with_blank_profile, name: "bob", email: "bob@example.com")
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
       sign_in @bob
 
       visit root_path
@@ -29,7 +29,7 @@ feature "user makes a post" do
   context "with text and an image" do 
 
     before(:each) do 
-      @bob = FactoryBot.create(:user, :with_blank_profile, name: "bob", email: "bob@example.com")
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
       sign_in @bob
 
       visit root_path

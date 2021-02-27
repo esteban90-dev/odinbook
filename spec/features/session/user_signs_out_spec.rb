@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "user signs out" do
 
   before(:each) do 
-    @user = FactoryBot.create(:user, :with_blank_profile)
+    @user = FactoryBot.create(:user)
     
     sign_in @user
     visit root_path

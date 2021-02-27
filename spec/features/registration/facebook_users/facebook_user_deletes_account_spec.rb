@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "facebook user deletes account" do
 
   before(:each) do 
-    @facebook_user = FactoryBot.create(:user, :with_blank_profile, :from_facebook)
+    @facebook_user = FactoryBot.create(:user, :from_facebook)
     sign_in @facebook_user
 
     visit root_path

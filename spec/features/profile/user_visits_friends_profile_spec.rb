@@ -4,7 +4,7 @@ feature "user visits friend's profile" do
 
   before(:each) do 
     @bob = FactoryBot.create(:user, :with_example_profile, name: "bob", email: "bob@example.com")
-    @frank = FactoryBot.create(:user, :with_blank_profile, name: "frank", email: "frank@example.com")
+    @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
     @frank.friends << @bob
     sign_in @frank
 

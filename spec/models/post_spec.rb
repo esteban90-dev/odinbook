@@ -4,8 +4,8 @@ describe Post, "#likers" do
 
   it "returns a list of users that have liked the post" do 
     bob = FactoryBot.create(:user, :with_example_profile, name: "bob", email: "bob@example.com") 
-    frank = FactoryBot.create(:user, :with_blank_profile, name: "frank", email: "frank@example.com")
-    alex = FactoryBot.create(:user, :with_blank_profile, name: "alex", email: "alex@example.com")
+    frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
+    alex = FactoryBot.create(:user, name: "alex", email: "alex@example.com")
 
     bob.friends << [frank, alex]
     bob.posts.first.likes.create(liker: frank)

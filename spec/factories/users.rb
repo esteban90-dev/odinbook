@@ -9,13 +9,9 @@ FactoryBot.define do
       uid { "1234" }
     end
 
-    trait :with_blank_profile do 
-      after(:create){ |user| user.create_profile({}) }
-    end
-
     trait :with_example_profile do 
       after(:create) do |user| 
-        user.create_profile({
+        user.profile.update({
           location: "New York, NY",
           education: "Bachelor's Degree",
           relationship_status: "Single",

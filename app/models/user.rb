@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :posts
   has_one :profile
 
+  after_create :create_blank_profile
+
   def self.from_omniauth(auth)
     where(provider: auth[:provider], uid: auth[:uid]).first_or_initialize do |new_user|
       new_user.email = auth[:info][:email]
@@ -32,5 +34,11 @@ class User < ApplicationRecord
 
   def password_required?
     super && provider.blank?
+  end
+
+  private
+
+  def create_blank_profile
+    self.create_profile({})
   end
 end

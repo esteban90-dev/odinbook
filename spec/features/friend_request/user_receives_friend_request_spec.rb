@@ -3,8 +3,8 @@ require "rails_helper"
 feature "user receives friend request" do 
 
   before(:each) do 
-    @bob = FactoryBot.create(:user, :with_blank_profile, name: "bob", email: "bob@mail.com")
-    @frank = FactoryBot.create(:user, :with_blank_profile, name: "frank", email: "frank@mail.com")
+    @bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com")
+    @frank = FactoryBot.create(:user, name: "frank", email: "frank@mail.com")
     
     sign_in @bob
     visit root_path
