@@ -11,7 +11,7 @@ class FriendRequestsController < ApplicationController
 
     if request.save
       flash[:notice] = "Friend request successfully sent to #{request.requestee.name}"
-      request.requestee.notifications.create(message: "You have a new friend request from #{request.requestor.name}")
+      request.requestee.notifications.create(message: "You have a new friend request from #{request.requestor.name}" + accept_ignore_links(request))
       redirect_to users_path
     end
   end
@@ -21,7 +21,7 @@ class FriendRequestsController < ApplicationController
     @request.destroy
 
     flash[:notice] = "Successfully accepted friend request from #{@request.requestor.name}"
-    @request.requestor.notifications.create(message: "#{@request.requestee.name} accepted your friend request")
+    @request.requestor.notifications.create(message: "#{requestee_profile_link(@request.requestee)} accepted your friend request")
     redirect_to friendships_path
   end
 
@@ -40,5 +40,14 @@ class FriendRequestsController < ApplicationController
 
   def find_request 
     @request = current_user.incoming_friend_requests.find(params[:id])
+  end
+
+  def accept_ignore_links(request)
+    "#{view_context.link_to("accept", accept_friend_request_path(request.id) )}" +
+    "#{view_context.link_to("ignore", ignore_friend_request_path(request.id) )}"
+  end
+
+  def requestee_profile_link(requestee)
+    "#{view_context.link_to("#{requestee.name}", user_profile_path(requestee.id) )}"
   end
 end

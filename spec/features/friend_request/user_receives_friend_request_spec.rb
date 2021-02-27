@@ -20,7 +20,7 @@ feature "user receives friend request" do
   scenario "they receive a new notification" do
     click_on "notifications"
 
-    expect(page).to have_content("You have a new friend request from bob")
+    user_sees_incoming_friend_request_notification(@frank)
   end
 
   scenario "they see 'accept/ignore' links next to the user in the users index" do

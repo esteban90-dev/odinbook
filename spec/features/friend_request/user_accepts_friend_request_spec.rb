@@ -38,7 +38,7 @@ feature "user accepts friend request" do
     visit root_path
     click_on "notifications"
 
-    expect(page).to have_content("joe accepted your friend request")
+    user_sees_accepted_friend_request_notification(@joe, @bob)
   end
 
   scenario "the requestor sees the user in their friends list" do
