@@ -43,8 +43,8 @@ class FriendRequestsController < ApplicationController
   end
 
   def accept_ignore_links(request)
-    "#{view_context.link_to("accept", accept_friend_request_path(request.id) )}" +
-    "#{view_context.link_to("ignore", ignore_friend_request_path(request.id) )}"
+    " #{view_context.link_to("accept", accept_friend_request_path(request.id), method: :delete )}" +
+    " #{view_context.link_to("ignore", ignore_friend_request_path(request.id), method: :delete )}"
   end
 
   def requestee_profile_link(requestee)
