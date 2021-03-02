@@ -25,4 +25,12 @@ feature "user visits friend's profile" do
     user_doesnt_see_post_form
   end
 
+  scenario "they don't see the edit profile link" do 
+    expect(page).not_to have_link("edit profile")
+  end
+
+  scenario "they don't see the 'friend requests' link" do 
+    expect(page).not_to have_link("friend requests")
+  end
+
 end
