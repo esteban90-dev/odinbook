@@ -23,4 +23,9 @@ def user_sees_profile_information(user)
   expect(about_section).to have_content(user.profile.relationship_status)
 end
 
+def have_friend(user)
+  have_css("##{user.id}", text: user.name)
+end
+
+
 

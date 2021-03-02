@@ -5,7 +5,9 @@ feature "user visits friend's profile" do
   before(:each) do 
     @bob = FactoryBot.create(:user, :with_example_profile, name: "bob", email: "bob@example.com")
     @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
-    @frank.friends << @bob
+    @sean = FactoryBot.create(:user, name: "sean", email: "sean@example.com")
+    @alex = FactoryBot.create(:user, name: "alex", email: "alex@example.com")
+    @bob.friends << [@frank, @sean, @alex]
     sign_in @frank
 
     visit root_path
@@ -23,6 +25,14 @@ feature "user visits friend's profile" do
 
   scenario "they don't see a form to create a post" do 
     user_doesnt_see_post_form
+  end
+
+  scenario "they see their friend's friends" do 
+    click_on "friends"
+
+    expect(page).to have_friend(@sean)
+    expect(page).to have_friend(@alex)
+    expect(page).to have_friend(@frank)
   end
 
   scenario "they don't see the edit profile link" do 
