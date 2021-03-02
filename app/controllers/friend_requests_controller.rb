@@ -22,14 +22,14 @@ class FriendRequestsController < ApplicationController
 
     flash[:notice] = "Successfully accepted friend request from #{@request.requestor.name}"
     @request.requestor.notifications.create(message: "#{requestee_profile_link(@request.requestee)} accepted your friend request")
-    redirect_to friendships_path
+    redirect_to user_friendships_path(current_user.id)
   end
 
   def ignore
     @request.destroy
 
     flash[:notice] = "Successfully ignored friend request from #{@request.requestor.name}"
-    redirect_to friendships_path
+    redirect_to user_friendships_path(current_user.id)
   end
 
   private

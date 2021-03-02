@@ -1,4 +1,4 @@
-<%= link_to "friends", friendships_path %>
+<%= link_to "friends", user_friendships_path(@profile.user.id) %>
 <% if @profile.user == current_user %>
   <%= link_to "friend requests", friend_requests_path %>
   <%= link_to "edit profile", edit_user_profile_path(@profile.user.id) %>
