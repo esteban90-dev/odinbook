@@ -26,6 +26,10 @@ feature "user comments on friend's post" do
     user_sees_name_with_comment(@post.comments.first)
   end
 
+  scenario "they see a flash message" do 
+    expect(page).to have_content("Successfully created comment")
+  end
+
   scenario "the post's author receives a notification" do 
     sign_out @frank
     sign_in @bob
