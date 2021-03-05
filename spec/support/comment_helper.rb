@@ -8,6 +8,13 @@ def comment_on_post(post, new_comment_text)
   end
 end
 
+def delete_comment_from_post(comment)
+  comment_section = find("##{comment.post.id}").find("##{comment.id}")
+  within(comment_section) do 
+    click_on "delete"
+  end
+end
+
 def edit_comment(original_comment, new_comment_text)
   comment_section = find("##{original_comment.post.id}").find("##{original_comment.id}")
   within(comment_section) do 
@@ -20,6 +27,11 @@ end
 def user_sees_post_comment(post, comment_text)
   post_section = find("##{post.id}")
   expect(post_section).to have_content("#{comment_text}")
+end
+
+def user_sees_post_comment_missing(post, comment_text)
+  post_section = find("##{post.id}")
+  expect(post_section).not_to have_content("#{comment_text}")
 end
 
 def user_sees_name_with_comment(comment)
