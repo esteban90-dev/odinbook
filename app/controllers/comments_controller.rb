@@ -5,8 +5,11 @@ class CommentsController < ApplicationController
     comment.commenter = current_user
 
     if comment.save
-      post.user.notifications.create(message: "#{comment.commenter.name} commented on your #{post_link(post)}")
-      redirect_to user_profile_path(post.user.id)
+      if post.user != current_user
+        post.user.notifications.create(message: "#{comment.commenter.name} commented on your #{post_link(post)}")
+      end
+      flash[:notice] = "Successfully created comment"
+      redirect_to user_profile_path(post.user.id) + "##{post.id}"
     end
   end
 
