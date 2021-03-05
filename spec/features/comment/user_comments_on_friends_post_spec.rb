@@ -19,7 +19,7 @@ feature "user comments on friend's post" do
   end
 
   scenario "they see the comment appear below the post" do
-    user_sees_post_comment(@post.comments.first)
+    user_sees_post_comment(@post, "this post is great")
   end
 
   scenario "they see their name appear as a link back to their profile next to their comment" do 

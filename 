@@ -1,0 +1,105 @@
+[33mda15530[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m Add feature - user comments on friend's post
+[33m5554a4a[m[33m ([m[1;31morigin/master[m[33m)[m Add additional test 'they see their friend's friends'
+[33m118151d[m Scope friendships resources inside of users
+[33mdbbc474[m Modify profile show view to not display 'edit' or 'friend requests' links if the profile does not belong to the user
+[33mce36f87[m Add delete method to accept/ignore links
+[33m539b9c5[m change have_link matchers to use path helpers
+[33mfc3476e[m Extract #have_accept_ignore_requestor_links
+[33m369973f[m Move post link to #post_link
+[33m5101661[m Add link to notification when a user accepts or receives a friend request
+[33m07c44af[m Move user blank profile creation from controller to model, remove
+[33m1b2f5d5[m Add 'facebook_user_registers_spec'
+[33m98b5afe[m Generate blank profile and notification to edit profile when a new facebook user registers
+[33m78d20d5[m Change context description
+[33m9177201[m Prevent notification from being generated when user likes own post
+[33mabbcf3d[m Add feature - user unlikes friend's post
+[33m48d9b78[m Add about section to profile and add user's name
+[33maa84222[m Add feature - user likes a friend's post
+[33ma5cbd7e[m Add feature - user visits friend's profile
+[33mac1e31f[m remove testing code
+[33m9a279d7[m When setting up users, create them with blank profile
+[33mf0983e5[m Add feature - user makes a post with an image
+[33m796ad3d[m refactor #user_sees_profile_picture
+[33m2fddd1f[m Add feature - user makes a post
+[33mf04d2da[m Add 'with_blank profile' trait to user factory
+[33m320db4f[m Update feature - user edit's profile - user uploads a profile picture
+[33m0228f54[m Add feature - user edits profile
+[33m9b84b4d[m When user is a created a blank profile is created for them, and they receieve a notification to edit the profile
+[33m6ca58c6[m Create notification to edit profile after user is created
+[33m60a5195[m Add launchy gem
+[33m712fe4a[m refactor
+[33m184cbf2[m refactor
+[33md796448[m Show 'friends' if user is already a friend
+[33mb23781f[m refactor
+[33ma23f3dc[m refactor
+[33m3e27fd7[m refactor
+[33ma101212[m Add flash message after signing in user
+[33m678942a[m refactor
+[33mf39c887[m refactor
+[33mec5469c[m refactor
+[33m4bbfae7[m Refactor
+[33m79fdbda[m Refactor
+[33m6a25edf[m Add 'edit account' link to nav bar
+[33m782456a[m Refactor
+[33m4fa0b56[m Refactor
+[33ma4df7c4[m refactor
+[33mba74d4d[m Add link to friendships#index
+[33m50d800b[m Add Profiles controller and show action
+[33md563dae[m refactor
+[33mf820d5b[m refactor
+[33mb9a15bb[m Change #user_sees_sent_friend_request to #user_sees_requestee_pending_in_friend_request_index
+[33m7af5499[m Refactor tests
+[33m0be816a[m Add 'accept' and 'ignore' links
+[33m7db108d[m Change 'Accept' and 'Ignore' links to lower case
+[33m344445b[m Remove User#requested_users and User#acceptable_users
+[33me716e8a[m Add User#acceptable_users
+[33m15ec675[m Change User#requested_friends to User#requested_users
+[33m2128521[m change scenario description
+[33m3785f90[m Move support methods to test users into the users_helper
+[33mb4f045e[m Refactor 'user sends friend request' spec
+[33m05a63a4[m Modify feature - user sees notifications in descending order
+[33m094d5f9[m Make notifications a nested resource
+[33m14fe52a[m Add feature - new notification is created when sent friend request is accepted
+[33m4c00719[m Add feature - user sees notification
+[33m6d9d271[m Change spec name
+[33m5c48de4[m Add feature - new notification is created when user receives a friend request
+[33m009ce79[m Refactor #unfriend
+[33m4ae0863[m Add feature - user sees list of other users
+[33m0962212[m Refactor tests
+[33m59f08d5[m Add feature - user sees sent friend request
+[33m1378ad5[m Add test - user sees incoming friend requests
+[33m4991070[m Update feature - user sends friend request - request shows 'pending'
+[33m34cf5ec[m Add feature - user unfriends someone
+[33mb29f410[m Remove space
+[33m01e9943[m Add feature - user sees friends
+[33m6aa05b0[m Refactor friend_requests#destroy into #accept and #ignore
+[33m759e7d7[m Add feature - user ignores friend request
+[33mc2ac3d3[m Add feature - user accepts friend request
+[33m1bcbe39[m Add feature - user sends friend request
+[33m50605c3[m Rename /sign_in_out to /sessions
+[33m353fb4b[m Display password field if user is a regular user
+[33me05fa68[m Change user to regular_user
+[33m672aafc[m Add scenario - registration unsuccessful because email has already been taken
+[33m88d5b1f[m Add scenario - user unsuccessfully logs in because password is too short
+[33m4213023[m Add scenario to feature - 'unsuccessfully'
+[33m96af2d5[m Add feature test - facebook user deletes account
+[33mb2a1a2c[m Add feature test - regular user deletes account
+[33mb5e3784[m Correct password display
+[33m24c01ed[m Add features - regular and facebook users update registrations
+[33m165ffe0[m Add tests for User#password_required?
+[33m5473ece[m Restructure and rename feature tests
+[33m97d6c05[m call super so regular user password validations work
+[33mb922b2d[m Don't require password when creating a new user from facebook
+[33me777a61[m Add feature - user updates registration
+[33mc326bfd[m Update user registration to include name field, display name instead of email when logged in
+[33mf742a5a[m[33m ([m[1;31mheroku/master[m[33m)[m Add feature - user signs in with facebook unsuccessfully
+[33m8c44e1d[m Add feature - user signs in with facebook
+[33me32b7f6[m Add feature - user signs out
+[33m0ee3771[m Add feature - user signs in
+[33m224ad8c[m Add user factory
+[33mb1abfea[m Copy devise views to application
+[33m1110f1a[m Change terminology from log in / log out to sign in / sign out
+[33ma8a8f66[m Add feature - user registers successfully
+[33m7a6640a[m add feature - user visits homepage
+[33m1f73aaa[m Test config
+[33mb19f381[m initial commit
