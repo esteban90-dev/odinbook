@@ -38,6 +38,10 @@
 
     <%= post.body %>
 
+    <% if current_user == post.user %>
+    <%= link_to "edit", edit_post_path(post.id) %>
+    <% end %>
+
     likes: <%= post.likes.count %>
 
     <% if post.likers.include?(current_user) %>

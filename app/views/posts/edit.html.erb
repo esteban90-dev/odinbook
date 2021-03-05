@@ -1,0 +1,9 @@
+<%= form_with model: @post do |f| %>
+  <%= f.label :body %>
+  <%= f.text_field :body %>
+
+  <%= f.label :picture %>
+  <%= f.file_field :picture %>
+  
+  <%= f.submit %>
+<% end %>
