@@ -17,12 +17,18 @@ FactoryBot.define do
           relationship_status: "Single",
         })
 
-        image_path = Rails.root.join('spec','files','eiffel_tower.jpg')
-        image_file = fixture_file_upload(image_path, 'image/jpg')
-        user.profile.picture.attach(image_file)
+        #add profile picture
+        profile_image_path = Rails.root.join('spec','files','eiffel_tower.jpg')
+        profile_image_file = fixture_file_upload(profile_image_path, 'image/jpg')
+        user.profile.picture.attach(profile_image_file)
 
+        #create a post - text only
         user.posts.create(body: "this is the first post")
-        user.posts.create(body: "this is the second post")
+
+        #create a post - text & picture
+        post_image_path = Rails.root.join('spec','files','empire_state_building.jpg')
+        post_image_file = fixture_file_upload(post_image_path, 'image/jpg')
+        user.posts.create(body: "this is the second post", picture: post_image_file)
       end
     end
 
