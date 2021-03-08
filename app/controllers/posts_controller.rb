@@ -20,6 +20,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    flash[:notice] = "Post successfully destroyed"
+    redirect_to user_profile_path(current_user.id)
+  end
+
   private
 
   def post_params

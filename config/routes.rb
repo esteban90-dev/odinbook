@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :users, only: :index, shallow: true do 
     resources :friendships, only: [:index, :destroy]
     resources :notifications, only: :index
-    resources :posts, only: [:show, :create, :edit, :update] do 
+    resources :posts, only: [:show, :create, :edit, :update, :destroy] do 
       resources :likes, only: [:create, :destroy]
       resources :comments, only: [:create, :edit, :update, :destroy]
     end

@@ -39,7 +39,8 @@
     <%= post.body %>
 
     <% if current_user == post.user %>
-    <%= link_to "edit", edit_post_path(post.id) %>
+      <%= link_to "edit", edit_post_path(post.id) %>
+      <%= link_to "delete", post_path(post.id), method: :delete %>
     <% end %>
 
     likes: <%= post.likes.count %>
