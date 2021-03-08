@@ -6,16 +6,17 @@ feature "user edits a post" do
 
     before(:each) do 
       @bob = FactoryBot.create(:user, :with_example_profile, name: "bob", email: "bob@example.com")
+      @post = @bob.posts.last
       sign_in @bob
 
       visit root_path
       click_on "bob"
       
-      edit_post_text(@bob.posts.last, "chicken is better than pork")
+      edit_post_with_new_text(@post, "chicken is better than pork")
     end
 
-    scenario "they see the modified post" do 
-      user_sees_post_text_edit(@bob.posts.last, "chicken is better than pork")
+    scenario "they see the modified post text" do 
+      user_sees_modified_post_text(@post, "chicken is better than pork")
     end
 
     scenario "they see a flash message" do 
@@ -28,16 +29,22 @@ feature "user edits a post" do
 
     before(:each) do 
       @bob = FactoryBot.create(:user, :with_example_profile, name: "bob", email: "bob@example.com")
+      @post = @bob.posts.last
       sign_in @bob
 
       visit root_path
       click_on "bob"
       
-      edit_post_new_image(@bob.posts.last, "#{Rails.root}/spec/files/white_house.jpg")
+      
+      edit_post_with_new_image(@post, "#{Rails.root}/spec/files/white_house.jpg")
     end
 
-    scenario "they see the modified post" do
-      user_sees_post_picture_edit(@bob.posts.last, "white_house.jpg")
+    scenario "they see the modified post image" do
+      user_sees_modified_post_picture(@post, "white_house.jpg")
+    end
+
+    scenario "they see the post text remain unchanged" do 
+      user_sees_post_text(@post)
     end
 
     scenario "they see a flash message" do 
