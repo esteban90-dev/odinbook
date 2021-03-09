@@ -4,7 +4,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user.new_record?
       if user.save
-        user.notifications.create(message: "Welcome to Odinbook!  #{view_context.link_to("Click here", edit_user_profile_path(user.id))} to edit your profile.")
+        user.notifications.create(message: "Welcome to Odinbook!")
       end
     end 
 

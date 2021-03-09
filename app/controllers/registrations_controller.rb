@@ -11,7 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    resource.notifications.create(message: "Welcome to Odinbook!  #{view_context.link_to("Click here", edit_user_profile_path(resource.id))} to edit your profile.")
+    resource.notifications.create(message: "Welcome to Odinbook!")
     edit_user_profile_path(resource.id)
   end
 end

@@ -30,11 +30,11 @@ feature "regular user registers" do
       expect(page).to have_field('user_email', with: "somebody@example.com")
     end
 
-    scenario "they receive a notification with a link that tells them to edit their profile" do 
+    scenario "they see a welcome notification" do 
       visit root_path
       click_on "notifications"
       
-      user_sees_edit_profile_notification
+      expect(page).to have_content("Welcome to Odinbook!")
     end
 
     scenario "a blank profile is created for them" do 
