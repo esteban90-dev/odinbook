@@ -37,10 +37,6 @@ feature "regular user registers" do
       expect(page).to have_content("Welcome to Odinbook!")
     end
 
-    scenario "a blank profile is created for them" do 
-      expect(User.first.profile).not_to eq(nil)
-    end
-
     scenario "they see the edit profile page" do 
       expect(page.current_path).to eq(edit_user_profile_path(User.first))
     end
