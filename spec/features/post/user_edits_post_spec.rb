@@ -2,21 +2,27 @@ require 'rails_helper'
 
 feature "user edits a post" do 
 
-  context "with new text" do 
+  context "and changes the text" do 
 
     before(:each) do 
-      @bob = FactoryBot.create(:user, :with_example_profile, name: "bob", email: "bob@example.com")
-      @post = @bob.posts.last
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      @post = @bob.posts.create(body: "this is a post")
       sign_in @bob
 
       visit root_path
       click_on "bob"
-      
-      edit_post_with_new_text(@post, "chicken is better than pork")
+
+      find("##{@post.id}").click_on "edit"
+      fill_in "Body", with: "this is different"
+      click_on "Update Post"
     end
 
     scenario "they see the modified post text" do 
-      user_sees_modified_post_text(@post, "chicken is better than pork")
+      expect(page).to have_content("this is different")
+    end
+
+    scenario "they don't see the old text" do 
+      expect(page).not_to have_content("this is a post")
     end
 
     scenario "they see a flash message" do 
@@ -25,26 +31,32 @@ feature "user edits a post" do
 
   end
 
-  context "with a new picture" do 
+  context "and changes the picture" do 
 
     before(:each) do 
-      @bob = FactoryBot.create(:user, :with_example_profile, name: "bob", email: "bob@example.com")
-      @post = @bob.posts.last
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      post_image_file = fixture_file_upload(Rails.root.join('spec','files','empire_state_building.jpg'), 'image/jpg')
+      @post = @bob.posts.create(body: "this is the second post", picture: post_image_file)
       sign_in @bob
 
       visit root_path
       click_on "bob"
-      
-      
-      edit_post_with_new_image(@post, "#{Rails.root}/spec/files/white_house.jpg")
+
+      find("##{@post.id}").click_on "edit"
+      attach_file "Picture", "#{Rails.root}/spec/files/white_house.jpg"
+      click_on "Update Post"
     end
 
     scenario "they see the modified post image" do
-      user_sees_modified_post_picture(@post, "white_house.jpg")
+      expect(page).to have_image("white_house.jpg")
+    end
+
+    scenario "they don't see the old image" do
+      expect(page).not_to have_image("empire_state_building.jpg")
     end
 
     scenario "they see the post text remain unchanged" do 
-      user_sees_post_text(@post)
+      expect(page).to have_content("this is the second post")
     end
 
     scenario "they see a flash message" do 
