@@ -1,4 +1,10 @@
 class PostsController < ApplicationController
+  def index
+    friend_ids = current_user.friends.pluck(:id)
+    valid_ids = (friend_ids << current_user.id).map(&:to_i)
+    @posts = Post.where(user_id: valid_ids).reverse_order.limit(15)
+  end
+
   def create
     post = current_user.posts.new(post_params)
 

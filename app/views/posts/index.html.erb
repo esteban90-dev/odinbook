@@ -1,0 +1,6 @@
+<% @posts.each do |post| %>
+  <div class="post" id=<%= post.id %>>
+    <%= post.body %>
+    <%= post.user.name %>
+  </div> 
+<% end %>
