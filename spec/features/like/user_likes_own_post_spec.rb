@@ -3,13 +3,13 @@ require 'rails_helper'
 feature "user likes his/her own post" do 
 
   scenario "no new notification is generated" do 
-    @bob = FactoryBot.create(:user, :with_example_profile, name: "bob", email: "bob@example.com")
+    @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+    @post = @bob.posts.create(body: "this is a post")
     sign_in @bob
 
     visit root_path
     click_on "bob"
-    @post = @bob.posts.last
-    like(@post)
+    find("##{@post.id}").click_on "like"
   
     expect(@bob.notifications.unacked.any?).to eq(false)
   end
