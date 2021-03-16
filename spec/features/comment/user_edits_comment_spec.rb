@@ -16,9 +16,7 @@ feature "user edits comment" do
     click_on "friends"
     click_on "bob"
 
-    within(".comment##{@comment.id}") do 
-      click_on "edit"
-    end
+    find("[data-test=comment-#{@comment.id}]").click_on "edit"
     fill_in "comment_body", with: "this post is actually great"
     click_on "Update Comment"
   end
