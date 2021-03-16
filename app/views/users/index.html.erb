@@ -1,5 +1,5 @@
 <% @users.each do |user| %>
-  <div id=<%= user.id %>>
+  <div data-test="user-<%= user.id %>">
     <%= user.name %>
 
     <% if current_user.friends.include?(user) %>

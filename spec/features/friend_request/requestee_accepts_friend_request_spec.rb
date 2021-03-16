@@ -12,7 +12,7 @@ feature "requestee accepts friend request" do
     click_on "joe"
     click_on "friend requests"
   
-    find("##{@bob.id}", text: "bob").click_on "accept"
+    find("[data-test=user-#{@bob.id}]", text: @bob.name).click_on "accept"
   end
 
   scenario "and sees a flash message" do
@@ -29,7 +29,7 @@ feature "requestee accepts friend request" do
   scenario "and sees the requestor appear in the user index as a friend" do 
     click_on "users"
 
-    within("##{@bob.id}") do 
+    within("[data-test=user-#{@bob.id}]", text: @bob.name) do 
       expect(page).to have_content("friends")
     end
   end

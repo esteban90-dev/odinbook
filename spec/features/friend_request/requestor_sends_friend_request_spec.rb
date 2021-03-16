@@ -9,7 +9,7 @@ feature "requestor sends friend request" do
     sign_in @bob
     visit root_path
     click_on "users"
-    find("##{@joe.id}", text: "joe").click_on "add friend"
+    find("[data-test=user-#{@joe.id}]", text: @joe.name).click_on "add friend"
   end
 
   scenario "and sees a flash message" do
@@ -17,17 +17,17 @@ feature "requestor sends friend request" do
   end
 
   scenario "and sees 'friend request sent' next to the requestee in the users index" do 
-    within("##{@joe.id}") do 
+    within("[data-test=user-#{@joe.id}]", text: @joe.name) do 
       expect(page).to have_content("friend request sent")
     end
   end
 
-  scenario "and sees the requestee's name appear in the friend requests index" do 
+  scenario "and sees the requestee appear in the sent section of the friend requests index" do 
     click_on "bob"
     click_on "friend requests"
-
-    within("##{@joe.id}") do 
-      expect(page).to have_content("joe")
+ 
+    within('.sent') do 
+      expect(page).to have_css("[data-test=user-#{@joe.id}]", text: @joe.name)
     end
   end
 
