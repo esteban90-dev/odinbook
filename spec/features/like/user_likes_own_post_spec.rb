@@ -9,7 +9,7 @@ feature "user likes his/her own post" do
 
     visit root_path
     click_on "bob"
-    find("##{@post.id}").click_on "like"
+    find("[data-test=post-#{@post.id}]").click_on "like"
   
     expect(@bob.notifications.unacked.any?).to eq(false)
   end

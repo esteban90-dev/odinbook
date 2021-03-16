@@ -14,11 +14,11 @@ feature "user unlikes a friend's post" do
     click_on "frank"
     click_on "friends"
     click_on "bob"
-    find("##{@post.id}").click_on "unlike"
+    find("[data-test=post-#{@post.id}]").click_on "unlike"
   end
 
   scenario "the user sees the like count decrement" do 
-    expect(page).to have_css("##{@post.id}", text: "likes: 0")
+    expect(page).to have_css("[data-test=post-#{@post.id}]", text: "likes: 0")
   end
 
   scenario "the user doesn't see the 'unlike' button anymore" do 
