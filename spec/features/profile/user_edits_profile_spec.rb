@@ -17,16 +17,24 @@ feature "user edits profile" do
     click_on "save"
   end
 
-  scenario "they receive a flash message" do 
+  scenario "they see a flash message" do 
     expect(page).to have_content("Successfully updated profile")
   end
 
-  scenario "they see their updated profile information" do 
-    user_sees_profile_information(@bob.reload)
+  scenario "they see their location" do 
+    expect(page).to have_content("New York")
+  end
+
+  scenario "they see their education" do 
+    expect(page).to have_content("Master's Degree")
+  end
+
+  scenario "they see their relationship status" do 
+    expect(page).to have_content("Single")
   end
 
   scenario "they see their profile picture" do 
-    user_sees_profile_picture("eiffel_tower.jpg")
+    expect(page).to have_image("eiffel_tower.jpg")
   end
 
 end
