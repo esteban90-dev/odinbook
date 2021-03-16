@@ -10,7 +10,7 @@ feature "user comments on own post" do
     visit root_path
     click_on "bob"
 
-    within("[data-test=post-#{@post.id}]") do 
+    within("[data-test=post-#{@post.id}]", text: @post.body) do 
       fill_in "comment_body", with: "I love my own posts so much"
       click_on "comment"
     end
