@@ -13,12 +13,12 @@ feature "user sees list of other users" do
   end
 
   scenario "user does not see themselves in the list" do 
-    expect(page).not_to have_user(@bob)
+    expect(page).not_to have_css("##{@bob.id}", text: "bob")
   end
 
   scenario "user sees other users in the list" do   
-    expect(page).to have_user(@frank)
-    expect(page).to have_user(@john)
+    expect(page).to have_css("##{@frank.id}", text: "frank")
+    expect(page).to have_css("##{@john.id}", text: "john")
   end
 
 end
