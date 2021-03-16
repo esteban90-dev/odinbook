@@ -11,7 +11,7 @@ feature "user unfriends a friend" do
     visit root_path
     click_on "bob"
     click_on "friends"
-    find("##{@joe.id}", text: "joe").click_on "unfriend"
+    find("[data-test=user-#{@joe.id}]").click_on "unfriend"
   end
 
   scenario "they see a flash message" do 

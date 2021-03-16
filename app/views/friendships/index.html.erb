@@ -1,5 +1,5 @@
 <% @friendships.each do |friendship| %>
-  <div id="<%= friendship.friend.id %>">
+  <div data-test="user-<%= friendship.friend.id %>">
     <%= link_to friendship.friend.name, user_profile_path(friendship.friend.id) %>
     <%= link_to "unfriend", friendship_path(friendship), method: :delete %>
   </div>
