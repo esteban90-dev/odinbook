@@ -11,7 +11,7 @@ feature "requestee ignores friend request" do
     visit root_path
     click_on "joe"
     click_on "friend requests"
-    find("[data-test=user-#{@bob.id}]", text: @bob.name).click_on("ignore")
+    find("[data-test=user-#{@bob.id}]").click_on("ignore")
   end
 
   scenario "and sees a flash message" do 
@@ -54,7 +54,7 @@ feature "requestee ignores friend request" do
     visit root_path
     click_on "users"
 
-    within("[data-test=user-#{@joe.id}]", text: @joe.name) do 
+    within("[data-test=user-#{@joe.id}]") do 
       expect(page).to have_content("add friend")
     end
   end

@@ -9,7 +9,7 @@ feature "requestee receives friend request" do
     sign_in bob
     visit root_path
     click_on "users"
-    find("[data-test=user-#{frank.id}]", text: @frank.name).click_on "add friend"
+    find("[data-test=user-#{frank.id}]").click_on "add friend"
     sign_out bob
 
     sign_in frank

@@ -15,7 +15,7 @@ feature "user deletes comment" do
     click_on "friends"
     click_on "bob"
 
-    find("[data-test=comment-#{@comment.id}]", text: @comment.body).click_on "delete"
+    find("[data-test=comment-#{@comment.id}]").click_on "delete"
   end
 
   scenario "they see that the comment is no longer there" do 
