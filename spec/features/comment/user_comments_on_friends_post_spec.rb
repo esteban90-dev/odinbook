@@ -3,10 +3,10 @@ require 'rails_helper'
 feature "user comments on friend's post" do 
 
   before(:each) do 
-    @bob = FactoryBot.create(:user, :with_example_profile, name: "bob", email: "bob@example.com")
+    @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
     @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
     @bob.friends << @frank
-    @post = @bob.posts.last
+    @post = @bob.posts.create(body: "this is a post")
 
     sign_in @frank
 
@@ -15,15 +15,26 @@ feature "user comments on friend's post" do
     click_on "friends"
     click_on "bob"
 
-    comment_on_post(@post, "this post is great")
+    within(".post##{@post.id}") do 
+      fill_in "comment_body", with: "this post is great"
+      click_on "comment"
+    end
   end
 
-  scenario "they see the comment appear below the post" do
-    user_sees_post_comment(@post, "this post is great")
+  scenario "they see the comment" do
+    expect(page).to have_content("this post is great")
   end
 
-  scenario "they see their name appear as a link back to their profile next to their comment" do 
-    user_sees_name_with_comment(@post.comments.first)
+  scenario "they see their name appear next to the comment" do 
+    within(".comment##{@post.comments.first.id}") do 
+      expect(page).to have_content("frank")
+    end
+  end
+
+  scenario "they click their name next to the comment and it leads them back to their profile" do 
+    find(".comment##{@post.comments.first.id}").click_on "frank"
+
+    expect(page).to have_current_path(user_profile_path(@frank.id))
   end
 
   scenario "they see a flash message" do 
@@ -37,7 +48,18 @@ feature "user comments on friend's post" do
     visit root_path
     click_on "notifications"
 
-    post_author_receives_comment_notification(@post, @post.comments.first)
+    expect(page).to have_content("frank commented on your post")
+  end
+
+  scenario "the post's author clicks the link in the notification and it leads them back to the post" do 
+    sign_out @frank
+    sign_in @bob
+
+    visit root_path
+    click_on "notifications"
+    click_on "post"
+
+    expect(page).to have_content("this is a post")
   end
 
 end
