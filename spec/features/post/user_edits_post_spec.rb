@@ -12,7 +12,7 @@ feature "user edits a post" do
       visit root_path
       click_on "bob"
 
-      find("##{@post.id}").click_on "edit"
+      find("[data-test=post-#{@post.id}]").click_on "edit"
       fill_in "Body", with: "this is different"
       click_on "Update Post"
     end
@@ -42,7 +42,7 @@ feature "user edits a post" do
       visit root_path
       click_on "bob"
 
-      find("##{@post.id}").click_on "edit"
+      find("[data-test=post-#{@post.id}]").click_on "edit"
       attach_file "Picture", "#{Rails.root}/spec/files/white_house.jpg"
       click_on "Update Post"
     end

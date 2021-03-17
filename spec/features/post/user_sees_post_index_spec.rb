@@ -18,18 +18,18 @@ feature "user sees post index" do
   end
 
   scenario "they see posts belonging to themselves and friends" do
-    expect(page).to have_css(".post##{@post_1.id}", text: @post_1.body)
-    expect(page).to have_css(".post##{@post_2.id}", text: @post_2.body)
+    expect(page).to have_css("[data-test=post-#{@post_1.id}]", text: @post_1.body)
+    expect(page).to have_css("[data-test=post-#{@post_2.id}]", text: @post_2.body)
   end
 
   scenario "they see each post's author's name" do 
-    within(".post##{@post_1.id}")do 
+    within("[data-test=post-#{@post_1.id}]")do 
       expect(page).to have_content(@post_1.user.name)
     end
   end
 
   scenario "they don't see posts belonging to users that aren't friends" do 
-    expect(page).not_to have_css(".post##{@post_3.id}", text: @post_3.body)
+    expect(page).not_to have_css("[data-test=post-#{@post_3.id}]", text: @post_3.body)
   end
 
   scenario "they only see up to 15 posts" do 
@@ -39,7 +39,7 @@ feature "user sees post index" do
 
     visit posts_path
 
-    expect(page.all('.post').count).to eq(15)
+    expect(all(:xpath, '//div[@data-test]'){ |element| element['data-test'].include?('post') }.count).to eq(15)
   end
 
   scenario "the posts are in order of most recent first" do 
@@ -47,7 +47,7 @@ feature "user sees post index" do
   end
 
   scenario "they see each post's author's name" do 
-    within(".post##{@post_1.id}")do 
+    within("[data-test=post-#{@post_1.id}]")do 
       expect(page).to have_content(@post_1.user.name)
     end
   end

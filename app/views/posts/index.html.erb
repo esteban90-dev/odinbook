@@ -1,5 +1,5 @@
 <% @posts.each do |post| %>
-  <div class="post" id=<%= post.id %>>
+  <div data-test="post-<%= post.id %>">
     <%= post.body %>
     <%= post.user.name %>
   </div> 
