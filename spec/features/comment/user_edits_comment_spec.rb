@@ -15,10 +15,7 @@ feature "user edits comment" do
     click_on "frank"
     click_on "friends"
     click_on "bob"
-
-    find("[data-test=comment-#{@comment.id}]").click_on "edit"
-    fill_in "comment_body", with: "this post is actually great"
-    click_on "Update Comment"
+    edit_comment(@comment, "this post is actually great")
   end
 
   scenario "they don't see the old comment text" do 

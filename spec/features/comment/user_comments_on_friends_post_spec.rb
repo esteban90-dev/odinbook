@@ -15,10 +15,7 @@ feature "user comments on friend's post" do
     click_on "friends"
     click_on "bob"
 
-    within("[data-test=post-#{@post.id}]") do 
-      fill_in "comment_body", with: "this post is great"
-      click_on "comment"
-    end
+    comment_on_post(@post, "this post is great")
   end
 
   scenario "they see the comment" do
@@ -26,13 +23,11 @@ feature "user comments on friend's post" do
   end
 
   scenario "they see their name appear next to the comment" do 
-    within("[data-test=comment-#{@post.comments.first.id}]") do 
-      expect(page).to have_content("frank")
-    end
+    expect(page).to have_commenter_name(@post.comments.first, "frank")
   end
 
   scenario "they click their name next to the comment and it leads them back to their profile" do 
-    find("[data-test=comment-#{@post.comments.first.id}]").click_on "frank"
+    click_on_comment_user_name(@post.comments.first)
 
     expect(page).to have_current_path(user_profile_path(@frank.id))
   end
@@ -51,7 +46,7 @@ feature "user comments on friend's post" do
     expect(page).to have_content("frank commented on your post")
   end
 
-  scenario "the post's author clicks the link in the notification and it leads them back to the post" do 
+  scenario "the post's author clicks the link in the notification and it leads them back to their profile" do 
     sign_out @frank
     sign_in @bob
 
@@ -59,7 +54,7 @@ feature "user comments on friend's post" do
     click_on "notifications"
     click_on "post"
 
-    expect(page).to have_content("this is a post")
+    expect(page).to have_current_path(user_profile_path(@bob.id))
   end
 
 end

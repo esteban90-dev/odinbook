@@ -9,11 +9,7 @@ feature "user comments on own post" do
 
     visit root_path
     click_on "bob"
-
-    within("[data-test=post-#{@post.id}]") do 
-      fill_in "comment_body", with: "I love my own posts so much"
-      click_on "comment"
-    end
+    comment_on_post(@post, "I love my own posts so much")
 
     expect(bob.notifications.unacked.any?).to eq(false)
   end
