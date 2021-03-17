@@ -5,14 +5,14 @@ feature "requestee accepts friend request" do
   before(:each) do
     @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
     @joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
-    FriendRequest.create(requestor: @bob, requestee: @joe)
+    @friend_request = FriendRequest.create(requestor: @bob, requestee: @joe)
 
     sign_in @joe
     visit root_path
     click_on "joe"
     click_on "friend requests"
   
-    find("[data-test=user-#{@bob.id}]").click_on "accept"
+    accept(@friend_request)
   end
 
   scenario "and sees a flash message" do
@@ -29,19 +29,14 @@ feature "requestee accepts friend request" do
   scenario "and sees the requestor appear in the user index as a friend" do 
     click_on "users"
 
-    within("[data-test=user-#{@bob.id}]") do 
-      expect(page).to have_content("friends")
-    end
+    expect(page).to have_user_appear_as_friend(@bob)
   end
 
-  scenario "and no longer sees pending incoming friend requests" do 
+  scenario "and no longer sees incoming friend requests" do 
     click_on "joe"
     click_on "friend requests"
 
-    within('.incoming') do 
-      expect(page).not_to have_content("accept")
-      expect(page).not_to have_content("ignore")
-    end
+    expect(incoming_friend_requests.count).to eq(0)
   end
 
   scenario "the requestor receives a new notification" do 
@@ -73,9 +68,7 @@ feature "requestee accepts friend request" do
     click_on "bob"
     click_on "friend requests"
 
-    within('.sent') do 
-      expect(page).not_to have_content("pending")
-    end
+    expect(sent_friend_requests.count).to eq(0)
   end
 
 end

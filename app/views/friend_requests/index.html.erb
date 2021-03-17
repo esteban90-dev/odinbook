@@ -1,17 +1,13 @@
-<div class="incoming">
-  <% @incoming_friend_requests.each do |ifr| %>
-    <div data-test="user-<%= ifr.requestor.id %>">
-      <%= ifr.requestor.name %>
-      <%= link_to "accept", accept_friend_request_path(ifr.id), method: :delete %>
-      <%= link_to "ignore", ignore_friend_request_path(ifr.id), method: :delete %>
-    </div>
-  <% end %>
-</div>
+<% @incoming_friend_requests.each do |ifr| %>
+  <div data-test="incoming-friend-request-<%= ifr.id %>">
+    <%= ifr.requestor.name %>
+    <%= link_to "accept", accept_friend_request_path(ifr.id), method: :delete %>
+    <%= link_to "ignore", ignore_friend_request_path(ifr.id), method: :delete %>
+  </div>
+<% end %>
 
-<div class="sent">
-  <% @sent_friend_requests.each do |sfr| %>
-    <div data-test="user-<%= sfr.requestee.id %>">
-      <%= sfr.requestee.name %>
-    </div>
-  <% end %>
-</div>
+<% @sent_friend_requests.each do |sfr| %>
+  <div data-test="sent-friend-request-<%= sfr.id %>">
+    <%= sfr.requestee.name %>
+  </div>
+<% end %>
