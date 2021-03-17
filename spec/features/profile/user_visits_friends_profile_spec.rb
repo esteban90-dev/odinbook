@@ -29,13 +29,21 @@ feature "user visits friend's profile" do
   scenario "they see their friend's friends" do 
     @sean = FactoryBot.create(:user, name: "sean", email: "sean@example.com")
     @alex = FactoryBot.create(:user, name: "alex", email: "alex@example.com")
-    @bob.friends << [@frank, @sean, @alex]
+    @bob.friends << [@sean, @alex]
 
     click_on "friends"
 
-    expect(page).to have_content("frank")
-    expect(page).to have_content("sean")
-    expect(page).to have_content("alex")
+    within("[data-test=user-#{@frank.id}]") do 
+      expect(page).to have_content("frank")
+    end
+
+    within("[data-test=user-#{@sean.id}]") do
+      expect(page).to have_content("sean")
+    end
+
+    within("[data-test=user-#{@alex.id}]") do
+      expect(page).to have_content("alex")
+    end
   end
 
   scenario "they don't see the edit profile link" do 
