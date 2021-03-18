@@ -1,7 +1,5 @@
 <% @notifications.each do |notification| %>
-  <div class="notification">
-    <div id="<%= notification.id %>">
-      <%= notification.message.html_safe %>
-    </div>
+  <div data-test="notification-<%= notification.id %>">
+    <%= notification.message.html_safe %>
   </div>
 <% end %>

@@ -14,19 +14,19 @@ feature "user likes a friend's post" do
     click_on "friends"
     click_on "bob"
   
-    find("[data-test=post-#{@post.id}]").click_on "like"
+    like(@post)
   end
 
   scenario "the user sees the like count increment" do 
-    expect(page).to have_css("[data-test=post-#{@post.id}]", text: "likes: 1")
+    expect(page).to have_post_with_likes(@post, 1)
   end
 
   scenario "the user doesn't see the like button anymore" do 
-    expect(page).not_to have_link("like", exact: true)
+    user_doesnt_see_post_like_button(@post)
   end
 
   scenario "the user now sees an 'unlike' button" do 
-    expect(page).to have_link("unlike")
+    user_sees_post_unlike_button(@post)
   end
 
   scenario "the friend receives a notification" do 
@@ -44,7 +44,7 @@ feature "user likes a friend's post" do
     visit root_path
     click_on "notifications"
 
-    click_on "post"
+    click_post_link_in_notification(@bob.notifications.first)
 
     expect(page).to have_content(@post.body)
   end
