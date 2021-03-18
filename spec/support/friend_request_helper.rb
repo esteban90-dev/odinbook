@@ -12,18 +12,6 @@ def add_friend(user)
   find("[data-test=user-#{user.id}]").click_on "add friend"
 end
 
-def have_user_appear_addable(user)
-  have_css("[data-test=user-#{user.id}]", text: "add friend")
-end
-
-def have_user_appear_as_friend(user)
-  have_css("[data-test=user-#{user.id}]", text: user.name).and have_css("[data-test=user-#{user.id}]", text: "friends")
-end
-
-def have_user_appear_pending(user)
-  have_css("[data-test=user-#{user.id}]", text: "friend request sent")
-end
-
 def have_sent_friend_request(request)
   have_css("[data-test=sent-friend-request-#{request.id}]", text: request.requestee.name)
 end
