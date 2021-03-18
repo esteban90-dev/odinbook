@@ -12,20 +12,20 @@ feature "user sees new notifications" do
   end
 
   scenario "the 'notifications' link is bold" do
-    expect(page).to have_css('b', text: 'notifications')
+    expect(page).to have_bold_notifications_link
   end
 
   scenario "the notifications are in descending order" do 
     click_on "notifications" 
 
-    expect(page.body.index(@notification_2.message) < page.body.index(@notification_1.message)).to eq(true)
+    user_sees_notifications_descending(@notification_1, @notification_2)
   end
 
   scenario "once viewed, the 'notifications' link is no longer bold" do 
     click_on "notifications" 
     visit root_path
 
-    expect(page).not_to have_css('b', text: 'notifications')
+    expect(page).not_to have_bold_notifications_link
   end
 
 end
