@@ -11,7 +11,7 @@ feature "user comments on own post" do
     click_on "bob"
     comment_on_post(@post, "I love my own posts so much")
 
-    expect(bob.notifications.unacked.any?).to eq(false)
+    expect(notifications_on_page.count).to eq(0)
   end
 
 end
