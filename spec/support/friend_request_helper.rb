@@ -4,6 +4,10 @@ def accept(friend_request)
   find("[data-test=incoming-friend-request-#{friend_request.id}]").click_on "accept"
 end
 
+def accept_from_notification(notification)
+  find("[data-test=notification-#{notification.id}]").click_on "accept"
+end
+
 def ignore(friend_request)
   find("[data-test=incoming-friend-request-#{friend_request.id}]").click_on("ignore")
 end
