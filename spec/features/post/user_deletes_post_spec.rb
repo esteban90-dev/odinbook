@@ -10,7 +10,7 @@ feature "user deletes a post" do
     visit root_path 
     click_on "bob"
 
-    find("[data-test=post-#{@post.id}]").click_on "delete"
+    delete_post(@post)
   end
   
   scenario "the post no longer exists" do 

@@ -18,7 +18,7 @@ feature "user sees new notifications" do
   scenario "the notifications are in descending order" do 
     click_on "notifications" 
 
-    user_sees_notifications_descending(@notification_1, @notification_2)
+    user_sees_content_order_descending(@notification_1.message, @notification_2.message)
   end
 
   scenario "once viewed, the 'notifications' link is no longer bold" do 

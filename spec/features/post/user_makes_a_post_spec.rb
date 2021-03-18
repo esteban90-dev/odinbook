@@ -32,9 +32,8 @@ feature "user makes a post" do
 
       visit root_path
       click_on "bob"
-      fill_in "Body", with: "this is my first post"
-      attach_file "Picture", "#{Rails.root}/spec/files/empire_state_building.jpg"
-      click_on "create post"
+
+      create_post_with_picture("this is my first post", "#{Rails.root}/spec/files/empire_state_building.jpg")
     end
 
     scenario "they see a flash message" do 
