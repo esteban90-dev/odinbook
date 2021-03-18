@@ -17,13 +17,11 @@ feature "user visits friend's profile" do
   end
 
   scenario "they see their friend's posts in descending order" do 
-    expect(page.body.index(@post_2.body) < page.body.index(@post_1.body)).to eq(true)
+    user_sees_content_order_descending(@post_1.body, @post_2.body)
   end
 
   scenario "they don't see a form to create a post" do 
-    expect(page).not_to have_field("Body")
-    expect(page).not_to have_field("Picture")
-    expect(page).not_to have_button("create post")
+    user_doesnt_see_post_form
   end
 
   scenario "they see their friend's friends" do 
@@ -33,17 +31,9 @@ feature "user visits friend's profile" do
 
     click_on "friends"
 
-    within("[data-test=user-#{@frank.id}]") do 
-      expect(page).to have_content("frank")
-    end
-
-    within("[data-test=user-#{@sean.id}]") do
-      expect(page).to have_content("sean")
-    end
-
-    within("[data-test=user-#{@alex.id}]") do
-      expect(page).to have_content("alex")
-    end
+    expect(page).to have_content("frank")
+    expect(page).to have_content("sean")
+    expect(page).to have_content("alex")
   end
 
   scenario "they don't see the edit profile link" do 
