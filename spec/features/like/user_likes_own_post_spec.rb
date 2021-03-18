@@ -10,8 +10,9 @@ feature "user likes his/her own post" do
     visit root_path
     click_on "bob"
     like(@post)
+    click_on "notifications"
   
-    expect(@bob.notifications.unacked.any?).to eq(false)
+    expect(notifications_on_page.count).to eq(0)
   end
 
 end
