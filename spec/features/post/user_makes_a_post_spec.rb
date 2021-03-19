@@ -16,11 +16,15 @@ feature "user makes a post" do
         click_on "create post"
       end
 
+      scenario "they are redirected back to their profile" do 
+        expect(page).to have_current_path(user_profile_path(@bob))
+      end
+
       scenario "they see a flash message" do 
         expect(page).to have_content("Successfully made a post")
       end
 
-      scenario "they see the posted text appear on their profile" do 
+      scenario "they see the posted text" do 
         expect(page).to have_content("this is my first post")
       end
 
@@ -38,15 +42,19 @@ feature "user makes a post" do
         create_post_with_picture("this is my first post", "#{Rails.root}/spec/files/empire_state_building.jpg")
       end
 
+      scenario "they are redirected back to their profile" do 
+        expect(page).to have_current_path(user_profile_path(@bob))
+      end
+
       scenario "they see a flash message" do 
         expect(page).to have_content("Successfully made a post")
       end
 
-      scenario "they see the posted text appear on their profile" do 
+      scenario "they see the posted text" do 
         expect(page).to have_content("this is my first post")
       end
 
-      scenario "they see the posted image appear on their profile" do 
+      scenario "they see the posted image" do 
         expect(page).to have_image("empire_state_building.jpg")
       end
 
@@ -76,13 +84,7 @@ feature "user makes a post" do
         expect(page).to have_content("Successfully made a post")
       end
 
-      scenario "they see the posted text appear on the timeline" do 
-        expect(page).to have_content("this is my first post")
-      end
-
-      scenario "they see the posted text appear on their profile" do 
-        click_on "bob"
-        
+      scenario "they see the posted text" do 
         expect(page).to have_content("this is my first post")
       end
 
@@ -108,19 +110,11 @@ feature "user makes a post" do
         expect(page).to have_content("Successfully made a post")
       end
 
-      scenario "they see the posted text appear on the timeline" do 
+      scenario "they see the posted text" do 
         expect(page).to have_content("this is my first post")
       end
 
-      scenario "they see the posted image appear on the timeline" do 
-        expect(page).to have_image("empire_state_building.jpg")
-      end
-
-      scenario "they see the posted text appear on their profile" do 
-        expect(page).to have_content("this is my first post")
-      end
-
-      scenario "they see the posted image appear on their profile" do 
+      scenario "they see the posted image" do 
         expect(page).to have_image("empire_state_building.jpg")
       end
 
