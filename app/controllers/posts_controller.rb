@@ -10,7 +10,11 @@ class PostsController < ApplicationController
 
     if post.save
       flash[:notice] = "Successfully made a post"
-      redirect_to user_profile_path(current_user.id) + "##{post.id}"
+      if request.referer.include?("profile")
+        redirect_to user_profile_path(current_user.id) + "##{post.id}"
+      else
+        redirect_to posts_path
+      end
     end
   end
 
