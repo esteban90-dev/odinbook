@@ -12,8 +12,12 @@ def accept_from_users(user)
   find("[data-test=user-#{user.id}]").click_on "accept"
 end
 
-def ignore(friend_request)
+def ignore_from_friend_requests(friend_request)
   find("[data-test=incoming-friend-request-#{friend_request.id}]").click_on("ignore")
+end
+
+def ignore_from_notifications(notification)
+  find("[data-test=notification-#{notification.id}]").click_on "ignore"
 end
 
 def add_friend(user)
