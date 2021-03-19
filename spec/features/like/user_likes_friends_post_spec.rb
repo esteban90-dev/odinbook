@@ -68,6 +68,10 @@ feature "user likes a friend's post" do
       like(@post)
     end
 
+    scenario "they are redirected back to the timeline" do 
+      expect(page).to have_current_path(posts_path)
+    end
+
     scenario "the user sees the like count increment" do 
       expect(page).to have_post_with_likes(@post, 1)
     end

@@ -68,6 +68,10 @@ feature "user makes a post" do
         click_on "create post"
       end
 
+      scenario "they are redirected back to the timeline" do 
+        expect(page).to have_current_path(posts_path)
+      end
+
       scenario "they see a flash message" do 
         expect(page).to have_content("Successfully made a post")
       end
@@ -94,6 +98,10 @@ feature "user makes a post" do
         click_on "timeline"
 
         create_post_with_picture("this is my first post", "#{Rails.root}/spec/files/empire_state_building.jpg")
+      end
+
+      scenario "they are redirected back to the timeline" do 
+        expect(page).to have_current_path(posts_path)
       end
 
       scenario "they see a flash message" do 
