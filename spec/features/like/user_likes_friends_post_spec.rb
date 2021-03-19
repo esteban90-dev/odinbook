@@ -19,6 +19,10 @@ feature "user likes a friend's post" do
       like(@post)
     end
 
+    scenario "they are redirected back to the post author's profile" do 
+      expect(page).to have_current_path(user_profile_path(@bob))
+    end
+
     scenario "the user sees the like count increment" do 
       expect(page).to have_post_with_likes(@post, 1)
     end
