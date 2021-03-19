@@ -20,6 +20,10 @@ def ignore_from_notifications(notification)
   find("[data-test=notification-#{notification.id}]").click_on "ignore"
 end
 
+def ignore_from_users(user)
+  find("[data-test=user-#{user.id}]").click_on "ignore"
+end
+
 def add_friend(user)
   find("[data-test=user-#{user.id}]").click_on "add friend"
 end
