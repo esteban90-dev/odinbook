@@ -163,12 +163,7 @@ feature "requestee accepts friend request" do
     before(:each) do
       @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
       @joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
-      
-      sign_in @bob
-      visit root_path
-      click_on "users"
-      add_friend(@joe)
-      sign_out @bob
+      FriendRequest.create(requestor: @bob, requestee: @joe)
 
       sign_in @joe
       visit root_path
