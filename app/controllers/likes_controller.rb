@@ -6,8 +6,12 @@ class LikesController < ApplicationController
     if post.user != current_user
       post.user.notifications.create(message: "#{current_user.name} liked your #{post_link(post)} ")
     end
-    
-    redirect_to user_profile_path(post.user.id)
+
+    if request.referer.include?("profile")
+      redirect_to user_profile_path(post.user.id)
+    else
+      redirect_to posts_path
+    end
   end
 
   def destroy
