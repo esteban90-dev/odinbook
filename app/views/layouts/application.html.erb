@@ -21,6 +21,7 @@
       <% if current_user %>
         signed in as <%= link_to current_user.name, user_profile_path(current_user.id) %>
         <%= link_to "users", users_path %>
+        <%= link_to "timeline", posts_path %>
         <%= link_to "sign out", destroy_user_session_path, method: :delete %>
         <% if current_user.notifications.unacked.any? %>
           <b><%= link_to "notifications", user_notifications_path(current_user.id) %></b>

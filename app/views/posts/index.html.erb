@@ -1,3 +1,13 @@
+<%= form_with model: [current_user, current_user.posts.new] do |f| %>
+  <%= f.label :body %>
+  <%= f.text_field :body %>
+
+  <%= f.label :picture %>
+  <%= f.file_field :picture %>
+
+  <%= f.submit "create post" %>
+<% end %>
+
 <% @posts.each do |post| %>
   <div data-test="post-<%= post.id %>">
     <%= post.body %>

@@ -2,50 +2,120 @@ require 'rails_helper'
 
 feature "user makes a post" do 
 
-  context "with text only" do 
+  context "from their profile" do 
 
-    before(:each) do 
-      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-      sign_in @bob
+    context "with text only" do 
 
-      visit root_path
-      click_on "bob"
-      fill_in "Body", with: "this is my first post"
-      click_on "create post"
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        sign_in @bob
+
+        visit root_path
+        click_on "bob"
+        fill_in "Body", with: "this is my first post"
+        click_on "create post"
+      end
+
+      scenario "they see a flash message" do 
+        expect(page).to have_content("Successfully made a post")
+      end
+
+      scenario "they see the posted text appear on their profile" do 
+        expect(page).to have_content("this is my first post")
+      end
+
     end
 
-    scenario "they see a flash message" do 
-      expect(page).to have_content("Successfully made a post")
-    end
+    context "with text and an image" do 
 
-    scenario "they see the posted text appear on their profile" do 
-      expect(page).to have_content("this is my first post")
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        sign_in @bob
+
+        visit root_path
+        click_on "bob"
+
+        create_post_with_picture("this is my first post", "#{Rails.root}/spec/files/empire_state_building.jpg")
+      end
+
+      scenario "they see a flash message" do 
+        expect(page).to have_content("Successfully made a post")
+      end
+
+      scenario "they see the posted text appear on their profile" do 
+        expect(page).to have_content("this is my first post")
+      end
+
+      scenario "they see the posted image appear on their profile" do 
+        expect(page).to have_image("empire_state_building.jpg")
+      end
+
     end
 
   end
 
-  context "with text and an image" do 
+  context "from the timeline" do 
 
-    before(:each) do 
-      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-      sign_in @bob
+    context "with text only" do 
 
-      visit root_path
-      click_on "bob"
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        sign_in @bob
 
-      create_post_with_picture("this is my first post", "#{Rails.root}/spec/files/empire_state_building.jpg")
+        visit root_path
+        click_on "timeline"
+        fill_in "Body", with: "this is my first post"
+        click_on "create post"
+      end
+
+      scenario "they see a flash message" do 
+        expect(page).to have_content("Successfully made a post")
+      end
+
+      scenario "they see the posted text appear on the timeline" do 
+        expect(page).to have_content("this is my first post")
+      end
+
+      scenario "they see the posted text appear on their profile" do 
+        click_on "bob"
+        
+        expect(page).to have_content("this is my first post")
+      end
+
     end
 
-    scenario "they see a flash message" do 
-      expect(page).to have_content("Successfully made a post")
-    end
+    context "with text and an image" do 
 
-    scenario "they see the posted text appear on their profile" do 
-      expect(page).to have_content("this is my first post")
-    end
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        sign_in @bob
 
-    scenario "they see the posted image appear on their profile" do 
-      expect(page).to have_image("empire_state_building.jpg")
+        visit root_path
+        click_on "timeline"
+
+        create_post_with_picture("this is my first post", "#{Rails.root}/spec/files/empire_state_building.jpg")
+      end
+
+      scenario "they see a flash message" do 
+        expect(page).to have_content("Successfully made a post")
+      end
+
+      scenario "they see the posted text appear on the timeline" do 
+        expect(page).to have_content("this is my first post")
+      end
+
+      scenario "they see the posted image appear on the timeline" do 
+        expect(page).to have_image("empire_state_building.jpg")
+      end
+
+      scenario "they see the posted text appear on their profile" do 
+        expect(page).to have_content("this is my first post")
+      end
+
+      scenario "they see the posted image appear on their profile" do 
+        expect(page).to have_image("empire_state_building.jpg")
+      end
+
     end
 
   end
