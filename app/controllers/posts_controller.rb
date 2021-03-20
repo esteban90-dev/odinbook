@@ -33,7 +33,7 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     post.destroy
     flash[:notice] = "Post successfully destroyed"
-    redirect_to user_profile_path(current_user.id)
+    post_redirect(post)
   end
 
   private

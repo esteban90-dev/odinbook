@@ -2,23 +2,58 @@ require 'rails_helper'
 
 feature "user deletes a post" do 
 
-  before(:each) do 
-    @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-    @post = @bob.posts.create(body: "this is a post")
+  context "from their profile" do 
 
-    sign_in @bob
-    visit root_path 
-    click_on "bob"
+    before(:each) do 
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      @post = @bob.posts.create(body: "this is a post")
 
-    delete_post(@post)
+      sign_in @bob
+      visit root_path 
+      click_on "bob"
+
+      delete_post(@post)
+    end
+
+    scenario "they are redirected back to their profile" do 
+      expect(page).to have_current_path(user_profile_path(@bob))
+    end
+    
+    scenario "they no longer see the post" do 
+      expect(page).not_to have_content("this is a post")
+    end
+
+    scenario "they see a flash message" do 
+      expect(page).to have_content("Post successfully destroyed")
+    end
+
   end
-  
-  scenario "the post no longer exists" do 
-    expect(page).not_to have_content("this is a post")
-  end
 
-  scenario "they see a flash message" do 
-    expect(page).to have_content("Post successfully destroyed")
+  context "from the timeline" do 
+
+    before(:each) do 
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      @post = @bob.posts.create(body: "this is a post")
+
+      sign_in @bob
+      visit root_path 
+      click_on "timeline"
+
+      delete_post(@post)
+    end
+
+    scenario "they are redirected back to the timeline" do 
+      expect(page).to have_current_path(posts_path)
+    end
+    
+    scenario "they no longer see the post" do 
+      expect(page).not_to have_content("this is a post")
+    end
+
+    scenario "they see a flash message" do 
+      expect(page).to have_content("Post successfully destroyed")
+    end
+
   end
 
 end
