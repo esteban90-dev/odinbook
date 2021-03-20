@@ -35,7 +35,11 @@ class CommentsController < ApplicationController
     post = comment.post
     comment.destroy
     flash[:notice] = "Successfully deleted comment"
-    redirect_to user_profile_path(post.user.id) + "##{comment.post.id}"
+    if params[:comment][:redirect] == "timeline"
+      redirect_to posts_path
+    else
+      redirect_to user_profile_path(post.user.id)
+    end
   end
 
   private
