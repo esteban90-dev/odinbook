@@ -5,6 +5,8 @@
   <%= f.label :picture %>
   <%= f.file_field :picture %>
 
+  <%= f.hidden_field :redirect, value: "timeline" %>
+
   <%= f.submit "create post" %>
 <% end %>
 
@@ -24,9 +26,9 @@
     likes: <%= post.likes.count %>
 
     <% if post.likers.include?(current_user) %>
-      <%= link_to "unlike", like_path(post.likes.where(liker: current_user).first.id), method: :delete %>
+      <%= link_to "unlike", like_path(post.likes.where(liker: current_user).first.id, redirect: "timeline"), method: :delete %>
     <% else %>
-      <%= link_to "like", post_likes_path(post.id), method: :post %>
+      <%= link_to "like", post_likes_path(post.id, redirect: "timeline"), method: :post %>
     <% end %>
 
   </div> 

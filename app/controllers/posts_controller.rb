@@ -10,11 +10,8 @@ class PostsController < ApplicationController
 
     if post.save
       flash[:notice] = "Successfully made a post"
-      if request.referer.include?("profile")
-        redirect_to user_profile_path(current_user.id) + "##{post.id}"
-      else
-        redirect_to posts_path
-      end
+
+      post_redirect(post)
     end
   end
 
@@ -27,11 +24,8 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     if post.update(post_params)
       flash[:notice] = "Successfully updated post"
-      if params[:post][:redirect] == "timeline"
-        redirect_to posts_path
-      else
-        redirect_to user_profile_path(post.user.id) + "##{post.id}"
-      end
+  
+      post_redirect(post)
     end
   end
 
@@ -47,4 +41,13 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:body, :picture)
   end
+
+  def post_redirect(post)
+    if params[:post][:redirect] == "timeline"
+      redirect_to posts_path
+    else
+      redirect_to user_profile_path(post.user.id) + "##{post.id}"
+    end
+  end
+
 end

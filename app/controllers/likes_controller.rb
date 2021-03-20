@@ -25,10 +25,10 @@ class LikesController < ApplicationController
   end
 
   def post_like_redirect(post)
-    if request.referer.include?("profile")
-      redirect_to user_profile_path(post.user.id)
-    else
+    if params[:redirect] == "timeline"
       redirect_to posts_path
+    else
+      redirect_to user_profile_path(post.user.id)
     end
   end
 
