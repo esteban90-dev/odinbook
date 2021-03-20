@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "user deletes comment" do 
 
-  context "from their profile" do 
+  context "from the friend's profile" do 
 
     before(:each) do 
       @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
