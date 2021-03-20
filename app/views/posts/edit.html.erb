@@ -4,6 +4,8 @@
 
   <%= f.label :picture %>
   <%= f.file_field :picture %>
+
+  <%= f.hidden_field :redirect, value: @redirect %>
   
   <%= f.submit %>
 <% end %>

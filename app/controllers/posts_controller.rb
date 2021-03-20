@@ -20,13 +20,18 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @redirect = params[:redirect]
   end
 
   def update
     post = Post.find(params[:id])
     if post.update(post_params)
       flash[:notice] = "Successfully updated post"
-      redirect_to user_profile_path(post.user.id) + "##{post.id}"
+      if params[:post][:redirect] == "timeline"
+        redirect_to posts_path
+      else
+        redirect_to user_profile_path(post.user.id) + "##{post.id}"
+      end
     end
   end
 
