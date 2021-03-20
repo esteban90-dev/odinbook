@@ -2,59 +2,128 @@ require 'rails_helper'
 
 feature "user comments on friend's post" do 
 
-  before(:each) do 
-    @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-    @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
-    @bob.friends << @frank
-    @post = @bob.posts.create(body: "this is a post")
+  context "from the friend's profile" do 
 
-    sign_in @frank
+    before(:each) do 
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
+      @bob.friends << @frank
+      @post = @bob.posts.create(body: "this is a post")
 
-    visit root_path
-    click_on "frank"
-    click_on "friends"
-    click_on "bob"
+      sign_in @frank
 
-    comment_on_post(@post, "this post is great")
+      visit root_path
+      click_on "frank"
+      click_on "friends"
+      click_on "bob"
+
+      comment_on_post(@post, "this post is great")
+    end
+
+    scenario "they are redirected back to the friend's profile" do 
+      expect(page).to have_current_path(user_profile_path(@bob))
+    end
+
+    scenario "they see the comment" do
+      expect(page).to have_content("this post is great")
+    end
+
+    scenario "they see their name appear next to the comment" do 
+      expect(page).to have_commenter_name(@post.comments.first, "frank")
+    end
+
+    scenario "they click their name next to the comment and it leads them back to their profile" do 
+      click_on_comment_user_name(@post.comments.first)
+
+      expect(page).to have_current_path(user_profile_path(@frank.id))
+    end
+
+    scenario "they see a flash message" do 
+      expect(page).to have_content("Successfully created comment")
+    end
+
+    scenario "the post's author receives a notification" do 
+      sign_out @frank
+      sign_in @bob
+
+      visit root_path
+      click_on "notifications"
+
+      expect(page).to have_content("frank commented on your post")
+    end
+
+    scenario "the post's author clicks the link in the notification and it leads them back to their profile" do 
+      sign_out @frank
+      sign_in @bob
+
+      visit root_path
+      click_on "notifications"
+      click_on "post"
+
+      expect(page).to have_current_path(user_profile_path(@bob.id))
+    end
+
   end
 
-  scenario "they see the comment" do
-    expect(page).to have_content("this post is great")
-  end
+  context "from the timeline" do 
 
-  scenario "they see their name appear next to the comment" do 
-    expect(page).to have_commenter_name(@post.comments.first, "frank")
-  end
+    before(:each) do 
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
+      @bob.friends << @frank
+      @post = @bob.posts.create(body: "this is a post")
 
-  scenario "they click their name next to the comment and it leads them back to their profile" do 
-    click_on_comment_user_name(@post.comments.first)
+      sign_in @frank
 
-    expect(page).to have_current_path(user_profile_path(@frank.id))
-  end
+      visit root_path
+      click_on "timeline"
 
-  scenario "they see a flash message" do 
-    expect(page).to have_content("Successfully created comment")
-  end
+      comment_on_post(@post, "this post is great")
+    end
 
-  scenario "the post's author receives a notification" do 
-    sign_out @frank
-    sign_in @bob
+    scenario "they are redirected back to the timeline" do 
+      expect(page).to have_current_path(posts_path)
+    end
 
-    visit root_path
-    click_on "notifications"
+    scenario "they see the comment" do
+      expect(page).to have_content("this post is great")
+    end
 
-    expect(page).to have_content("frank commented on your post")
-  end
+    scenario "they see their name appear next to the comment" do 
+      expect(page).to have_commenter_name(@post.comments.first, "frank")
+    end
 
-  scenario "the post's author clicks the link in the notification and it leads them back to their profile" do 
-    sign_out @frank
-    sign_in @bob
+    scenario "they click their name next to the comment and it leads them back to their profile" do 
+      click_on_comment_user_name(@post.comments.first)
 
-    visit root_path
-    click_on "notifications"
-    click_on "post"
+      expect(page).to have_current_path(user_profile_path(@frank.id))
+    end
 
-    expect(page).to have_current_path(user_profile_path(@bob.id))
+    scenario "they see a flash message" do 
+      expect(page).to have_content("Successfully created comment")
+    end
+
+    scenario "the post's author receives a notification" do 
+      sign_out @frank
+      sign_in @bob
+
+      visit root_path
+      click_on "notifications"
+
+      expect(page).to have_content("frank commented on your post")
+    end
+
+    scenario "the post's author clicks the link in the notification and it leads them back to their profile" do 
+      sign_out @frank
+      sign_in @bob
+
+      visit root_path
+      click_on "notifications"
+      click_on "post"
+
+      expect(page).to have_current_path(user_profile_path(@bob.id))
+    end
+
   end
 
 end

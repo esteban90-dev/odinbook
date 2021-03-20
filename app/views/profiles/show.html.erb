@@ -69,6 +69,8 @@
     <%= form_with model: [post, post.comments.new] do |f| %>
       <%= f.text_field :body %>
 
+      <%= f.hidden_field :redirect, value: "profile" %>
+
       <%= f.submit "comment"%>
     <% end %>
 

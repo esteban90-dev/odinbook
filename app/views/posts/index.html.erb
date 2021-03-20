@@ -32,5 +32,22 @@
       <%= link_to "like", post_likes_path(post.id, redirect: "timeline"), method: :post %>
     <% end %>
 
+    <% if post.comments.any? %>
+      <% post.comments.each do |comment| %>
+        <div data-test="comment-<%= comment.id %>">
+          <%= comment.body %>
+          <%= link_to comment.commenter.name, user_profile_path(comment.commenter.id) %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= form_with model: [post, post.comments.new] do |f| %>
+      <%= f.text_field :body %>
+
+      <%= f.hidden_field :redirect, value: "timeline" %>
+
+      <%= f.submit "comment"%>
+    <% end %>
+
   </div> 
 <% end %>
