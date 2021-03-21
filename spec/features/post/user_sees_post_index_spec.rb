@@ -22,6 +22,14 @@ feature "user sees post index" do
     expect(page).to have_content(@post_2.body)
   end
 
+  scenario "they don't see an edit link next to a friend's posts" do 
+    post_doesnt_appear_editable(@post_2)
+  end
+
+  scenario "they don't see a delete link next to a friend's posts" do 
+    post_doesnt_appear_deletable(@post_2)
+  end
+
   scenario "they see each post's author's name" do 
     expect(page).to have_post_author_name(@post_1)
     expect(page).to have_post_author_name(@post_2)

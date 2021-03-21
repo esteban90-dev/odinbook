@@ -63,6 +63,26 @@ feature "user comments on friend's post" do
       expect(page).to have_current_path(user_profile_path(@bob.id))
     end
 
+    scenario "the post's author doesn't see an edit link next to the comment" do 
+      sign_out @frank
+      sign_in @bob
+
+      visit root_path
+      click_on "bob"
+
+      comment_doesnt_appear_editable(@post.comments.first)
+    end
+
+    scenario "the post's author doesn't see a delete link next to the comment" do 
+      sign_out @frank
+      sign_in @bob
+      
+      visit root_path
+      click_on "bob"
+
+      comment_doesnt_appear_deletable(@post.comments.first)
+    end
+
   end
 
   context "from the timeline" do 
@@ -122,6 +142,26 @@ feature "user comments on friend's post" do
       click_on "post"
 
       expect(page).to have_current_path(user_profile_path(@bob.id))
+    end
+
+    scenario "the post's author doesn't see an edit link next to the comment" do 
+      sign_out @frank
+      sign_in @bob
+
+      visit root_path
+      click_on "timeline"
+
+      comment_doesnt_appear_editable(@post.comments.first)
+    end
+
+    scenario "the post's author doesn't see a delete link next to the comment" do 
+      sign_out @frank
+      sign_in @bob
+
+      visit root_path
+      click_on "timeline"
+
+      comment_doesnt_appear_deletable(@post.comments.first)
     end
 
   end

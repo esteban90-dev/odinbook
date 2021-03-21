@@ -29,3 +29,15 @@ end
 def posts_on_page
   all(:xpath, '//div[@data-test]'){ |element| element['data-test'].include?('post') }
 end
+
+def post_doesnt_appear_editable(post)
+  within("[data-test=post-#{post.id}]") do 
+    expect(page).not_to have_link("edit")
+  end
+end
+
+def post_doesnt_appear_deletable(post)
+  within("[data-test=post-#{post.id}]") do 
+    expect(page).not_to have_link("delete")
+  end
+end

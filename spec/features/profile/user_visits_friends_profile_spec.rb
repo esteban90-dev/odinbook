@@ -36,6 +36,14 @@ feature "user visits friend's profile" do
     expect(page).to have_content("alex")
   end
 
+  scenario "they don't see an edit link next to the friend's posts" do 
+    post_doesnt_appear_editable(@post_1)
+  end
+
+  scenario "they don't see a delete link next to the friend's posts" do 
+    post_doesnt_appear_deletable(@post_1)
+  end
+
   scenario "they don't see the edit profile link" do 
     expect(page).not_to have_link("edit profile")
   end

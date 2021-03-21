@@ -24,3 +24,15 @@ def edit_comment(comment, new_comment_text)
   fill_in "comment_body", with: new_comment_text
   click_on "Update Comment"
 end
+
+def comment_doesnt_appear_editable(comment)
+  within("[data-test=comment-#{comment.id}]") do 
+    expect(page).not_to have_link("edit")
+  end
+end
+
+def comment_doesnt_appear_deletable(comment)
+  within("[data-test=comment-#{comment.id}]") do 
+    expect(page).not_to have_link("delete")
+  end
+end
