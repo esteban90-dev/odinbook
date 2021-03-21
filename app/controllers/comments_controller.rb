@@ -10,23 +10,21 @@ class CommentsController < ApplicationController
       end
       flash[:notice] = "Successfully created comment"
 
-      if params[:comment][:redirect] == "profile"
-        redirect_to user_profile_path(post.user.id) + "##{post.id}"
-      else
-        redirect_to posts_path
-      end
+      comment_redirect(comment)
     end
   end
 
   def edit
     @comment = Comment.find(params[:id])
+    @redirect = params[:comment][:redirect]
   end
 
   def update
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
       flash[:notice] = "Successfully updated comment"
-      redirect_to user_profile_path(@comment.post.user.id) + "##{@comment.post.id}"
+
+      comment_redirect(@comment)
     end
   end
 
@@ -35,11 +33,8 @@ class CommentsController < ApplicationController
     post = comment.post
     comment.destroy
     flash[:notice] = "Successfully deleted comment"
-    if params[:comment][:redirect] == "timeline"
-      redirect_to posts_path
-    else
-      redirect_to user_profile_path(post.user.id)
-    end
+    
+    comment_redirect(comment)
   end
 
   private
@@ -50,5 +45,13 @@ class CommentsController < ApplicationController
 
   def post_link(post)
     "#{view_context.link_to("post", user_profile_path(post.user.id) + "##{post.id}", data: { turbolinks: false })}"
+  end
+
+  def comment_redirect(comment)
+    if params[:comment][:redirect] == "profile"
+      redirect_to user_profile_path(comment.post.user.id) + "##{comment.post.id}"
+    else
+      redirect_to posts_path
+    end
   end
 end

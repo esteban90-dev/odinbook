@@ -39,6 +39,7 @@
           <%= link_to comment.commenter.name, user_profile_path(comment.commenter.id) %>
           <% if current_user == comment.commenter %>
             <%= link_to "delete", comment_path(comment.id, comment: { redirect: "timeline" } ), method: :delete %>
+            <%= link_to "edit", edit_comment_path(comment.id, comment: { redirect: "timeline" } ) %>
           <% end %>
         </div>
       <% end %>

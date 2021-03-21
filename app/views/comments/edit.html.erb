@@ -1,5 +1,7 @@
 <%= form_with model: @comment do |f| %>
   <%= f.text_field :body %>
 
+  <%= f.hidden_field :redirect, value: @redirect %>
+
   <%= f.submit %>
 <% end %>
