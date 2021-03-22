@@ -74,3 +74,17 @@ describe User, "#password_required?" do
   end
 
 end 
+
+describe User do 
+
+  it "destroys dependent incoming friend requests" do 
+    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+    joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
+    FriendRequest.create(requestor: joe, requestee: bob)
+
+    bob.destroy
+
+    expect(FriendRequest.all.count).to eq(0)
+  end
+
+end
