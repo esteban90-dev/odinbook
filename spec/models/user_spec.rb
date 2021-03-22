@@ -116,4 +116,13 @@ describe User do
     expect(Notification.all.count).to eq(0)
   end
 
+  it "destroys dependent posts" do 
+    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+    bob.posts.create(body: "this is a post")
+
+    bob.destroy
+
+    expect(Post.all.count).to eq(0)
+  end
+
 end
