@@ -125,4 +125,12 @@ describe User do
     expect(Post.all.count).to eq(0)
   end
 
+  it "destroys dependent profile" do 
+    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+
+    bob.destroy
+
+    expect(Profile.all.count).to eq(0)
+  end
+
 end

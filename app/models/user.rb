@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships
   has_many :notifications, dependent: :destroy
   has_many :posts, dependent: :destroy
-  has_one :profile
+  has_one :profile, dependent: :destroy
 
   after_create :create_blank_profile
 
