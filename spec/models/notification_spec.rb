@@ -3,8 +3,10 @@ require 'rails_helper'
 describe Notification, ".unacked" do
 
   it "returns a list of unacknowledged notifications" do 
-    notification_1 = Notification.create(message: "new notification")
-    notification_2 = Notification.create(message: "new notification")
+    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+    notification_1 = bob.notifications.create(message: "new notification")
+    notification_2 = bob.notifications.create(message: "new notification")
+  
     notification_2.touch
 
     expect(Notification.unacked).to include(notification_1)
@@ -16,7 +18,9 @@ end
 describe Notification, "#unacked?" do 
 
   before do
-    @notification = Notification.create(message: "new notification")
+    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+    
+    @notification = bob.notifications.create(message: "new notification")
   end
 
   it "returns true if the created_at time matches the updated_at time" do 
