@@ -107,4 +107,13 @@ describe User do
     expect(Friendship.all.count).to eq(0)
   end
 
+  it "destroys dependent notifications" do 
+    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+    bob.notifications.create(message: "hello bob!")
+
+    bob.destroy
+
+    expect(Notification.all.count).to eq(0)
+  end
+
 end

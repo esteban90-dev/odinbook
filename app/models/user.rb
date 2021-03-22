@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :sent_friend_requests, class_name: "FriendRequest", foreign_key: "requestor_id", dependent: :destroy
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
   has_many :posts
   has_one :profile
 
