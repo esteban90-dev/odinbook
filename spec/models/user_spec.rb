@@ -97,4 +97,14 @@ describe User do
     expect(FriendRequest.all.count).to eq(0)
   end
 
+  it "destroys dependent friendships" do 
+    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+    joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
+    bob.friends << joe
+
+    bob.destroy
+
+    expect(Friendship.all.count).to eq(0)
+  end
+
 end
