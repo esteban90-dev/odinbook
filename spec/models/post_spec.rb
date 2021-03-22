@@ -30,4 +30,15 @@ describe Post do
     expect(Comment.all.count).to eq(0)
   end
 
+  it "destroys dependent likes" do 
+    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+    frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
+    post = bob.posts.create(body: "this is a post")
+    post.likes.create(liker: frank)
+
+    post.destroy
+
+    expect(Like.all.count).to eq(0)
+  end
+
 end
