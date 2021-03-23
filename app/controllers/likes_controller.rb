@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
-  
+  before_action :authorize, only: :destroy
+
   def create
     post = Post.find(params[:post_id])
     post.likes.create(liker: current_user)
@@ -31,6 +32,13 @@ class LikesController < ApplicationController
       redirect_to posts_path
     else
       redirect_to user_profile_path(post.user.id)
+    end
+  end
+
+  def authorize
+    if Like.find(params[:id]).liker != current_user
+      flash[:alert] = "this action is not permitted"
+      redirect_to posts_path
     end
   end
 
