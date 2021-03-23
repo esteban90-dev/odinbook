@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create, :edit, :update, :destroy]
+
   def index
     friend_ids = current_user.friends.pluck(:id)
     valid_ids = (friend_ids << current_user.id).map(&:to_i)
