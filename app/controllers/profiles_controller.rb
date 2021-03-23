@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     @profile = Profile.find_by_user_id(params[:user_id])
   end
