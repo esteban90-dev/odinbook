@@ -38,16 +38,19 @@ class LikesController < ApplicationController
 
   def authorize_destroy
     if Like.find(params[:id]).liker != current_user
-      flash[:alert] = "this action is not permitted"
-      redirect_to posts_path
+      unauthorized
     end
   end
 
   def authorize_create
     unless current_user.friends.include?(Post.find(params[:post_id]).user)
-      flash[:alert] = "this action is not permitted"
-      redirect_to posts_path
+      unauthorized
     end
+  end
+
+  def unauthorized
+    flash[:alert] = "this action is not permitted"
+    redirect_to posts_path
   end
 
 end
