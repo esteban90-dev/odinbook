@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create, :edit, :update, :destroy]
+  before_action :authorize, only: [:edit, :update, :destroy]
 
   def index
     friend_ids = current_user.friends.pluck(:id)
@@ -49,6 +50,13 @@ class PostsController < ApplicationController
       redirect_to posts_path
     else
       redirect_to user_profile_path(post.user.id) + "##{post.id}"
+    end
+  end
+
+  def authorize
+    if Post.find(params[:id]).user != current_user
+      flash[:alert] = "this action is not permitted"
+      redirect_to posts_path
     end
   end
 
