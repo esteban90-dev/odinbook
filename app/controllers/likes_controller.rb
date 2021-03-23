@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
-  before_action :authorize, only: :destroy
+  before_action :authorize_destroy, only: :destroy
+  before_action :authorize_create, only: :create
 
   def create
     post = Post.find(params[:post_id])
@@ -35,8 +36,15 @@ class LikesController < ApplicationController
     end
   end
 
-  def authorize
+  def authorize_destroy
     if Like.find(params[:id]).liker != current_user
+      flash[:alert] = "this action is not permitted"
+      redirect_to posts_path
+    end
+  end
+
+  def authorize_create
+    unless current_user.friends.include?(Post.find(params[:post_id]).user)
       flash[:alert] = "this action is not permitted"
       redirect_to posts_path
     end
