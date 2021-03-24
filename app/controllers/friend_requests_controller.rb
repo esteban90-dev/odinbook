@@ -8,7 +8,7 @@ class FriendRequestsController < ApplicationController
   end
 
   def create
-    request = FriendRequest.new(request_params)
+    request = current_user.sent_friend_requests.new(request_params)
 
     if request.save
       flash[:notice] = "Friend request successfully sent"
@@ -36,7 +36,7 @@ class FriendRequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:friend_request).permit(:requestor_id, :requestee_id)
+    params.require(:friend_request).permit(:requestee_id)
   end
 
   def find_request 
