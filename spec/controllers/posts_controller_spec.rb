@@ -44,7 +44,7 @@ RSpec.describe PostsController, type: :controller do
         post = bob.posts.create(body: "this is a post")
 
         sign_in frank
-        get :edit, params: { id: post.id }
+        get :edit, params: { id: post.id, post: { redirect: "profile" } }
       end
 
       it "redirects to the posts index" do 
@@ -75,14 +75,12 @@ RSpec.describe PostsController, type: :controller do
         bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
         post = bob.posts.create(body: "this is a post")
-        post.body = "this is another post"
-        updated_post_params = post.attributes.merge("redirect" => "profile") 
 
         sign_in frank
-        patch :update, params: { id: post.id, post: updated_post_params }
+        patch :update, params: { id: post.id, post: { body: "this is my post", redirect: "profile" } }
       end
 
-      it "doesn't update the record" do 
+      it "doesn't update the post" do 
         expect(Post.first.body).to eq("this is a post")
       end
 
@@ -119,7 +117,7 @@ RSpec.describe PostsController, type: :controller do
         delete :destroy, params: { id: @post.id, post: { redirect: "profile" } }
       end
 
-      it "doesn't destroy the record" do 
+      it "doesn't destroy the post" do 
         expect(Post.all.count).to eq(1)
       end
 
