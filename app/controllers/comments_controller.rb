@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_create, only: :create
+  before_action :authorize_edit_update_destroy, only: [:edit, :update, :destroy]
 
   def create
     post = Post.find(params[:post_id])
@@ -56,4 +58,22 @@ class CommentsController < ApplicationController
       redirect_to user_profile_path(comment.post.user.id) + "##{comment.post.id}"
     end
   end
+
+  def authorize_create
+    unless Post.find(params[:post_id]).user.friends.include?(current_user) || Post.find(params[:post_id]).user == current_user
+      unauthorized
+    end
+  end
+
+  def authorize_edit_update_destroy
+    unless Comment.find(params[:id]).commenter == current_user
+      unauthorized
+    end
+  end
+
+  def unauthorized
+    flash[:alert] = "this action is not permitted"
+    redirect_to posts_path
+  end
+
 end
