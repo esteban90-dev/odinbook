@@ -4,13 +4,16 @@ class LikesController < ApplicationController
 
   def create
     post = Post.find(params[:post_id])
-    post.likes.create(liker: current_user)
+    post.likes.new(liker: current_user)
 
-    if post.user != current_user
-      post.user.notifications.create(message: "#{current_user.name} liked your #{post_link(post)} ")
+    if post.save
+      if post.user != current_user
+        post.user.notifications.create(message: "#{current_user.name} liked your #{post_link(post)} ")
+      end
+      post_like_redirect(post)
+    else
+      unauthorized
     end
-
-    post_like_redirect(post)
   end
 
   def destroy

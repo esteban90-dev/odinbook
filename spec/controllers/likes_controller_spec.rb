@@ -36,6 +36,31 @@ RSpec.describe LikesController, type: :controller do
       end
     end
 
+    context "as a user trying to like a post twice" do 
+
+      before(:each) do 
+        bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        @post_1 = bob.posts.create(body: "this is a post")
+        @post_1.likes.create(liker: bob)
+
+        sign_in bob
+        post :create, params: { post_id: @post_1.id, redirect: "profile"}
+      end
+
+      it "doesn't create a second like" do 
+        expect(@post_1.likes.count).to eq(1)
+      end
+
+      it "redirects to the posts index" do 
+        expect(response).to redirect_to posts_path
+      end
+
+      it "sets a flash alert message" do 
+        expect(flash[:alert]).to eq("this action is not permitted")
+      end
+
+    end
+
   end
 
   describe "#destroy" do 
