@@ -1,5 +1,4 @@
 class FriendshipsController < ApplicationController
-  before_action :authenticate_user!
   before_action :authorize_index, only: :index
   before_action :authorize_destroy, only: :destroy
 
@@ -33,10 +32,5 @@ class FriendshipsController < ApplicationController
     if Friendship.find(params[:id]).user != current_user && Friendship.find(params[:id]).friend != current_user 
       unauthorized
     end
-  end
-
-  def unauthorized
-    flash[:alert] = "this action is not permitted"
-    redirect_to posts_path
   end
 end

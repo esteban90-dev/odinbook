@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :authorize, only: [:edit, :update, :destroy]
 
@@ -52,8 +51,7 @@ class PostsController < ApplicationController
 
   def authorize
     if @post.user != current_user
-      flash[:alert] = "this action is not permitted"
-      redirect_to posts_path
+      unauthorized
     end
   end
 

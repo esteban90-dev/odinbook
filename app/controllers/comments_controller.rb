@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_comment, only: [:edit, :update, :destroy]
   before_action :authorize_create, only: :create
   before_action :authorize_edit_update_destroy, only: [:edit, :update, :destroy]
@@ -72,13 +71,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def unauthorized
-    flash[:alert] = "this action is not permitted"
-    redirect_to posts_path
-  end
-
   def set_comment
     @comment = Comment.find(params[:id])
   end
-
 end

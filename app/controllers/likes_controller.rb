@@ -1,5 +1,4 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!
   before_action :authorize_destroy, only: :destroy
   before_action :authorize_create, only: :create
 
@@ -50,11 +49,6 @@ class LikesController < ApplicationController
     unless current_user.friends.include?(post.user) || current_user == post.user
       unauthorized
     end
-  end
-
-  def unauthorized
-    flash[:alert] = "this action is not permitted"
-    redirect_to posts_path
   end
 
 end
