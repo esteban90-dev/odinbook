@@ -14,6 +14,7 @@ RSpec.describe FriendshipsController, type: :controller do
 
     context "as an unauthorized user" do 
       before(:each) do 
+        #user can't see the friends of someone they aren't friends with
         bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
         john = FactoryBot.create(:user, name: "john", email: "john@example.com")
@@ -46,6 +47,7 @@ RSpec.describe FriendshipsController, type: :controller do
 
     context "as an unauthorized user" do 
       before(:each) do 
+        #only one of the users in a friendship can destroy (unfriend) the friendship
         bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
         john = FactoryBot.create(:user, name: "john", email: "john@example.com")
@@ -55,7 +57,7 @@ RSpec.describe FriendshipsController, type: :controller do
         delete :destroy, params: { id: friendship.id }
       end
 
-      it "doesn't destroy the record" do 
+      it "doesn't destroy the friendship" do 
         #there are two records for each friendship (one is a reverse friendship)
         expect(Friendship.all.count).to eq(2) 
       end
