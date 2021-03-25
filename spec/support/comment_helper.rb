@@ -3,7 +3,7 @@ require 'rails_helper'
 def comment_on_post(post, comment_text)
   within("[data-test=post-#{post.id}]") do 
     fill_in "comment_body", with: comment_text
-    click_on "comment"
+    click_on "Create Comment"
   end
 end
 

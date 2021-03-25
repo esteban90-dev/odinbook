@@ -19,7 +19,7 @@ end
 def create_post_with_picture(post_text, file_path)
   fill_in "Body", with: post_text
   attach_file "Picture", file_path
-  click_on "create post"
+  click_on "Create Post"
 end
 
 def have_post_author_name(post)

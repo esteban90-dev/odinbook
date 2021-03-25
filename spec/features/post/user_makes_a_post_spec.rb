@@ -13,7 +13,7 @@ feature "user makes a post" do
         visit root_path
         click_on "bob"
         fill_in "Body", with: "this is my first post"
-        click_on "create post"
+        click_on "Create Post"
       end
 
       scenario "they are redirected back to their profile" do 
@@ -39,7 +39,7 @@ feature "user makes a post" do
         visit root_path
         click_on "bob"
         fill_in "Body", with: ""
-        click_on "create post"
+        click_on "Create Post"
       end
 
       scenario "they see an error message" do 
@@ -91,7 +91,7 @@ feature "user makes a post" do
         visit root_path
         click_on "timeline"
         fill_in "Body", with: "this is my first post"
-        click_on "create post"
+        click_on "Create Post"
       end
 
       scenario "they are redirected back to the timeline" do 
@@ -117,7 +117,7 @@ feature "user makes a post" do
         visit root_path
         click_on "timeline"
         fill_in "Body", with: ""
-        click_on "create post"
+        click_on "Create Post"
       end
 
       scenario "they see an error message" do 
