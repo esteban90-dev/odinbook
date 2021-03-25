@@ -9,11 +9,12 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = current_user.posts.new(post_params)
-    if post.save
+    @post = current_user.posts.new(post_params)
+    if @post.save
       flash[:notice] = "Successfully made a post"
-
-      post_redirect(post)
+      post_redirect(@post)
+    else
+      render :edit
     end
   end
 

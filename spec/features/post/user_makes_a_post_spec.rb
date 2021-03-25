@@ -30,6 +30,24 @@ feature "user makes a post" do
 
     end
 
+    context "without text" do 
+
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        sign_in @bob
+
+        visit root_path
+        click_on "bob"
+        fill_in "Body", with: ""
+        click_on "create post"
+      end
+
+      scenario "they see an error message" do 
+        expect(page).to have_content("can't be blank")
+      end
+
+    end
+
     context "with text and an image" do 
 
       before(:each) do 
@@ -86,6 +104,24 @@ feature "user makes a post" do
 
       scenario "they see the posted text" do 
         expect(page).to have_content("this is my first post")
+      end
+
+    end
+
+    context "without text" do 
+
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        sign_in @bob
+
+        visit root_path
+        click_on "timeline"
+        fill_in "Body", with: ""
+        click_on "create post"
+      end
+
+      scenario "they see an error message" do 
+        expect(page).to have_content("can't be blank")
       end
 
     end
