@@ -19,12 +19,15 @@ class FriendRequestsController < ApplicationController
   end
 
   def accept
-    current_user.friendships.create(friend_id: @request.requestor.id)
-    @request.destroy
+    friendship = current_user.friendships.new(friend_id: @request.requestor.id)
 
-    flash[:notice] = "You and #{@request.requestor.name} are now friends"
-    @request.requestor.notifications.create(message: "#{requestee_profile_link(@request.requestee)} accepted your friend request")
-    redirect_to user_friendships_path(current_user.id)
+    if friendship.save
+      @request.destroy
+
+      flash[:notice] = "You and #{@request.requestor.name} are now friends"
+      @request.requestor.notifications.create(message: "#{requestee_profile_link(@request.requestee)} accepted your friend request")
+      redirect_to user_friendships_path(current_user.id)
+    end
   end
 
   def ignore

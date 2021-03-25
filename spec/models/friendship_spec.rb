@@ -29,4 +29,19 @@ describe Friendship do
 
   end
 
+  context "uniqueness validation" do 
+
+    it "doesn't permit the creation of a friendship record if another record exists with the same user and friend" do
+      joe = FactoryBot.create(:user, name: "joe", email: "joe@mail.com")
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com")
+      joe.friends << bob
+
+      Friendship.create(user: joe, friend: bob)
+
+      #one 'friendship' consists of 2 records - the second record is an inverse of the first
+      expect(Friendship.all.count).to eq(2)
+    end
+
+  end
+
 end
