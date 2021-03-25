@@ -43,7 +43,7 @@ class LikesController < ApplicationController
   end
 
   def authorize_create
-    unless current_user.friends.include?(Post.find(params[:post_id]).user)
+    unless current_user.friends.include?(Post.find(params[:post_id]).user) || current_user == Post.find(params[:post_id]).user
       unauthorized
     end
   end
