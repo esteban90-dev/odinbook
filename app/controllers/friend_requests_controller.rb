@@ -9,7 +9,7 @@ class FriendRequestsController < ApplicationController
   def create
     request = current_user.sent_friend_requests.new(request_params)
 
-    if request.save
+    if !current_user.friends.include?(request.requestee) && request.save
       flash[:notice] = "Friend request successfully sent"
       request.requestee.notifications.create(message: "You have a new friend request from #{request.requestor.name}" + accept_ignore_links(request))
       redirect_to users_path
