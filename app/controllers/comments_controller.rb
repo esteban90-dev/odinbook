@@ -4,17 +4,19 @@ class CommentsController < ApplicationController
   before_action :authorize_edit_update_destroy, only: [:edit, :update, :destroy]
 
   def create
-    post = Post.find(params[:post_id])
-    comment = post.comments.new(comment_params)
-    comment.commenter = current_user
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.new(comment_params)
+    @comment.commenter = current_user
 
-    if comment.save
-      if post.user != current_user
-        post.user.notifications.create(message: "#{comment.commenter.name} commented on your #{post_link(post)}")
+    if @comment.save
+      if @post.user != current_user
+        @post.user.notifications.create(message: "#{@comment.commenter.name} commented on your #{post_link(@post)}")
       end
       flash[:notice] = "Successfully created comment"
-
-      comment_redirect(comment)
+      comment_redirect(@comment)
+    else
+      @redirect = params[:comment][:redirect]
+      render :new
     end
   end
 
@@ -27,6 +29,9 @@ class CommentsController < ApplicationController
       flash[:notice] = "Successfully updated comment"
 
       comment_redirect(@comment)
+    else
+      @redirect = params[:comment][:redirect]
+      render :edit
     end
   end
 
