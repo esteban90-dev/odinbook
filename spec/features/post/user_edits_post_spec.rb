@@ -4,7 +4,7 @@ feature "user edits a post" do
   
   context "from their profile" do
 
-    context "and changes the text" do 
+    context "with new text" do 
 
       before(:each) do 
         @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
@@ -35,7 +35,26 @@ feature "user edits a post" do
 
     end
 
-    context "and changes the picture" do 
+    context "with no text" do 
+
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        @post = @bob.posts.create(body: "this is a post")
+        sign_in @bob
+
+        visit root_path
+        click_on "bob"
+
+        edit_post_text(@post, "")
+      end
+
+      scenario "they see an error message" do 
+        expect(page).to have_content("can't be blank")
+      end
+
+    end
+
+    context "with a different picture" do 
 
       before(:each) do 
         @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
@@ -75,7 +94,7 @@ feature "user edits a post" do
 
   context "from the timeline" do 
 
-    context "and changes the text" do 
+    context "with different text" do 
 
       before(:each) do 
         @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
@@ -106,7 +125,26 @@ feature "user edits a post" do
 
     end
 
-    context "and changes the picture" do 
+    context "with no text" do 
+
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        @post = @bob.posts.create(body: "this is a post")
+        sign_in @bob
+
+        visit root_path
+        click_on "timeline"
+
+        edit_post_text(@post, "")
+      end
+
+      scenario "they see an error message" do 
+        expect(page).to have_content("can't be blank")
+      end
+
+    end
+
+    context "with a different picture" do 
 
       before(:each) do 
         @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")

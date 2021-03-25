@@ -1,0 +1,22 @@
+<%= form_with model: [current_user, @post] do |f| %>
+  <%= f.label :body %>
+  <%= f.text_field :body %>
+
+  <%= f.label :picture %>
+  <%= f.file_field :picture %>
+
+  <%= f.hidden_field :redirect, value: @redirect %>
+  
+  <%= f.submit %>
+<% end %>
+
+<% if @post.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <ul>
+      <% @post.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

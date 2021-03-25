@@ -14,7 +14,8 @@ class PostsController < ApplicationController
       flash[:notice] = "Successfully made a post"
       post_redirect(@post)
     else
-      render :edit
+      @redirect = params[:post][:redirect]
+      render :new
     end
   end
 
@@ -25,8 +26,10 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       flash[:notice] = "Successfully updated post"
-  
       post_redirect(@post)
+    else
+      @redirect = params[:post][:redirect]
+      render :edit
     end
   end
 
