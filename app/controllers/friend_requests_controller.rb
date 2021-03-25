@@ -13,6 +13,8 @@ class FriendRequestsController < ApplicationController
       flash[:notice] = "Friend request successfully sent"
       request.requestee.notifications.create(message: "You have a new friend request from #{request.requestor.name}" + accept_ignore_links(request))
       redirect_to users_path
+    else
+      unauthorized
     end
   end
 
