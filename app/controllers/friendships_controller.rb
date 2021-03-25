@@ -22,7 +22,8 @@ class FriendshipsController < ApplicationController
 
   def authorize_index
     #only allow current user to see his/her friends or his/her friends' friends
-    if User.find(params[:user_id]) != current_user && !current_user.friends.include?(User.find(params[:user_id]))
+    user = User.find(params[:user_id])
+    unless user == current_user || current_user.friends.include?(user)
       unauthorized
     end
   end

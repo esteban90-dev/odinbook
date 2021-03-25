@@ -37,13 +37,17 @@ class LikesController < ApplicationController
   end
 
   def authorize_destroy
-    if Like.find(params[:id]).liker != current_user
+    #only permit the liker to destroy (unlike) a like
+    like = Like.find(params[:id])
+    if like.liker != current_user
       unauthorized
     end
   end
 
   def authorize_create
-    unless current_user.friends.include?(Post.find(params[:post_id]).user) || current_user == Post.find(params[:post_id]).user
+    #only permit a user to like a post that belongs to themselves or their friends
+    post = Post.find(params[:post_id])
+    unless current_user.friends.include?(post.user) || current_user == post.user
       unauthorized
     end
   end

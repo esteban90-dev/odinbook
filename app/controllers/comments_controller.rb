@@ -58,13 +58,16 @@ class CommentsController < ApplicationController
   end
 
   def authorize_create
-    unless Post.find(params[:post_id]).user.friends.include?(current_user) || Post.find(params[:post_id]).user == current_user
+    #only allow a user to comment on a post belonging to them or their friends
+    post = Post.find(params[:post_id])
+    unless current_user.friends.include?(post.user) || current_user == post.user
       unauthorized
     end
   end
 
   def authorize_edit_update_destroy
-    unless Comment.find(params[:id]).commenter == current_user
+    #only allow a user to change a comment that they created
+    unless current_user == @comment.commenter
       unauthorized
     end
   end

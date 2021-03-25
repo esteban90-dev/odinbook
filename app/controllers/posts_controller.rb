@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   end
 
   def authorize
-    if Post.find(params[:id]).user != current_user
+    if @post.user != current_user
       flash[:alert] = "this action is not permitted"
       redirect_to posts_path
     end
