@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_comment, only: [:edit, :update, :destroy]
   before_action :authorize_create, only: :create
   before_action :authorize_edit_update_destroy, only: [:edit, :update, :destroy]
 
@@ -19,12 +20,10 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find(params[:id])
     @redirect = params[:comment][:redirect]
   end
 
   def update
-    @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
       flash[:notice] = "Successfully updated comment"
 
@@ -33,12 +32,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    post = comment.post
-    comment.destroy
+    post = @comment.post
+    @comment.destroy
     flash[:notice] = "Successfully deleted comment"
     
-    comment_redirect(comment)
+    comment_redirect(@comment)
   end
 
   private
@@ -74,6 +72,10 @@ class CommentsController < ApplicationController
   def unauthorized
     flash[:alert] = "this action is not permitted"
     redirect_to posts_path
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 
 end
