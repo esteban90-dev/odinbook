@@ -14,6 +14,7 @@ RSpec.describe LikesController, type: :controller do
 
     context "as an unauthorized user" do 
       before(:each) do 
+        #a user can't create likes on posts that belong to users that they aren't friends with
         bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
         post_1 = bob.posts.create(body: "this is a post")
@@ -49,6 +50,7 @@ RSpec.describe LikesController, type: :controller do
 
     context "as an unauthorized user" do 
       before(:each) do 
+        #a user can't destroy (unlike) someone else's like
         bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
         post = bob.posts.create(body: "this is a post")
@@ -58,7 +60,7 @@ RSpec.describe LikesController, type: :controller do
         delete :destroy, params: { id: like.id, redirect: "profile" }
       end
 
-      it "doesn't destroy the record" do 
+      it "doesn't destroy the like" do 
         expect(Like.all.count).to eq(1)
       end
 
