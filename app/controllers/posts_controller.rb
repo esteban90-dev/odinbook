@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_post, only: [:edit, :update, :destroy]
   before_action :authorize, only: [:edit, :update, :destroy]
 
   def index
@@ -10,7 +11,6 @@ class PostsController < ApplicationController
 
   def create
     post = current_user.posts.new(post_params)
-
     if post.save
       flash[:notice] = "Successfully made a post"
 
@@ -19,24 +19,21 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
     @redirect = params[:post][:redirect]
   end
 
   def update
-    post = Post.find(params[:id])
-    if post.update(post_params)
+    if @post.update(post_params)
       flash[:notice] = "Successfully updated post"
   
-      post_redirect(post)
+      post_redirect(@post)
     end
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
+    @post.destroy
     flash[:notice] = "Post successfully destroyed"
-    post_redirect(post)
+    post_redirect(@post)
   end
 
   private
@@ -58,6 +55,10 @@ class PostsController < ApplicationController
       flash[:alert] = "this action is not permitted"
       redirect_to posts_path
     end
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 
 end
