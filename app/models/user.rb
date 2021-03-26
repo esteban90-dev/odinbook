@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_one :profile, dependent: :destroy
 
+  validates :name, presence: true
+
   after_create :create_blank_profile
 
   def self.from_omniauth(auth)

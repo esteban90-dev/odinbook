@@ -78,5 +78,21 @@ feature "regular user registers" do
     end
 
   end
+
+  context "without a name" do 
+
+    scenario "they see an error message" do 
+      visit root_path
+
+      click_on "sign up"
+      fill_in "Email", with: "somebody@example.com"
+      fill_in "Password", with: "testpassword"
+      fill_in "Password confirmation", with: "testpassword"
+      click_on "Sign up"
+
+      expect(page).to have_content("can't be blank")
+    end
+
+  end
   
 end
