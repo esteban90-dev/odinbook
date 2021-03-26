@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "facebook user signs in" do 
 
-  context "successfully" do 
+  context "auth hash provides valid data" do 
 
     before(:each) do
       stub_omniauth_successful
@@ -22,7 +22,7 @@ feature "facebook user signs in" do
 
   end
 
-  context "unsuccessfully - auth hash doesn't provide email" do 
+  context "auth hash doesn't provide valid data - missing email" do 
 
     before(:each) do 
       stub_omniauth_unsuccessful

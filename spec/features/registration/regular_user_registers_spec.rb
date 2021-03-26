@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "regular user registers" do
 
-  context "successfully" do 
+  context "with valid data" do 
 
     before(:each) do
       visit root_path
@@ -43,9 +43,9 @@ feature "regular user registers" do
 
   end
 
-  context "unsuccessfully" do 
+  context "with a password that is too short" do 
 
-    scenario "they see that their password must be at least 8 characters" do
+    scenario "they see an error message" do
       visit root_path
 
       click_on "sign up"
@@ -58,7 +58,11 @@ feature "regular user registers" do
       expect(page).to have_content("Password is too short")
     end
 
-    scenario "they see that the email they entered has already been taken" do
+  end
+
+  context "with an email that has already been taken" do 
+
+    scenario "they see an error message" do
       FactoryBot.create(:user)
 
       visit root_path
