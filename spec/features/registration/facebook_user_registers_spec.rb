@@ -26,15 +26,4 @@ feature "facebook user registers" do
     expect(page).to have_field('user_email', with: "somebody@example.com")
   end
 
-  scenario "they see a welcome notification" do 
-    visit root_path
-    click_on "notifications"
-    
-    expect(page).to have_content("Welcome to Odinbook!")
-  end
-
-  scenario "they see the edit profile page" do 
-    expect(page.current_path).to eq(edit_user_profile_path(User.first))
-  end
-
 end
