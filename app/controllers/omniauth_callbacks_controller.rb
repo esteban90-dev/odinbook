@@ -2,19 +2,20 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     user = User.from_omniauth(request.env["omniauth.auth"])
 
-    if user.new_record?
+    if !user.persisted?
       if user.save
-        user.notifications.create(message: "Welcome to Odinbook!")
+        sign_in user
+        flash[:notice] = "Signed in successfully"
+        redirect_to new_user_profile_path(user)
+      else
+        session["devise.user_attributes"] = user.attributes
+        redirect_to new_user_registration_path
       end
-    end 
-
-    if user.persisted?
+    else
       sign_in user
       flash[:notice] = "Signed in successfully"
-      redirect_to edit_user_profile_path(user.id)
-    else 
-      session["devise.user_attributes"] = user.attributes
-      redirect_to new_user_registration_path
+      redirect_to user_profile_path(user)
     end
+      
   end
 end
