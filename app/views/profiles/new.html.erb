@@ -1,4 +1,4 @@
-<%= form_with model: [current_user, @profile] do |f| %>
+<%= form_with url: user_profile_path(current_user), scope: :profile do |f| %>
   <%= f.label :location, "Location" %>
   <%= f.text_field :location %>
 
@@ -11,5 +11,5 @@
   <%= f.label :picture %>
   <%= f.file_field :picture %>
 
-  <%= f.submit %>
+  <%= f.submit "Create Profile" %>
 <% end %>

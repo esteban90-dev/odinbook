@@ -14,8 +14,6 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
-  after_create :create_blank_profile
-
   def self.from_omniauth(auth)
     where(provider: auth[:provider], uid: auth[:uid]).first_or_initialize do |new_user|
       new_user.email = auth[:info][:email]
@@ -38,9 +36,4 @@ class User < ApplicationRecord
     super && provider.blank?
   end
 
-  private
-
-  def create_blank_profile
-    self.create_profile({})
-  end
 end

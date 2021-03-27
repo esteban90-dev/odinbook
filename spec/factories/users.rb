@@ -9,5 +9,8 @@ FactoryBot.define do
       uid { "1234" }
     end
 
+    trait :with_profile do 
+      after(:create){ |user| create(:profile, user: user) }
+    end
   end
 end

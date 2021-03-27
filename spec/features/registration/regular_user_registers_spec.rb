@@ -23,24 +23,6 @@ feature "regular user registers" do
       expect(page).to have_content("signed in as somebody")
     end
 
-    scenario "they see their account credentials" do 
-      click_on "edit account"
-
-      expect(page).to have_field('user_name', with: "somebody")
-      expect(page).to have_field('user_email', with: "somebody@example.com")
-    end
-
-    scenario "they see a welcome notification" do 
-      visit root_path
-      click_on "notifications"
-      
-      expect(page).to have_content("Welcome to Odinbook!")
-    end
-
-    scenario "they see the edit profile page" do 
-      expect(page.current_path).to eq(edit_user_profile_path(User.first))
-    end
-
   end
 
   context "with a password that is too short" do 
