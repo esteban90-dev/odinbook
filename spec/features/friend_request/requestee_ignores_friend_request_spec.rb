@@ -5,8 +5,8 @@ feature "requestee ignores friend request" do
   context "from the friend requests index" do
 
     before(:each) do  
-      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-      @joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
+      @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+      @joe = FactoryBot.create(:user, :with_profile, name: "joe", email: "joe@example.com")
       @friend_request = FriendRequest.create(requestor: @bob, requestee: @joe)
 
       sign_in @joe
@@ -72,8 +72,8 @@ feature "requestee ignores friend request" do
   context "from a friend request notification" do
 
     before(:each) do  
-      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-      @joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
+      @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+      @joe = FactoryBot.create(:user, :with_profile, name: "joe", email: "joe@example.com")
 
       sign_in @bob
       visit root_path
@@ -143,8 +143,8 @@ feature "requestee ignores friend request" do
   context "from the users index" do
 
     before(:each) do  
-      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-      @joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
+      @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+      @joe = FactoryBot.create(:user, :with_profile, name: "joe", email: "joe@example.com")
       @friend_request = FriendRequest.create(requestor: @bob, requestee: @joe)
 
       sign_in @joe

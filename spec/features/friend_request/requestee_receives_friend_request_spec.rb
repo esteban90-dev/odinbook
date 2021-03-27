@@ -3,8 +3,8 @@ require "rails_helper"
 feature "requestee receives friend request" do 
 
   scenario "and sees a new notification" do 
-    bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com")
-    frank = FactoryBot.create(:user, name: "frank", email: "frank@mail.com")
+    bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@mail.com")
+    frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@mail.com")
     
     sign_in bob
     visit root_path

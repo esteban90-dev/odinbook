@@ -5,7 +5,7 @@ feature "user deletes a post" do
   context "from their profile" do 
 
     before(:each) do 
-      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
       @post = @bob.posts.create(body: "this is a post")
 
       sign_in @bob
@@ -32,7 +32,7 @@ feature "user deletes a post" do
   context "from the timeline" do 
 
     before(:each) do 
-      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
       @post = @bob.posts.create(body: "this is a post")
 
       sign_in @bob

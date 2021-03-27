@@ -3,8 +3,8 @@ require 'rails_helper'
 feature "user unfriends a friend" do 
 
   before(:each) do 
-    @joe = FactoryBot.create(:user, name: "joe", email: "joe@mail.com")
-    @bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com")
+    @joe = FactoryBot.create(:user, :with_profile, name: "joe", email: "joe@mail.com")
+    @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@mail.com")
     @joe.friends << @bob
 
     sign_in @bob

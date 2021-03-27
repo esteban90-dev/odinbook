@@ -5,8 +5,8 @@ feature "user unlikes a friend's post" do
   context "from the friend's profile" do 
 
     before(:each) do 
-      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-      @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
+      @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+      @frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
       @frank.friends << @bob
       @post = @bob.posts.create(body: "this is a post")
       @post.likes.create(liker: @frank)
@@ -41,8 +41,8 @@ feature "user unlikes a friend's post" do
   context "from the timeline" do 
 
     before(:each) do 
-      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-      @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
+      @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+      @frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
       @frank.friends << @bob
       @post = @bob.posts.create(body: "this is a post")
       @post.likes.create(liker: @frank)

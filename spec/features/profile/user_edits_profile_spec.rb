@@ -3,7 +3,7 @@ require "rails_helper"
 feature "user edits profile" do 
 
   before(:each) do 
-    @bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com" )
+    @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@mail.com" )
     sign_in @bob
     
     visit root_path

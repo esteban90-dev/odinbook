@@ -7,7 +7,7 @@ feature "user edits a post" do
     context "with new text" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
         @post = @bob.posts.create(body: "this is a post")
         sign_in @bob
 
@@ -38,7 +38,7 @@ feature "user edits a post" do
     context "with no text" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
         @post = @bob.posts.create(body: "this is a post")
         sign_in @bob
 
@@ -57,7 +57,7 @@ feature "user edits a post" do
     context "with a different picture" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
         post_image_file = fixture_file_upload(Rails.root.join('spec','files','empire_state_building.jpg'), 'image/jpg')
         @post = @bob.posts.create(body: "this is the second post", picture: post_image_file)
         sign_in @bob
@@ -97,7 +97,7 @@ feature "user edits a post" do
     context "with different text" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
         @post = @bob.posts.create(body: "this is a post")
         sign_in @bob
 
@@ -128,7 +128,7 @@ feature "user edits a post" do
     context "with no text" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
         @post = @bob.posts.create(body: "this is a post")
         sign_in @bob
 
@@ -147,7 +147,7 @@ feature "user edits a post" do
     context "with a different picture" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
         post_image_file = fixture_file_upload(Rails.root.join('spec','files','empire_state_building.jpg'), 'image/jpg')
         @post = @bob.posts.create(body: "this is the second post", picture: post_image_file)
         sign_in @bob
