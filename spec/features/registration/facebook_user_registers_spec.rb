@@ -19,11 +19,8 @@ feature "facebook user registers" do
     expect(page).to have_content("signed in as somebody")
   end
 
-  scenario "they see their account credentials" do 
-    click_on "edit account"
-
-    expect(page).to have_field('user_name', with: "somebody")
-    expect(page).to have_field('user_email', with: "somebody@example.com")
+  scenario "they see the new profile page" do 
+    expect(page).to have_current_path(new_user_profile_path(User.first))
   end
 
 end
