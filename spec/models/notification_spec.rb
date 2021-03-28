@@ -34,3 +34,18 @@ describe Notification, "#unacked?" do
   end
 
 end 
+
+describe Notification do 
+
+  context "validations" do 
+
+    it "isn't valid without a message" do 
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      notification = bob.notifications.new(message: "")
+
+      expect(notification.valid?).to be(false)
+    end
+
+  end
+
+end
