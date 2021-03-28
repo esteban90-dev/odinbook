@@ -9,12 +9,12 @@ feature "user edits profile" do
     visit root_path
     click_on "bob"
     click_on "edit profile"
-    fill_in "Location", with: "New York"
+    fill_in "Location", with: "China"
     select("Master's Degree", from: "Education")
-    select('Single', from: "Relationship Status")
+    select('Married', from: "Relationship Status")
     attach_file "Picture", "#{Rails.root}/spec/files/eiffel_tower.jpg"
 
-    click_on "save"
+    click_on "Update Profile"
   end
 
   scenario "they see a flash message" do 
@@ -22,7 +22,7 @@ feature "user edits profile" do
   end
 
   scenario "they see their location" do 
-    expect(page).to have_content("New York")
+    expect(page).to have_content("China")
   end
 
   scenario "they see their education" do 
@@ -30,7 +30,7 @@ feature "user edits profile" do
   end
 
   scenario "they see their relationship status" do 
-    expect(page).to have_content("Single")
+    expect(page).to have_content("Married")
   end
 
   scenario "they see their profile picture" do 
