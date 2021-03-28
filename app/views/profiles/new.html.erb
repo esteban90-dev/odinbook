@@ -1,4 +1,16 @@
 <%= form_with url: user_profile_path(current_user), scope: :profile do |f| %>
+
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% @profile.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= f.label :location, "Location" %>
   <%= f.text_field :location %>
 
@@ -12,4 +24,6 @@
   <%= f.file_field :picture %>
 
   <%= f.submit "Create Profile" %>
+  
 <% end %>
+

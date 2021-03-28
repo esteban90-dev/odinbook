@@ -16,6 +16,8 @@ class ProfilesController < ApplicationController
       flash[:notice] = "Successfully created profile"
       current_user.notifications.create(message: "Welcome to Odinbook!")
       redirect_to user_profile_path(current_user)
+    else
+      render :new
     end
   end
 
