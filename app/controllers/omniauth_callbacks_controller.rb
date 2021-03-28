@@ -2,6 +2,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     user = User.from_omniauth(request.env["omniauth.auth"])
 
+    #new user
     if !user.persisted?
       if user.save
         sign_in user
@@ -11,6 +12,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         session["devise.user_attributes"] = user.attributes
         redirect_to new_user_registration_path
       end
+    #existing user
     else
       sign_in user
       flash[:notice] = "Signed in successfully"
