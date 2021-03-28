@@ -23,6 +23,10 @@ feature "regular user registers" do
       expect(page).to have_content("signed in as somebody")
     end
 
+    scenario "they see the new profile page" do 
+      expect(page).to have_current_path(new_user_profile_path(User.first))
+    end
+
   end
 
   context "with a password that is too short" do 
