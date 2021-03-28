@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
   def update
     if @profile.update(profile_params)
       flash[:notice] = "Successfully updated profile"
-      redirect_to user_profile_path(params[:user_id])
+      redirect_to user_profile_path(current_user)
     end
   end
 
