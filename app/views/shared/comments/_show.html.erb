@@ -1,0 +1,8 @@
+<div data-test="comment-<%= comment.id %>">
+  <%= comment.body %>
+  <%= link_to comment.commenter.name, user_profile_path(comment.commenter.id) %>
+  <% if current_user == comment.commenter %>
+    <%= link_to "edit", edit_comment_path(comment.id, comment: { redirect: redirect } ) %>
+    <%= link_to "delete", comment_path(comment.id, comment: { redirect: redirect } ), method: :delete %>
+  <% end %>
+</div>
