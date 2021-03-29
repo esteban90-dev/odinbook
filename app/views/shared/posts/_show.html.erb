@@ -1,0 +1,44 @@
+<div data-test="post-<%= post.id %>">
+
+  <% if post.picture.attached? %>
+    <%= image_tag post.picture %>
+  <% end %>
+
+  <%= post.body %>
+  <%= post.user.name %>
+
+  <% if current_user == post.user %>
+    <%= link_to "edit", edit_post_path(post.id, post: { redirect: redirect } ) %>
+    <%= link_to "delete", post_path(post.id, post: { redirect: redirect } ), method: :delete %>
+  <% end %>
+
+  likes: <%= post.likes.count %>
+
+  <% if post.likers.include?(current_user) %>
+    <%= link_to "unlike", like_path(post.likes.where(liker: current_user).first.id, redirect: redirect), method: :delete %>
+  <% else %>
+    <%= link_to "like", post_likes_path(post.id, redirect: redirect), method: :post %>
+  <% end %>
+
+  <% if post.comments.any? %>
+    <% post.comments.each do |comment| %>
+      <div data-test="comment-<%= comment.id %>">
+        <%= comment.body %>
+        <%= link_to comment.commenter.name, user_profile_path(comment.commenter.id) %>
+        <% if current_user == comment.commenter %>
+          <%= link_to "edit", edit_comment_path(comment.id, comment: { redirect: redirect } ) %>
+          <%= link_to "delete", comment_path(comment.id, comment: { redirect: redirect } ), method: :delete %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= form_with model: [post, post.comments.new] do |f| %>
+    <%= f.text_field :body %>
+
+    <%= f.hidden_field :redirect, value: redirect %>
+
+    <%= f.submit %>
+  <% end %>
+
+</div>
