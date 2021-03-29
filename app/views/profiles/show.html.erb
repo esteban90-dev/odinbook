@@ -18,17 +18,7 @@
 </div>
 
 <% if @profile.user == current_user %>
-  <%= form_with model: [current_user, current_user.posts.new] do |f| %>
-    <%= f.label :body %>
-    <%= f.text_field :body %>
-
-    <%= f.label :picture %>
-    <%= f.file_field :picture %>
-
-    <%= f.hidden_field :redirect, value: "profile" %>
-    
-    <%= f.submit %>
-  <% end %>
+  <%= render partial: 'shared/posts/form', locals: { model: [current_user, current_user.posts.new], post: current_user.posts.new, redirect: "profile" } %>
 <% end %>
 
 <% @profile.user.posts.reverse.each do |post| %>

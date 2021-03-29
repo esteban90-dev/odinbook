@@ -1,14 +1,4 @@
-<%= form_with model: [current_user, current_user.posts.new] do |f| %>
-  <%= f.label :body %>
-  <%= f.text_field :body %>
-
-  <%= f.label :picture %>
-  <%= f.file_field :picture %>
-
-  <%= f.hidden_field :redirect, value: "timeline" %>
-
-  <%= f.submit %>
-<% end %>
+<%= render partial: 'shared/posts/form', locals: { model: [current_user, current_user.posts.new], post: current_user.posts.new, redirect: "timeline" } %>
 
 <% @posts.each do |post| %>
   <div data-test="post-<%= post.id %>">
