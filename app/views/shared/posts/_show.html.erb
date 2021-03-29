@@ -33,12 +33,6 @@
     <% end %>
   <% end %>
 
-  <%= form_with model: [post, post.comments.new] do |f| %>
-    <%= f.text_field :body %>
-
-    <%= f.hidden_field :redirect, value: redirect %>
-
-    <%= f.submit %>
-  <% end %>
+  <%= render partial: "shared/comments/form", locals: { model: [post, post.comments.new], comment: post.comments.new, redirect: redirect } %>
 
 </div>
