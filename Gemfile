@@ -32,6 +32,7 @@ gem 'devise', :git => "https://github.com/heartcombo/devise.git", ref: '8bb358cf
 gem 'omniauth', '~> 1.9.1'
 gem 'omniauth-facebook'
 gem 'figaro'
+gem "aws-sdk-s3", require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
