@@ -15,8 +15,8 @@ RSpec.describe CommentsController, type: :controller do
     context "as an unauthorized user" do 
       before(:each) do 
         #users can't comment on posts that don't belong to them or their friends
-        bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-        frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
+        bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
         post_1 = bob.posts.create(body: "this is a post")
 
         sign_in frank
@@ -36,6 +36,24 @@ RSpec.describe CommentsController, type: :controller do
       end
     end
 
+    context "as a user that hasn't completed their profile" do 
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        post_1 = @bob.posts.create(body: "this is a post")
+
+        sign_in @bob
+        post :create, params: { post_id: post_1.id, comment: { body: "this is a comment", redirect: "profile" } }
+      end
+
+      it "redirects to the new profile page" do 
+        expect(response).to redirect_to new_user_profile_path(@bob)
+      end
+
+      it "displays an alert" do 
+        expect(flash[:alert]).to eq("you must complete your profile before continuing")
+      end
+    end
+
   end
 
   describe "#edit" do 
@@ -51,8 +69,8 @@ RSpec.describe CommentsController, type: :controller do
     context "as an unauthorized user" do 
       before(:each) do 
         #users can't edit comments that don't belong to them 
-        bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-        frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
+        bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
         post_1 = bob.posts.create(body: "this is a post")
         comment_1 = post_1.comments.create(body: "this is a comment", commenter: bob)
 
@@ -66,6 +84,25 @@ RSpec.describe CommentsController, type: :controller do
 
       it "sets a flash alert message" do 
         expect(flash[:alert]).to eq("this action is not permitted")
+      end
+    end
+
+    context "as a user that hasn't completed their profile" do 
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        post_1 = @bob.posts.create(body: "this is a post")
+        comment_1 = post_1.comments.create(body: "this is a comment", commenter: @bob)
+
+        sign_in @bob
+        get :edit, params: { id: comment_1.id, comment: { redirect: "profile" } }
+      end
+
+      it "redirects to the new profile page" do 
+        expect(response).to redirect_to new_user_profile_path(@bob)
+      end
+
+      it "displays an alert" do 
+        expect(flash[:alert]).to eq("you must complete your profile before continuing")
       end
     end
 
@@ -84,8 +121,8 @@ RSpec.describe CommentsController, type: :controller do
     context "as an unauthorized user" do 
       before(:each) do 
         #users can't update comments that don't belong to them 
-        bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-        frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
+        bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
         @post_1 = bob.posts.create(body: "this is a post")
         @comment_1 = @post_1.comments.create(body: "this is a comment", commenter: bob)
 
@@ -108,6 +145,25 @@ RSpec.describe CommentsController, type: :controller do
       end
     end
 
+    context "as a user that hasn't completed their profile" do 
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        post_1 = @bob.posts.create(body: "this is a post")
+        comment_1 = post_1.comments.create(body: "this is a comment", commenter: @bob)
+
+        sign_in @bob
+        patch :update, params: { id: comment_1.id, comment: { body: "new comment text", redirect: "profile" } }
+      end
+
+      it "redirects to the new profile page" do 
+        expect(response).to redirect_to new_user_profile_path(@bob)
+      end
+
+      it "displays an alert" do 
+        expect(flash[:alert]).to eq("you must complete your profile before continuing")
+      end
+    end
+
   end
 
   describe "#destroy" do 
@@ -123,8 +179,8 @@ RSpec.describe CommentsController, type: :controller do
     context "as an unauthorized user" do 
       before(:each) do 
         #users can't delete comments that don't belong to them 
-        bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-        frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
+        bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
         @post_1 = bob.posts.create(body: "this is a post")
         @comment_1 = @post_1.comments.create(body: "this is a comment", commenter: bob)
 
@@ -142,6 +198,25 @@ RSpec.describe CommentsController, type: :controller do
 
       it "sets a flash alert message" do 
         expect(flash[:alert]).to eq("this action is not permitted")
+      end
+    end
+
+    context "as a user that hasn't completed their profile" do 
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        post_1 = @bob.posts.create(body: "this is a post")
+        comment_1 = post_1.comments.create(body: "this is a comment", commenter: @bob)
+
+        sign_in @bob
+        delete :destroy, params: { id: comment_1.id, comment: { redirect: "profile" } }
+      end
+
+      it "redirects to the new profile page" do 
+        expect(response).to redirect_to new_user_profile_path(@bob)
+      end
+
+      it "displays an alert" do 
+        expect(flash[:alert]).to eq("you must complete your profile before continuing")
       end
     end
 

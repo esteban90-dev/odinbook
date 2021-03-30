@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
   before_action :authorize_destroy, only: :destroy
   before_action :authorize_create, only: :create
+  before_action :check_profile_completion
 
   def create
     post = Post.find(params[:post_id])
@@ -53,5 +54,4 @@ class LikesController < ApplicationController
       unauthorized
     end
   end
-
 end

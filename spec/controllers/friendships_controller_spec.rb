@@ -33,6 +33,23 @@ RSpec.describe FriendshipsController, type: :controller do
       end
     end
 
+    context "as a user that hasn't completed their profile" do 
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+
+        sign_in @bob
+        get :index, params: { user_id: @bob.id }
+      end
+
+      it "redirects to the new profile page" do 
+        expect(response).to redirect_to new_user_profile_path(@bob)
+      end
+
+      it "displays an alert" do 
+        expect(flash[:alert]).to eq("you must complete your profile before continuing")
+      end
+    end
+
   end
 
   describe "#destroy" do 
@@ -68,6 +85,25 @@ RSpec.describe FriendshipsController, type: :controller do
 
       it "sets a flash alert message" do 
         expect(flash[:alert]).to eq("this action is not permitted")
+      end
+    end
+
+    context "as a user that hasn't completed their profile" do 
+      before(:each) do 
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
+        friendship = Friendship.create(user: @bob, friend: frank)
+
+        sign_in @bob
+        delete :destroy, params: { id: friendship.id }
+      end
+
+      it "redirects to the new profile page" do 
+        expect(response).to redirect_to new_user_profile_path(@bob)
+      end
+
+      it "displays an alert" do 
+        expect(flash[:alert]).to eq("you must complete your profile before continuing")
       end
     end
 

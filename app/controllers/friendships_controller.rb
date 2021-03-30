@@ -1,6 +1,7 @@
 class FriendshipsController < ApplicationController
   before_action :authorize_index, only: :index
   before_action :authorize_destroy, only: :destroy
+  before_action :check_profile_completion
 
   def index
     user = User.find(params[:user_id])

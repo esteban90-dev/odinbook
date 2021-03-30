@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :authorize, only: [:edit, :update, :destroy]
+  before_action :check_profile_completion
 
   def index
     friend_ids = current_user.friends.pluck(:id)
@@ -62,5 +63,4 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
-
 end
