@@ -46,9 +46,11 @@ class ProfilesController < ApplicationController
   end
 
   def resize_picture
-    path = profile_params[:picture].tempfile.path
-    ImageProcessing::MiniMagick.source(path)
-        .resize_to_limit(250,250)
-        .call(destination: path)
+    if profile_params[:picture]
+      path = profile_params[:picture].tempfile.path
+      ImageProcessing::MiniMagick.source(path)
+          .resize_to_limit(250,250)
+          .call(destination: path)
+    end
   end
 end

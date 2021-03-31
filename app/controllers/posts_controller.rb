@@ -66,9 +66,11 @@ class PostsController < ApplicationController
   end
 
   def resize_picture
-    path = post_params[:picture].tempfile.path
-    ImageProcessing::MiniMagick.source(path)
-        .resize_to_limit(400,400)
-        .call(destination: path)
+    if post_params[:picture]
+      path = post_params[:picture].tempfile.path
+      ImageProcessing::MiniMagick.source(path)
+          .resize_to_limit(400,400)
+          .call(destination: path)
+    end
   end
 end
