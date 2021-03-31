@@ -44,7 +44,7 @@ User.all.each do |user|
   )
 
   #attach profile picture
-  profile.picture.attach(io: File.open('app/assets/images/generic-user-icon-10.png'), filename: 'generic-user-icon-10.png', content_type: 'image/png')
+  profile.picture.attach(io: File.open('app/assets/images/generic-user-icon-10.jpg'), filename: 'generic-user-icon-10.jpg', content_type: 'image/png')
 
   puts "user #{user.id} profile created"
 end
