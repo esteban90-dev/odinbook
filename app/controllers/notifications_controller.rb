@@ -1,5 +1,4 @@
 class NotificationsController < ApplicationController
-  before_action :authenticate_user!
   before_action :check_profile_completion
 
   def index
