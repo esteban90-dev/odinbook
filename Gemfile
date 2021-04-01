@@ -32,7 +32,7 @@ gem 'devise', :git => "https://github.com/heartcombo/devise.git", ref: '8bb358cf
 gem 'omniauth', '~> 1.9.1'
 gem 'omniauth-facebook'
 gem 'figaro'
-gem "aws-sdk-s3", require: false
+gem 'cloudinary'
 gem 'image_processing'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
