@@ -7,7 +7,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if user.save
         sign_in user
         flash[:notice] = "Signed in successfully"
-        UserMailer.with(user: user).welcome_email.deliver_now
         redirect_to new_user_profile_path(user)
       else
         session["devise.user_attributes"] = user.attributes

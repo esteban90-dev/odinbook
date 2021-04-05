@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_one :profile, dependent: :destroy
 
+  after_create :send_welcome_email
+
   validates :name, presence: true
 
   def self.from_omniauth(auth)
@@ -34,6 +36,12 @@ class User < ApplicationRecord
 
   def password_required?
     super && provider.blank?
+  end
+
+  private
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_now
   end
 
 end
