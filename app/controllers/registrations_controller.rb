@@ -10,6 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
+    UserMailer.with(user: resource).welcome_email.deliver_now
     new_user_profile_path(resource.id)
   end
 end

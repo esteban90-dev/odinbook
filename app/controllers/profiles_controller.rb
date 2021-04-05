@@ -15,7 +15,6 @@ class ProfilesController < ApplicationController
     @profile = current_user.build_profile(profile_params)
 
     if @profile.save
-      UserMailer.with(user: current_user).welcome_email.deliver_now
       flash[:notice] = "Successfully created profile"
       current_user.notifications.create(message: "Welcome to Odinbook!")
       redirect_to user_profile_path(current_user)
