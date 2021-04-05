@@ -77,60 +77,76 @@ end
 
 describe User do 
 
-  it "destroys dependent incoming friend requests" do 
-    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-    joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
-    FriendRequest.create(requestor: joe, requestee: bob)
+  context "when created" do 
 
-    bob.destroy
+    it "sends a welcome email to the user" do 
+      allow(UserMailer).to receive_message_chain(:welcome_email, :deliver_now)
 
-    expect(FriendRequest.all.count).to eq(0)
+      user = FactoryBot.create(:user)
+
+      expect(UserMailer).to have_received(:welcome_email).with(user)
+    end
+
   end
 
-  it "destroys dependent sent friend requests" do 
-    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-    joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
-    FriendRequest.create(requestor: joe, requestee: bob)
+  context "when destroyed" do 
 
-    joe.destroy
+    it "destroys dependent incoming friend requests" do 
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
+      FriendRequest.create(requestor: joe, requestee: bob)
 
-    expect(FriendRequest.all.count).to eq(0)
-  end
+      bob.destroy
 
-  it "destroys dependent friendships" do 
-    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-    joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
-    bob.friends << joe
+      expect(FriendRequest.all.count).to eq(0)
+    end
 
-    bob.destroy
+    it "destroys dependent sent friend requests" do 
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
+      FriendRequest.create(requestor: joe, requestee: bob)
 
-    expect(Friendship.all.count).to eq(0)
-  end
+      joe.destroy
 
-  it "destroys dependent notifications" do 
-    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-    bob.notifications.create(message: "hello bob!")
+      expect(FriendRequest.all.count).to eq(0)
+    end
 
-    bob.destroy
+    it "destroys dependent friendships" do 
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      joe = FactoryBot.create(:user, name: "joe", email: "joe@example.com")
+      bob.friends << joe
 
-    expect(Notification.all.count).to eq(0)
-  end
+      bob.destroy
 
-  it "destroys dependent posts" do 
-    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-    bob.posts.create(body: "this is a post")
+      expect(Friendship.all.count).to eq(0)
+    end
 
-    bob.destroy
+    it "destroys dependent notifications" do 
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      bob.notifications.create(message: "hello bob!")
 
-    expect(Post.all.count).to eq(0)
-  end
+      bob.destroy
 
-  it "destroys dependent profile" do 
-    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      expect(Notification.all.count).to eq(0)
+    end
 
-    bob.destroy
+    it "destroys dependent posts" do 
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      bob.posts.create(body: "this is a post")
 
-    expect(Profile.all.count).to eq(0)
+      bob.destroy
+
+      expect(Post.all.count).to eq(0)
+    end
+
+    it "destroys dependent profile" do 
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+
+      bob.destroy
+
+      expect(Profile.all.count).to eq(0)
+    end
+
   end
 
 end
