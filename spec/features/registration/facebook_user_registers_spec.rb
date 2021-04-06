@@ -2,25 +2,49 @@ require 'rails_helper'
 
 feature "facebook user registers" do 
 
-  before(:each) do
-    stub_omniauth_successful
+  context "auth hash provides valid data" do 
 
-    visit root_path
+    before(:each) do
+      stub_omniauth_successful
 
-    click_on "sign up"
-    click_on "Sign in with Facebook"
+      visit root_path
+
+      click_on "sign up"
+      click_on "Sign in with Facebook"
+    end
+
+    scenario "they see a flash message" do 
+      expect(page).to have_content("Signed in successfully")
+    end
+      
+    scenario "they see that they are signed in" do 
+      expect(page).to have_content("signed in as somebody")
+    end
+
+    scenario "they see the new profile page" do 
+      expect(page).to have_current_path(new_user_profile_path(User.first))
+    end
+
   end
 
-  scenario "they see a flash message" do 
-    expect(page).to have_content("Signed in successfully")
-  end
-    
-  scenario "they see that they are signed in" do 
-    expect(page).to have_content("signed in as somebody")
-  end
+  context "auth hash doesn't provide valid data - missing email" do 
 
-  scenario "they see the new profile page" do 
-    expect(page).to have_current_path(new_user_profile_path(User.first))
+    before(:each) do 
+      stub_omniauth_unsuccessful
+
+      visit root_path
+      click_on "sign up"
+      click_on "Sign in with Facebook"
+    end
+
+    scenario "they see that the email field can't be blank" do 
+      expect(page).to have_content("Email can't be blank")
+    end
+      
+    scenario "they do not see 'Password can't be blank'" do 
+      expect(page).not_to have_content("Password can't be blank")
+    end
+
   end
 
 end
