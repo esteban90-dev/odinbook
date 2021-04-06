@@ -16,8 +16,13 @@ def edit_post_picture(post, new_file_path)
   click_on "Update Post"
 end
 
-def create_post_with_picture(post_text, file_path)
+def create_post_with_text_and_picture(post_text, file_path)
   fill_in "Body", with: post_text
+  attach_file "Picture", file_path
+  click_on "Create Post"
+end
+
+def create_post_with_picture_only(file_path)
   attach_file "Picture", file_path
   click_on "Create Post"
 end

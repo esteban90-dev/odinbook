@@ -35,7 +35,7 @@ feature "user edits a post" do
 
     end
 
-    context "with no text" do 
+    context "with no text or picture" do 
 
       before(:each) do 
         @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
@@ -49,7 +49,7 @@ feature "user edits a post" do
       end
 
       scenario "they see an error message" do 
-        expect(page).to have_content("can't be blank")
+        expect(page).to have_content("must have text or picture")
       end
 
     end
@@ -125,7 +125,7 @@ feature "user edits a post" do
 
     end
 
-    context "with no text" do 
+    context "with no text or picture" do 
 
       before(:each) do 
         @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
@@ -139,7 +139,7 @@ feature "user edits a post" do
       end
 
       scenario "they see an error message" do 
-        expect(page).to have_content("can't be blank")
+        expect(page).to have_content("must have text or picture")
       end
 
     end

@@ -4,9 +4,15 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  validates :body, presence: true
+  validate :must_have_text_or_picture
 
   def likers
     self.likes.map{ |like| like.liker }
+  end
+
+  def must_have_text_or_picture
+    if !picture.attached? && body.empty?
+      errors.add(:base, "must have text or picture")
+    end
   end
 end
