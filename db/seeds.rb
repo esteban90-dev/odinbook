@@ -23,13 +23,15 @@ def random_user
   User.order('RANDOM()').first
 end
 
-#create 50 users
-50.times do 
+#create 30 users
+30.times do 
   #create user
   user = User.create(
     email: Faker::Internet.unique.email,
     name: Faker::Name.name,
-    password: ENV['test_password']
+    password: ENV['test_password'],
+    #don't send confirmation email
+    skip_email: true
   )
 
   puts "user #{user.id} created"

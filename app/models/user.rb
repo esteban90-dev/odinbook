@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :skip_email
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,7 +14,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_one :profile, dependent: :destroy
 
-  after_create :send_welcome_email
+  after_create :send_welcome_email, unless: :skip_email
 
   validates :name, presence: true
 
@@ -43,5 +45,4 @@ class User < ApplicationRecord
   def send_welcome_email
     UserMailer.welcome_email(self).deliver_now
   end
-
 end
