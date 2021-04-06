@@ -1,7 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:edit, :update]
   before_action :check_profile_completion, except: [:new, :create]
-  before_action :resize_picture, only: [:create, :update]
 
   def show
     @profile = Profile.find_by_user_id(params[:user_id])
@@ -43,14 +42,5 @@ class ProfilesController < ApplicationController
 
   def set_profile
     @profile = current_user.profile
-  end
-
-  def resize_picture
-    if profile_params[:picture]
-      path = profile_params[:picture].tempfile.path
-      ImageProcessing::MiniMagick.source(path)
-          .resize_to_limit(250,250)
-          .call(destination: path)
-    end
   end
 end

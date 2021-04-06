@@ -6,7 +6,7 @@
 
 <% if @profile.picture.attached? %>
   <div class="profile-picture">
-    <%= image_tag @profile.picture %>
+    <%= image_tag @profile.picture.variant(resize_to_limit: [500,500])  %>
   </div>
 <% end %>
 

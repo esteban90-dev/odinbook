@@ -2,7 +2,6 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :authorize, only: [:edit, :update, :destroy]
   before_action :check_profile_completion
-  before_action :resize_picture, only: [:create, :update]
 
   def index
     friend_ids = current_user.friends.pluck(:id)
@@ -63,14 +62,5 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
-  end
-
-  def resize_picture
-    if post_params[:picture]
-      path = post_params[:picture].tempfile.path
-      ImageProcessing::MiniMagick.source(path)
-          .resize_to_limit(400,400)
-          .call(destination: path)
-    end
   end
 end

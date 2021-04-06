@@ -1,7 +1,7 @@
 <div data-test="post-<%= post.id %>">
 
   <% if post.picture.attached? %>
-    <%= image_tag post.picture %>
+    <%= image_tag post.picture.variant(resize_to_limit: [500,500]) %>
   <% end %>
 
   <%= post.body %>
