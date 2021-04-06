@@ -5,4 +5,5 @@ class Profile < ApplicationRecord
   validates :location, presence: true
   validates :relationship_status, presence: true
   validates :education, presence: true
+  validates :picture, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
 end

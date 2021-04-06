@@ -104,6 +104,24 @@ feature "user makes a post" do
 
     end
 
+    context "with a non-image file" do 
+
+      before(:each) do 
+        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        sign_in @bob
+
+        visit root_path
+        click_on "bob"
+
+        create_post_with_picture_only("#{Rails.root}/spec/files/test.txt")
+      end
+
+      scenario "they see an error message" do 
+        expect(page).to have_content("not a valid file format")
+      end
+
+    end
+
   end
 
   context "from the timeline" do 
@@ -141,13 +159,13 @@ feature "user makes a post" do
         sign_in @bob
 
         visit root_path
-        click_on "bob"
+        click_on "timeline"
 
         create_post_with_picture_only("#{Rails.root}/spec/files/empire_state_building.jpg")
       end
 
-      scenario "they are redirected back to their profile" do 
-        expect(page).to have_current_path(user_profile_path(@bob))
+      scenario "they are redirected back to the timeline" do 
+        expect(page).to have_current_path(posts_path)
       end
 
       scenario "they see a flash message" do 
@@ -204,6 +222,24 @@ feature "user makes a post" do
 
       scenario "they see an error message" do 
         expect(page).to have_content("must have text or picture")
+      end
+
+    end
+
+    context "with a non-image file" do 
+
+      before(:each) do 
+        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        sign_in @bob
+
+        visit root_path
+        click_on "timeline"
+
+        create_post_with_picture_only("#{Rails.root}/spec/files/test.txt")
+      end
+
+      scenario "they see an error message" do 
+        expect(page).to have_content("not a valid file format")
       end
 
     end

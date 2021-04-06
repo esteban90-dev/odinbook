@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  validates :picture, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
   validate :must_have_text_or_picture
 
   def likers

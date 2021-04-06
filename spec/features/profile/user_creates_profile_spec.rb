@@ -78,4 +78,26 @@ feature "user creates profile" do
 
   end
 
+  context "with a text file instead of a picture" do 
+
+    scenario "they see an error message" do 
+      visit root_path
+
+      click_on "sign up"
+      fill_in "Name", with: "somebody"
+      fill_in "Email", with: "somebody@example.com"
+      fill_in "Password", with: "testpassword"
+      fill_in "Password confirmation", with: "testpassword"
+      click_on "Sign up"
+      fill_in "Location", with: ""
+      select("Master's Degree", from: "Education")
+      select('Single', from: "Relationship Status")
+      attach_file "Picture", "#{Rails.root}/spec/files/test.txt"
+      click_on "Create Profile"
+
+      expect(page).to have_content("not a valid file format")
+    end
+
+  end
+
 end
