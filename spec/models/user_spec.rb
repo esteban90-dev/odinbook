@@ -9,7 +9,7 @@ describe User, ".from_omniauth" do
         name: "somebody"
       },
       provider: "facebook",
-      uid: "1234"
+      uid: "12345"
     }
   end
 

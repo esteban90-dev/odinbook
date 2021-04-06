@@ -6,7 +6,7 @@ FactoryBot.define do
 
     trait :from_facebook do
       provider { "facebook" }
-      uid { "1234" }
+      uid { "12345" }
     end
 
     trait :with_profile do 
