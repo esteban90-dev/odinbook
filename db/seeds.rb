@@ -45,9 +45,6 @@ User.all.each do |user|
     relationship_status: random_relationship_status
   )
 
-  #attach profile picture
-  profile.picture.attach(io: File.open('app/assets/images/generic-user-icon-10.jpg'), filename: 'generic-user-icon-10.jpg', content_type: 'image/png')
-
   puts "user #{user.id} profile created"
 end
 

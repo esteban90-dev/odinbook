@@ -78,6 +78,27 @@ feature "user creates profile" do
 
   end
 
+  context "without a profile picture" do 
+
+    scenario "they see a generic user icon for a profile picture" do 
+      visit root_path
+
+      click_on "sign up"
+      fill_in "Name", with: "somebody"
+      fill_in "Email", with: "somebody@example.com"
+      fill_in "Password", with: "testpassword"
+      fill_in "Password confirmation", with: "testpassword"
+      click_on "Sign up"
+      fill_in "Location", with: "somewhere"
+      select("Master's Degree", from: "Education")
+      select('Single', from: "Relationship Status")
+      click_on "Create Profile"
+
+      expect(page).to have_image("generic-user-icon-19.png")
+    end
+
+  end
+
   context "with a text file instead of a picture" do 
 
     scenario "they see an error message" do 
