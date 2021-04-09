@@ -1,31 +1,67 @@
 <div data-test="post-<%= post.id %>">
+  <div class="row justify-content-center">
+    <div class="col-5 bg-white shadow rounded mb-3 pt-3 pb-3">
+      
+      <div class="row mb-2">
+        <div class="col-2">
+          <%= image_tag post.user.profile.picture.variant(resize_to_limit: [75,75]), class: "rounded-circle" %>
+        </div>
 
-  <% if post.picture.attached? %>
-    <%= image_tag post.picture.variant(resize_to_limit: [500,500]) %>
-  <% end %>
+        <div class="col-8">
+          <%= post.user.name %>
+        </div>
 
-  <%= post.body %>
-  <%= post.user.name %>
+        <div class="col-2 text-center">
+          <% if current_user == post.user %>
+            <%= link_to "edit", edit_post_path(post.id, post: { redirect: redirect } ) %>
+            <%= link_to "delete", post_path(post.id, post: { redirect: redirect } ), method: :delete %>
+          <% end %>
+        </div>
+        
+      </div>
+      
+      <div class="row">
+        <% if post.picture.attached? %>
+          <%= image_tag post.picture %>
+        <% end %>
+      </div>
+            
+      <div class="row">
+        <div class="col">
+          <%= post.body %>
+        </div>
+      </div>
 
-  <% if current_user == post.user %>
-    <%= link_to "edit", edit_post_path(post.id, post: { redirect: redirect } ) %>
-    <%= link_to "delete", post_path(post.id, post: { redirect: redirect } ), method: :delete %>
-  <% end %>
+      <div class="row">
+        <div class="col mx-3 my-3 border-top">
+        </div>
+      </div>     
 
-  likes: <%= post.likes.count %>
+      <div class="row">
+        <div class="col-10 text-start">
+          likes: <%= post.likes.count %>
+        </div>
+        <div class="col-2 text-center">
+          <% if post.likers.include?(current_user) %>
+              <%= link_to "unlike", like_path(post.likes.where(liker: current_user).first.id, redirect: redirect), method: :delete %>
+          <% else %>
+              <%= link_to "like", post_likes_path(post.id, redirect: redirect), method: :post %>
+          <% end %>
+        </div>
+      </div>
 
-  <% if post.likers.include?(current_user) %>
-    <%= link_to "unlike", like_path(post.likes.where(liker: current_user).first.id, redirect: redirect), method: :delete %>
-  <% else %>
-    <%= link_to "like", post_likes_path(post.id, redirect: redirect), method: :post %>
-  <% end %>
+      <div class="row">
+        <div class="col mx-3 my-3 border-top">
+        </div>
+      </div>
+  
+      <% if post.comments.any? %>
+        <% post.comments.each do |comment| %>
+          <%= render partial: "shared/comments/show", locals: { comment: comment, redirect: redirect } %>
+        <% end %>
+      <% end %>
 
-  <% if post.comments.any? %>
-    <% post.comments.each do |comment| %>
-      <%= render partial: "shared/comments/show", locals: { comment: comment, redirect: redirect } %>
-    <% end %>
-  <% end %>
-
-  <%= render partial: "shared/comments/form", locals: { model: [post, post.comments.new], comment: post.comments.new, redirect: redirect } %>
-
+      <%= render partial: "shared/comments/form", locals: { model: [post, post.comments.new], comment: post.comments.new, redirect: redirect } %>
+    </div>
+  </div>
 </div>

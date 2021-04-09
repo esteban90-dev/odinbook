@@ -1,21 +1,39 @@
-<%= form_with model: model do |f| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= f.label :body %>
-  <%= f.text_field :body %>
+<div class="row d-flex justify-content-center mb-3">
+  <div class="col-5 bg-white shadow rounded">
+    <%= form_with model: model do |f| %>
+      <% if post.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+          <ul>
+            <% post.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <%= f.label :picture %>
-  <%= f.file_field :picture %>
+      <div class="row mt-3">
+        <div class="col">
+          <%= f.label :body, class: "form-label d-none" %>
+          <%= f.text_area :body, placeholder: "What's on your mind?", class: "form-control" %>
+        </div>
+      </div>
 
-  <%= f.hidden_field :redirect, value: redirect %>
-  
-  <%= f.submit %>
-<% end %>
+      <div class="row mt-3">
+        <div class="col">
+          <%= f.label :picture, class: "form-label d-none" %>
+          <%= f.file_field :picture, class: "form-control" %>
+          <%= f.hidden_field :redirect, value: redirect %>
+        </div>
+      </div>
+
+      <div class="row d-flex justify-content-end my-3">
+        <div class="col-3 text-end">
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+      </div>
+        
+    <% end %>
+  </div>
+</div>
+
