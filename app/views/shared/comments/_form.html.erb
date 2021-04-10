@@ -1,18 +1,31 @@
-<%= form_with model: model do |f| %>
-  <% if comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this post from being saved:</h2>
-      <ul>
-        <% comment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="row">
+  <div class="col-1 text-center">
+    <%= image_tag comment.post.user.profile.picture.variant(resize_to_limit: [25,25]), class: "rounded-circle" %>
+  </div>
 
-  <%= f.text_field :body %>
+  <div class="col bg-gray-200 rounded">
 
-  <%= f.hidden_field :redirect, value: redirect %>
+    <%= form_with model: model do |f| %>
+      <% if comment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(comment.errors.count, "error") %> prohibited this post from being saved:</h2>
+          <ul>
+            <% comment.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <%= f.submit %>
-<% end %>
+      <%= f.text_field :body, class: "form-control-comment bg-gray-200", placeholder: "Write a comment..." %>
+
+      <%= f.hidden_field :redirect, value: redirect %>
+  
+  </div>
+
+  <div class="col-2">
+      <%= f.submit class: "d-none" %>
+    <% end %>
+  </div>
+
+</div>

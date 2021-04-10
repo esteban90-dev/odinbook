@@ -1,2 +1,17 @@
 // Import Bootstrap v5  
 @import "~bootstrap/scss/bootstrap";  
+
+.bg-gray-200 { 
+  background-color: $gray-200;
+}
+
+.border-gray-200 {
+  border-color: $gray-200;
+}
+
+.form-control-comment {
+  border: 0;
+  outline:0;
+  box-shadow: none;
+  width: 100%;
+}
