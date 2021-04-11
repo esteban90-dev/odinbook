@@ -7,6 +7,7 @@ class FriendshipsController < ApplicationController
     user = User.find(params[:user_id])
     if current_user.friends.include?(user) || current_user == user
       @friendships = user.friendships
+      @user = user
     end
   end
 
