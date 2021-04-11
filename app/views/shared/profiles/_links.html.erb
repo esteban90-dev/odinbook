@@ -1,0 +1,17 @@
+<div class="row mt-3">
+  <div class="col d-flex justify-content-center">
+    <ul class="nav">
+      <li class="nav-item">
+        <%= link_to "friends", user_friendships_path(profile.user.id), class: "nav-link active" %>
+      </li>
+      <% if profile.user == current_user %>
+        <li class="nav-item">
+          <%= link_to "friend requests", friend_requests_path, class: "nav-link active" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "edit profile", edit_user_profile_path(profile.user.id), class: "nav-link active" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
