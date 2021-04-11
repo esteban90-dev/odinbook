@@ -8,7 +8,7 @@
         </div>
 
         <div class="col-8">
-          <%= post.user.name %>
+          <h5><%= link_to post.user.name, user_profile_path(post.user), class: "link-dark" %></h5>
         </div>
 
         <div class="col-2 text-center my-auto">
