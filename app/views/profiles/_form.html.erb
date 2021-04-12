@@ -1,28 +1,52 @@
-<%= form_with url: model, scope: :profile do |f| %>
+<div class="row mt-4 justify-content-center">
+  <div class="col-5 px-3 py-3 shadow bg-white rounded">
+    <%= form_with url: model, scope: :profile do |f| %>
 
-  <% if profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(profile.errors.count, "error") %> prohibited this post from being saved:</h2>
-      <ul>
-        <% profile.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <% if profile.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(profile.errors.count, "error") %> prohibited this post from being saved:</h2>
+          <ul>
+            <% profile.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <%= f.label :location, "Location" %>
-  <%= f.text_field :location %>
+      <div class="row">
+        <div class="col mb-3">
+          <%= f.label :location, "Location" %>
+          <%= f.text_field :location, class: "form-control" %>
+        </div>
+      </div>
 
-  <%= f.label :education, "Education" %>
-  <%= f.select :education, ["High School", "Associate's Degree", "Bachelor's Degree", "Master's Degree", "Doctoral Degree"] %>
+      <div class="row">
+        <div class="col mb-3">
+          <%= f.label :education, "Education" %>
+          <%= f.select :education, ["High School", "Associate's Degree", "Bachelor's Degree", "Master's Degree", "Doctoral Degree"], {}, { class: "form-select" } %>
+        </div>
+      </div>
 
-  <%= f.label :relationship_status, "Relationship Status" %>
-  <%= f.select :relationship_status, ["Single", "In a Relationship", "Married"] %>
+      <div class="row">
+        <div class="col mb-3">
+          <%= f.label :relationship_status, "Relationship Status" %>
+          <%= f.select :relationship_status, ["Single", "In a Relationship", "Married"], {}, { class: "form-select" } %>
+        </div>
+      </div>
 
-  <%= f.label :picture %>
-  <%= f.file_field :picture %>
+      <div class="row">
+        <div class="col mb-3">
+          <%= f.label :picture %>
+          <%= f.file_field :picture, class: "form-control" %>
+        </div>
+      </div>
 
-  <%= f.submit "Create Profile" %>
-  
-<% end %>
+      <div class="row">
+        <div class="col mb-3 text-end">
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+      </div>
+      
+    <% end %>
+  </div>
+</div>
