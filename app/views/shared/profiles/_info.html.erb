@@ -7,9 +7,27 @@
 </div>
 
 <div class="row justify-content-center">
-  <div class="col-4 text-center my-3">
+  <div class="col-4"></div>
+
+  <div class="col text-center my-3">
     <h2><%= profile.user.name %></h2>
   </div>
+
+  <div class="col-4 my-auto text-start">
+      <div class="row">
+        <% if profile.user == current_user %>
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              ...
+            </a>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><%= link_to "edit profile", edit_user_profile_path(profile.user.id), class: "nav-link active" %></li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </div>
 </div>
 
 <div class="row justify-content-center mb-3">

@@ -3,12 +3,22 @@
     <div class="col-5 bg-white shadow rounded mb-3 pt-3 pb-3">
       
       <div class="row mb-2">
-        <div class="col-2">
+        <div class="col-2 text-center">
           <%= image_tag post.user.profile.picture.variant(resize_to_limit: [75,75]), class: "rounded-circle" %>
         </div>
 
         <div class="col-8">
-          <h5><%= link_to post.user.name, user_profile_path(post.user), class: "link-dark" %></h5>
+          <div class="row">
+            <div class="col">
+              <h5><%= link_to post.user.name, user_profile_path(post.user), class: "link-dark" %></h5>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <sub><%= time_tag post.updated_at, class: "text-secondary" %></sub>
+            </div>
+          </div>
         </div>
 
         <div class="col-2 text-center my-auto">

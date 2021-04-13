@@ -1,13 +1,56 @@
-<% @incoming_friend_requests.each do |ifr| %>
-  <div data-test="incoming-friend-request-<%= ifr.id %>">
-    <%= ifr.requestor.name %>
-    <%= link_to "accept", accept_friend_request_path(ifr.id), method: :delete %>
-    <%= link_to "ignore", ignore_friend_request_path(ifr.id), method: :delete %>
-  </div>
-<% end %>
+<%= render partial: 'shared/profiles/info', locals: { profile: @user.profile } %>
 
-<% @sent_friend_requests.each do |sfr| %>
-  <div data-test="sent-friend-request-<%= sfr.id %>">
-    <%= sfr.requestee.name %>
+<%= render partial: 'shared/profiles/links', locals: { profile: @user.profile } %>
+
+<div class="row justify-content-center">
+  <div class="col-5 py-3 mb-3 shadow bg-white rounded">
+
+    <% @incoming_friend_requests.each do |ifr| %>
+
+      <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
+        <div class="col-2">
+          <%= image_tag ifr.requestor.profile.picture.variant(resize_to_limit: [75,75]), class: "rounded-circle" %>
+        </div>
+
+        <div class="col-6 my-auto">
+          <h5><%= link_to ifr.requestor.name, user_profile_path(ifr.requestor.id), class: "link-dark" %></h5>
+        </div>
+
+        <div class="col-4 text-center my-auto">
+          <div data-test="incoming-friend-request-<%= ifr.id %>">
+            <%= link_to "accept", accept_friend_request_path(ifr.id), method: :delete, class: "btn btn-primary" %>
+            <%= link_to "ignore", ignore_friend_request_path(ifr.id), method: :delete, class: "btn btn-primary" %>
+          </div>
+        </div>
+
+      </div>
+      
+    <% end %>
+
+    <% @sent_friend_requests.each do |sfr| %>
+
+      <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
+        <div class="col-2">
+          <%= image_tag sfr.requestee.profile.picture.variant(resize_to_limit: [75,75]), class: "rounded-circle" %>
+        </div>
+
+        <div class="col-6 my-auto">
+          <h5><%= link_to sfr.requestee.name, user_profile_path(sfr.requestee.id), class: "link-dark" %></h5>
+        </div>
+
+        <div class="col-4 text-center my-auto">
+          <div data-test="sent-friend-request-<%= sfr.id %>">
+            <b>friend request sent</b>
+          </div>
+        </div>
+
+      </div>
+
+    <% end %>
+  
   </div>
-<% end %>
+</div>
+
+    
+
+  

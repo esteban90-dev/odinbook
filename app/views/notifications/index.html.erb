@@ -1,5 +1,27 @@
-<% @notifications.each do |notification| %>
-  <div data-test="notification-<%= notification.id %>">
-    <%= notification.message.html_safe %>
+<div class="row mt-5 mb-3">
+  <div class="col text-center">
+    <h2>Notifications</h2>
   </div>
-<% end %>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-5 py-3 my-3 shadow bg-white rounded">
+    <% @notifications.each do |notification| %>
+
+      <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
+
+        <div class="col-3">
+          <%= time_tag notification.created_at, class: "text-secondary" %>
+        </div>
+
+        <div class="col">
+          <div data-test="notification-<%= notification.id %>">
+            <%= notification.message.html_safe %>
+          </div>
+        </div>
+
+      </div>
+
+    <% end %>
+  </div>
+</div>

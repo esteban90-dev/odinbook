@@ -16,6 +16,12 @@
             </div>
           </div>
 
+          <div class="row mb-2">
+            <div class="col">
+              <sub><%= time_tag comment.updated_at, class: "text-secondary" %></sub>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col">
               <%= comment.body %>
