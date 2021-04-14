@@ -94,7 +94,7 @@ feature "user makes a post" do
 
         visit root_path
         click_on "bob"
-        fill_in "Body", with: ""
+        fill_in "Body", with: " "
         click_on "Create Post"
       end
 

@@ -12,7 +12,7 @@ class Post < ApplicationRecord
   end
 
   def must_have_text_or_picture
-    if !picture.attached? && body.empty?
+    if !picture.attached? && body.blank?
       errors.add(:base, "must have text or picture")
     end
   end
