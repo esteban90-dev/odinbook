@@ -18,64 +18,64 @@
     <% end %>
 
     <div class="container-fluid min-vh-100 pb-3 bg-gray-200">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Odinbook</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto">
+      <div data-test="nav">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Odinbook</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ms-auto">
+                <% if current_user %>
 
-              <% if current_user %>
+                  <li class="nav-item">
+                    <%= link_to current_user.name, user_profile_path(current_user.id), class: "nav-link active" %>
+                  </li>
 
-                <li class="nav-item">
-                  <%= link_to current_user.name, user_profile_path(current_user.id), class: "nav-link active" %>
-                </li>
+                  <li class="nav-item">
+                    <%= link_to "timeline", posts_path, class: "nav-link active" %>
+                  </li>
 
-                <li class="nav-item">
-                  <%= link_to "timeline", posts_path, class: "nav-link active" %>
-                </li>
+                  <li class="nav-item">
+                    <%= link_to "users", users_path, class: "nav-link active"%>
+                  </li>
 
-                <li class="nav-item">
-                  <%= link_to "users", users_path, class: "nav-link active"%>
-                </li>
+                  <li class="nav-item">
+                    <% if current_user.notifications.unacked.any? %>
+                      <b><%= link_to "notifications", user_notifications_path(current_user.id), class: "nav-link active" %></b>
+                    <% else %>
+                      <%= link_to "notifications", user_notifications_path(current_user.id), class: "nav-link active" %>
+                    <% end %>
+                  </li>
 
-                <li class="nav-item">
-                  <% if current_user.notifications.unacked.any? %>
-                    <b><%= link_to "notifications", user_notifications_path(current_user.id), class: "nav-link active" %></b>
-                  <% else %>
-                    <%= link_to "notifications", user_notifications_path(current_user.id), class: "nav-link active" %>
-                  <% end %>
-                </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      account
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                      <li><%= link_to "sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+                      <li><%= link_to "edit account", edit_user_registration_path, class: "dropdown-item" %></li>
+                    </ul>
+                  </li>
 
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    account
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                    <li><%= link_to "sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
-                    <li><%= link_to "edit account", edit_user_registration_path, class: "dropdown-item" %></li>
-                  </ul>
-                </li>
+                <% else %>
 
-              <% else %>
+                  <li class="nav-item">
+                    <%= link_to "sign in", new_user_session_path, class: "nav-link active" %>
+                  </li>
 
-                <li class="nav-item">
-                  <%= link_to "sign in", new_user_session_path, class: "nav-link active" %>
-                </li>
+                  <li class="nav-item">
+                    <%= link_to "sign up", new_user_registration_path, class: "nav-link active" %>
+                  </li>
 
-                <li class="nav-item">
-                  <%= link_to "sign up", new_user_registration_path, class: "nav-link active" %>
-                </li>
-
-              <% end %>
-
-            </ul>
+                <% end %>
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
-
+        </nav>
+      </div>
+      
       <%= yield %>
 
     </div>
