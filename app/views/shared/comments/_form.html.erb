@@ -6,22 +6,20 @@
   <div class="col bg-gray-200 rounded">
 
     <%= form_with model: model do |f| %>
-      <% if comment.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(comment.errors.count, "error") %> prohibited this post from being saved:</h2>
-          <ul>
-            <% comment.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
       <%= f.text_field :body, class: "form-control-comment bg-gray-200", placeholder: "Write a comment..." %>
-
       <%= f.hidden_field :redirect, value: redirect %>
   
   </div>
+
+  <% if comment.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% comment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="col-2">
       <%= f.submit class: "d-none" %>
