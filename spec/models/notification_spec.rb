@@ -15,26 +15,6 @@ describe Notification, ".unacked" do
 
 end
 
-describe Notification, "#unacked?" do 
-
-  before do
-    bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-    
-    @notification = bob.notifications.create(message: "new notification")
-  end
-
-  it "returns true if the created_at time matches the updated_at time" do 
-    expect(@notification.unacked?).to eq(true)
-  end
-
-  it "returns false if the created_at time matches the updated_at time" do 
-    @notification.touch
-
-    expect(@notification.unacked?).to eq(false)
-  end
-
-end 
-
 describe Notification do 
 
   context "validations" do 

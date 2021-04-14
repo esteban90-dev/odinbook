@@ -28,4 +28,12 @@ feature "user sees new notifications" do
     expect(page).not_to have_bold_notifications_link
   end
 
+  scenario "once viewed, the notifications disappear" do 
+    click_on "notifications"
+    visit root_path
+    click_on "notifications"
+
+    expect(notifications_on_page.count).to eq(0)
+  end
+
 end
