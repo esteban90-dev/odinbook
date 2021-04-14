@@ -17,15 +17,17 @@
           </div>
 
           <div class="col-2 my-auto">
-            <div class="dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                ...
-              </a>
+            <% if current_user == @user %>
+              <div class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  ...
+                </a>
 
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><%= link_to "unfriend", friendship_path(friendship), method: :delete, class: "dropdown-item" %></li>
-              </ul>
-            </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li><%= link_to "unfriend", friendship_path(friendship), method: :delete, class: "dropdown-item" %></li>
+                </ul>
+              </div>
+            <% end %>
           </div>
 
         </div>

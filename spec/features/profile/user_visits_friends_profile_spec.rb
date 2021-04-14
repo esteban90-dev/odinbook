@@ -25,8 +25,8 @@ feature "user visits friend's profile" do
   end
 
   scenario "they see their friend's friends" do 
-    @sean = FactoryBot.create(:user, name: "sean", email: "sean@example.com")
-    @alex = FactoryBot.create(:user, name: "alex", email: "alex@example.com")
+    @sean = FactoryBot.create(:user, :with_profile, name: "sean", email: "sean@example.com")
+    @alex = FactoryBot.create(:user, :with_profile, name: "alex", email: "alex@example.com")
     @bob.friends << [@sean, @alex]
 
     click_on "friends"
@@ -34,6 +34,12 @@ feature "user visits friend's profile" do
     expect(page).to have_content("frank")
     expect(page).to have_content("sean")
     expect(page).to have_content("alex")
+  end
+
+  scenario "they don't see an 'unfriend' link next to their friend's friends" do 
+    click_on "friends"
+
+    expect(page).not_to have_link("unfriend")
   end
 
   scenario "they don't see an edit link next to the friend's posts" do 
