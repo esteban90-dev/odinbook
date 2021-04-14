@@ -3,27 +3,30 @@
     <%= image_tag comment.post.user.profile.picture.variant(resize_to_limit: [25,25]), class: "rounded-circle" %>
   </div>
 
-  <div class="col bg-gray-200 rounded">
-
+  <div class="col bg-gray-200">
     <%= form_with model: model do |f| %>
-      <%= f.text_field :body, class: "form-control-comment bg-gray-200", placeholder: "Write a comment..." %>
-      <%= f.hidden_field :redirect, value: redirect %>
-  
-  </div>
+      <div class="row bg-gray-200 rounded">
+        <div class="col">
+          <%= f.label :body, class: "d-none" %>
+          <%= f.text_field :body, placeholder: "Write a comment...", class: "form-control-comment bg-gray-200" %>
+          <%= f.hidden_field :redirect, value: redirect %>
+        </div>
+      </div>
 
-  <% if comment.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% comment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <% if comment.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% comment.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="col-2">
       <%= f.submit class: "d-none" %>
     <% end %>
-  </div>
+  </div> 
 
+  <div class="col-2"></div>
+   
 </div>
