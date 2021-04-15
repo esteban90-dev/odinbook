@@ -16,7 +16,7 @@ feature "user edits profile" do
       select('Married', from: "Relationship Status")
       attach_file "Picture", "#{Rails.root}/spec/files/eiffel_tower.jpg"
 
-      click_on "Update Profile"
+      click_on "Save Profile"
     end
 
     scenario "they see a flash message" do 
@@ -54,7 +54,7 @@ feature "user edits profile" do
       select("Master's Degree", from: "Education")
       select('Married', from: "Relationship Status")
       attach_file "Picture", "#{Rails.root}/spec/files/eiffel_tower.jpg"
-      click_on "Update Profile"
+      click_on "Save Profile"
 
       expect(page).to have_content("can't be blank")
     end

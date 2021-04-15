@@ -17,7 +17,7 @@ feature "user creates profile" do
       select('Single', from: "Relationship Status")
       attach_file "Picture", "#{Rails.root}/spec/files/eiffel_tower.jpg"
 
-      click_on "Create Profile"
+      click_on "Save Profile"
     end
 
     scenario "they see a flash message" do 
@@ -67,11 +67,11 @@ feature "user creates profile" do
       fill_in "Password", with: "testpassword"
       fill_in "Password confirmation", with: "testpassword"
       click_on "Sign up"
-      fill_in "Location", with: ""
+      fill_in "Location", with: " "
       select("Master's Degree", from: "Education")
       select('Single', from: "Relationship Status")
       attach_file "Picture", "#{Rails.root}/spec/files/eiffel_tower.jpg"
-      click_on "Create Profile"
+      click_on "Save Profile"
 
       expect(page).to have_content("can't be blank")
     end
@@ -92,7 +92,7 @@ feature "user creates profile" do
       fill_in "Location", with: "somewhere"
       select("Master's Degree", from: "Education")
       select('Single', from: "Relationship Status")
-      click_on "Create Profile"
+      click_on "Save Profile"
 
       expect(page).to have_image("generic-user-icon-19.png")
     end
@@ -114,7 +114,7 @@ feature "user creates profile" do
       select("Master's Degree", from: "Education")
       select('Single', from: "Relationship Status")
       attach_file "Picture", "#{Rails.root}/spec/files/test.txt"
-      click_on "Create Profile"
+      click_on "Save Profile"
 
       expect(page).to have_content("not a valid file format")
     end
