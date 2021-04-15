@@ -8,7 +8,7 @@ feature "user comments on own post" do
     sign_in bob
 
     visit root_path
-    click_on "bob"
+    find("[data-test=nav]").click_on "bob"
     comment_on_post(@post, "I love my own posts so much")
 
     expect(notifications_on_page.count).to eq(0)

@@ -16,7 +16,7 @@ feature "user edits comment" do
         sign_in @frank
 
         visit root_path
-        click_on "frank"
+        find("[data-test=nav]").click_on "frank"
         click_on "friends"
         click_on "bob"
         edit_comment(@comment, "this post is actually great")
@@ -52,7 +52,7 @@ feature "user edits comment" do
         sign_in @frank
 
         visit root_path
-        click_on "frank"
+        find("[data-test=nav]").click_on "frank"
         click_on "friends"
         click_on "bob"
         edit_comment(@comment, "")

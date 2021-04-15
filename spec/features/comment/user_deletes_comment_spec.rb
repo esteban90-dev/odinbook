@@ -13,7 +13,7 @@ feature "user deletes comment" do
 
       sign_in @frank
       visit root_path
-      click_on "frank"
+      find("[data-test=nav]").click_on "frank"
       click_on "friends"
       click_on "bob"
 
