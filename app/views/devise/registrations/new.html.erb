@@ -7,7 +7,6 @@
 <div class="row mt-4 justify-content-center">
   <div class="col-5 px-3 py-3 shadow bg-white rounded">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="row">
         <div class="col mb-3">
@@ -49,6 +48,8 @@
           </div>
         </div>
       <% end %>
+
+      <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="row">
         <div class="col mb-3">
