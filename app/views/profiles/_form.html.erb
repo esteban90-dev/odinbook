@@ -1,6 +1,6 @@
 <div class="row mt-4 justify-content-center">
   <div class="col-5 px-3 py-3 shadow bg-white rounded">
-    <%= form_with url: model, scope: :profile do |f| %>
+    <%= form_with url: model, scope: :profile, method: method do |f| %>
 
       <% if profile.errors.any? %>
         <div id="error_explanation">

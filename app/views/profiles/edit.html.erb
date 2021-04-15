@@ -4,4 +4,4 @@
   </div>
 </div>
 
-<%= render partial: 'form', locals: { model: [current_user, @profile], profile: @profile } %>
+<%= render partial: 'form', locals: { model: user_profile_path(current_user), profile: @profile, method: :patch } %>
