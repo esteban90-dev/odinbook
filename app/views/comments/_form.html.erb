@@ -4,7 +4,6 @@
     <%= form_with model: model do |f| %>
       <div class="row my-3">
         <div class="col">
-          <%= f.label :body, class: "d-none" %>
           <%= f.text_field :body, placeholder: "Write a comment...", class: "form-control" %>
           <%= f.hidden_field :redirect, value: redirect %>
         </div>

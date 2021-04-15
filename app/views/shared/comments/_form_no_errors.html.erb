@@ -7,12 +7,11 @@
     <%= form_with model: model do |f| %>
       <div class="row bg-gray-200 rounded">
         <div class="col">
-          <%= f.label :body, class: "d-none" %>
           <%= f.text_field :body, placeholder: "Write a comment...", class: "form-control-comment bg-gray-200" %>
           <%= f.hidden_field :redirect, value: redirect %>
         </div>
       </div>
-      
+
       <%= f.submit class: "d-none" %>
     <% end %>
   </div> 
