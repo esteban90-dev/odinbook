@@ -79,7 +79,7 @@
         <% end %>
       <% end %>
 
-      <%= render partial: "shared/comments/form", locals: { model: [post, post.comments.new], comment: post.comments.new, redirect: redirect } %>
+      <%= render partial: "shared/comments/form_no_errors", locals: { model: [post, post.comments.new], comment: post.comments.new, redirect: redirect } %>
     </div>
   </div>
 </div>

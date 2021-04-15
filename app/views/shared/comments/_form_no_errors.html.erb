@@ -12,17 +12,7 @@
           <%= f.hidden_field :redirect, value: redirect %>
         </div>
       </div>
-
-      <% if comment.errors.any? %>
-        <div id="error_explanation">
-          <ul>
-            <% comment.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
+      
       <%= f.submit class: "d-none" %>
     <% end %>
   </div> 
@@ -30,3 +20,4 @@
   <div class="col-2"></div>
    
 </div>
+

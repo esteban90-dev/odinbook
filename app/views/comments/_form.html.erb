@@ -1,0 +1,30 @@
+<div class="row my-3 justify-content-center">
+  <div class="col-5 bg-white shadow rounded ">
+
+    <%= form_with model: model do |f| %>
+      <div class="row my-3">
+        <div class="col">
+          <%= f.label :body, class: "d-none" %>
+          <%= f.text_field :body, placeholder: "Write a comment...", class: "form-control" %>
+          <%= f.hidden_field :redirect, value: redirect %>
+        </div>
+      </div>
+
+      <% if comment.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% comment.errors.each do |error| %>
+              <li class="text-danger"><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="row mb-3">
+        <div class="col d-grid gap-2">
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div> 
+</div>
