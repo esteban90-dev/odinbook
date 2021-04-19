@@ -7,7 +7,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if user.save
         sign_in user
         flash[:notice] = "Signed in successfully"
-        redirect_to new_user_profile_path(user)
+        redirect_to edit_user_profile_path(user)
       else
         session["devise.user_attributes"] = user.attributes
         redirect_to new_user_registration_path
@@ -16,7 +16,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       sign_in user
       flash[:notice] = "Signed in successfully"
-      redirect_to user_profile_path(user)
+      redirect_to edit_profile_path(user)
     end
   end
 end

@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
 
   after_create :send_welcome_email, unless: :skip_email
+  after_create :create_default_profile
 
   validates :name, presence: true
 
@@ -44,5 +45,9 @@ class User < ApplicationRecord
 
   def send_welcome_email
     UserMailer.welcome_email(self).deliver_now
+  end
+
+  def create_default_profile
+    create_profile(location: "unknown", education: "High School", relationship_status: "Single")
   end
 end

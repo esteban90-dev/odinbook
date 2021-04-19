@@ -87,6 +87,15 @@ describe User do
       expect(UserMailer).to have_received(:welcome_email).with(user)
     end
 
+    it "creates a default profile" do 
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+
+      expect(bob.profile.location).to eq("unknown")
+      expect(bob.profile.education).to eq("High School")
+      expect(bob.profile.relationship_status).to eq("Single")
+      expect(bob.profile.picture.attached?).to eq(true)
+    end
+
   end
 
   context "when destroyed" do 

@@ -1,6 +1,5 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:edit, :update]
-  before_action :check_profile_completion, except: [:new, :create]
 
   def show
     @profile = Profile.find_by_user_id(params[:user_id])

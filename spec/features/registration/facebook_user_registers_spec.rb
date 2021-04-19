@@ -18,11 +18,11 @@ feature "facebook user registers" do
     end
       
     scenario "they see that they are signed in" do 
-      expect(page).to have_content("signed in as somebody")
+      expect(page).to have_content("somebody")
     end
 
-    scenario "they see the new profile page" do 
-      expect(page).to have_current_path(new_user_profile_path(User.first))
+    scenario "they see the edit profile page" do 
+      expect(page).to have_current_path(edit_user_profile_path(User.first))
     end
 
   end
