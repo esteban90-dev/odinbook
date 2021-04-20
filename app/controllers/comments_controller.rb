@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:edit, :update, :destroy]
   before_action :authorize_create, only: :create
   before_action :authorize_edit_update_destroy, only: [:edit, :update, :destroy]
-  before_action :check_profile_completion
 
   def create
     @post = Post.find(params[:post_id])

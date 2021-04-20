@@ -1,6 +1,5 @@
 class FriendRequestsController < ApplicationController
   before_action :find_request, only: [:accept, :ignore]
-  before_action :check_profile_completion
 
   def index
     @incoming_friend_requests = current_user.incoming_friend_requests

@@ -61,24 +61,6 @@ RSpec.describe LikesController, type: :controller do
 
     end
 
-    context "as a user that hasn't completed their profile" do 
-      before(:each) do 
-        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-        post_1 = @bob.posts.create(body: "this is a post")
-
-        sign_in @bob
-        post :create, params: { post_id: post_1.id, redirect: "profile"}
-      end
-
-      it "redirects to the new profile page" do 
-        expect(response).to redirect_to new_user_profile_path(@bob)
-      end
-
-      it "displays an alert" do 
-        expect(flash[:alert]).to eq("you must complete your profile before continuing")
-      end
-    end
-
   end
 
   describe "#destroy" do 
@@ -113,25 +95,6 @@ RSpec.describe LikesController, type: :controller do
 
       it "sets a flash alert message" do 
         expect(flash[:alert]).to eq("this action is not permitted")
-      end
-    end
-
-    context "as a user that hasn't completed their profile" do 
-      before(:each) do 
-        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
-        post = @bob.posts.create(body: "this is a post")
-        like = post.likes.create(liker: @bob)
-
-        sign_in @bob
-        delete :destroy, params: { id: like.id, redirect: "profile" }
-      end
-
-      it "redirects to the new profile page" do 
-        expect(response).to redirect_to new_user_profile_path(@bob)
-      end
-
-      it "displays an alert" do 
-        expect(flash[:alert]).to eq("you must complete your profile before continuing")
       end
     end
 
