@@ -11,3 +11,15 @@ end
 def be_timeline
   have_css("[data-test=timeline]")
 end
+
+def nav_section
+  '[data-test="nav"]'
+end
+
+def user_appears_signed_in(user_name)
+  expect(find(nav_section)).to have_content(user_name)
+end
+
+def user_doesnt_appear_signed_in(user_name)
+  expect(find(nav_section)).not_to have_content(user_name)
+end

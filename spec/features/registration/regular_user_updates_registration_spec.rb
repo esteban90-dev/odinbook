@@ -21,7 +21,7 @@ feature "regular user updates registration" do
     end
     
     scenario "they see that they are logged in with their new name" do 
-      expect(page).to have_content("signed in as somebody else")
+      expect(page).to have_content("somebody else")
     end
 
     scenario "they see their account credentials change" do 
@@ -59,7 +59,7 @@ feature "regular user updates registration" do
       fill_in "Password", with: "testpassword2"
       click_on "Sign in"
       
-      expect(page).to have_content("signed in as somebody")
+      expect(page).to have_content("somebody")
     end
 
   end

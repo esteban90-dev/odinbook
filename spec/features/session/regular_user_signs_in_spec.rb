@@ -19,7 +19,7 @@ feature "regular user signs in" do
     end
 
     scenario "they see that they are signed in" do 
-      expect(page).to have_content("signed in as #{@user.name}")
+      user_appears_signed_in("#{@user.name}")
     end
 
   end

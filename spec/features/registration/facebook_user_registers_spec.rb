@@ -17,8 +17,8 @@ feature "facebook user registers" do
       expect(page).to have_content("Signed in successfully")
     end
       
-    scenario "they see that they are signed in" do 
-      expect(page).to have_content("somebody")
+    scenario "they see that they are signed in" do
+      user_appears_signed_in("somebody")
     end
 
     scenario "they see the edit profile page" do 

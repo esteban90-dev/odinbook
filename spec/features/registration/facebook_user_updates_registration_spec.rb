@@ -18,7 +18,7 @@ feature "facebook user updates registration" do
   end
 
   scenario "they see that they are signed in with a different name" do 
-    expect(page).to have_content("somebody else")
+    user_appears_signed_in("somebody else")
   end
 
   scenario "they see their account credentials change" do 

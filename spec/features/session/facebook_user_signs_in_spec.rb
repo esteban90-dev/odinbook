@@ -12,11 +12,11 @@ feature "facebook user signs in" do
   end
 
   scenario "they see a flash message" do 
-    expect(page).to have_content("signed in as somebody")
+    expect(page).to have_content("signed in successfully")
   end
 
   scenario "they see that they are signed in" do 
-    expect(page).to have_content("Signed in successfully")
+    user_appears_signed_in("somebody")
   end
 
 end

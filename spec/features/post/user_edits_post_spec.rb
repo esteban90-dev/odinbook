@@ -12,7 +12,7 @@ feature "user edits a post" do
         sign_in @bob
 
         visit root_path
-        click_on "bob"
+        find(nav_section).click_on "bob"
 
         edit_post_text(@post, "this is different")
       end
@@ -43,7 +43,7 @@ feature "user edits a post" do
         sign_in @bob
 
         visit root_path
-        click_on "bob"
+        find(nav_section).click_on "bob"
 
         edit_post_text(@post, "")
       end
@@ -63,7 +63,7 @@ feature "user edits a post" do
         sign_in @bob
 
         visit root_path
-        click_on "bob"
+        find(nav_section).click_on "bob"
 
         edit_post_picture(@post, "#{Rails.root}/spec/files/white_house.jpg")
       end

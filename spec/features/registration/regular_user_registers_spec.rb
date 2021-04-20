@@ -20,7 +20,7 @@ feature "regular user registers" do
     end
       
     scenario "they see that they are signed in" do 
-      expect(page).to have_content("somebody")
+      user_appears_signed_in("somebody")
     end
 
     scenario "they see the edit profile page" do 

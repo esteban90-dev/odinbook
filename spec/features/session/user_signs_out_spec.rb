@@ -15,7 +15,6 @@ feature "user signs out" do
   end
 
   scenario "they don't appear signed in" do 
-    expect(page).not_to have_content("signed in as")
+    user_doesnt_appear_signed_in("someone")
   end
-
 end

@@ -70,7 +70,7 @@ feature "user comments on friend's post" do
         sign_in @bob
 
         visit root_path
-        find("[data-test=nav]").click_on "bob"
+        find(nav_section).click_on "bob"
 
         comment_doesnt_appear_editable(@post.comments.first)
       end
@@ -80,7 +80,7 @@ feature "user comments on friend's post" do
         sign_in @bob
         
         visit root_path
-        find("[data-test=nav]").click_on "bob"
+        find(nav_section).click_on "bob"
 
         comment_doesnt_appear_deletable(@post.comments.first)
       end

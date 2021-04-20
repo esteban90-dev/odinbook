@@ -8,7 +8,7 @@ feature "user likes his/her own post" do
     sign_in @bob
 
     visit root_path
-    click_on "bob"
+    find(nav_section).click_on "bob"
     like(@post)
     click_on "notifications" 
     

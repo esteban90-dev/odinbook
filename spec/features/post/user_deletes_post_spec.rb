@@ -10,7 +10,7 @@ feature "user deletes a post" do
 
       sign_in @bob
       visit root_path 
-      click_on "bob"
+      find(nav_section).click_on "bob"
 
       delete_post(@post)
     end
