@@ -3,10 +3,10 @@ require 'rails_helper'
 feature "user visits friend's profile" do 
 
   before(:each) do 
-    @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+    @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
     @post_1 = @bob.posts.create(body: "this is a post")
     @post_2 = @bob.posts.create(body: "this is another post")
-    @frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
+    @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
     @bob.friends << @frank
     sign_in @frank
 
@@ -25,8 +25,8 @@ feature "user visits friend's profile" do
   end
 
   scenario "they see their friend's friends" do 
-    @sean = FactoryBot.create(:user, :with_profile, name: "sean", email: "sean@example.com")
-    @alex = FactoryBot.create(:user, :with_profile, name: "alex", email: "alex@example.com")
+    @sean = FactoryBot.create(:user, name: "sean", email: "sean@example.com")
+    @alex = FactoryBot.create(:user, name: "alex", email: "alex@example.com")
     @bob.friends << [@sean, @alex]
 
     click_on "friends"

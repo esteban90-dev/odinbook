@@ -3,9 +3,9 @@ require 'rails_helper'
 feature "user sees post index" do 
 
   before(:each) do 
-    @stephen = FactoryBot.create(:user, :with_profile, name: "stephen", email: "stephen@example.com")
-    @sean = FactoryBot.create(:user, :with_profile, name: "sean", email: "sean@example.com")
-    @kevin = FactoryBot.create(:user, :with_profile, name: "kevin", email: "kevin@example.com") 
+    @stephen = FactoryBot.create(:user, name: "stephen", email: "stephen@example.com")
+    @sean = FactoryBot.create(:user, name: "sean", email: "sean@example.com")
+    @kevin = FactoryBot.create(:user, name: "kevin", email: "kevin@example.com") 
 
     @stephen.friends << @sean
 

@@ -5,8 +5,8 @@ feature "user deletes comment" do
   context "from the friend's profile" do 
 
     before(:each) do 
-      @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
-      @frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
       @bob.friends << @frank
       @post = @bob.posts.create(body: "this is a post")
       @comment = @post.comments.create(body: "this post could be better", commenter: @frank)
@@ -37,8 +37,8 @@ feature "user deletes comment" do
   context "from the timeline" do 
 
     before(:each) do 
-      @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
-      @frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      @frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
       @bob.friends << @frank
       @post = @bob.posts.create(body: "this is a post")
       @comment = @post.comments.create(body: "this post could be better", commenter: @frank)

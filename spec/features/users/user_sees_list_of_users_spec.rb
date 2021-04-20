@@ -3,9 +3,9 @@ require "rails_helper"
 feature "user sees list of other users" do 
 
   before(:each) do 
-    @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@mail.com")
-    @frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@mail.com")
-    @john = FactoryBot.create(:user, :with_profile, name: "john", email: "john@mail.com")
+    @bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com")
+    @frank = FactoryBot.create(:user, name: "frank", email: "frank@mail.com")
+    @john = FactoryBot.create(:user, name: "john", email: "john@mail.com")
 
     sign_in @bob
     visit root_path

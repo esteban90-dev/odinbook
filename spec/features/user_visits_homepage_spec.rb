@@ -21,7 +21,7 @@ feature "user visits homepage" do
   context "as an authenticated user" do 
 
     scenario "they are redirected to the timeline" do 
-      @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@mail.com" )
+      @bob = FactoryBot.create(:user, name: "bob", email: "bob@mail.com" )
       sign_in @bob
 
       visit root_path

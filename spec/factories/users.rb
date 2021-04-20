@@ -8,9 +8,5 @@ FactoryBot.define do
       provider { "facebook" }
       uid { "12345" }
     end
-
-    trait :with_profile do 
-      after(:create){ |user| create(:profile, user: user) }
-    end
   end
 end

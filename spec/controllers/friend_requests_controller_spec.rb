@@ -26,8 +26,8 @@ RSpec.describe FriendRequestsController, type: :controller do
 
     context "as a user trying to send a duplicate friend request" do 
       before(:each) do 
-        bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
-        frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
+        bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
         bob.sent_friend_requests.create(requestee: frank)
 
         sign_in bob
@@ -49,8 +49,8 @@ RSpec.describe FriendRequestsController, type: :controller do
 
     context "as a user trying to send a friend request to someone they are already friends with" do 
       before(:each) do 
-        bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
-        frank = FactoryBot.create(:user, :with_profile, name: "frank", email: "frank@example.com")
+        bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+        frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
         bob.friends << frank
 
         sign_in bob

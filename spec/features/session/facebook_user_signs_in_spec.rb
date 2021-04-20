@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "facebook user signs in" do 
 
   before(:each) do
-    FactoryBot.create(:user, :with_profile, :from_facebook)
+    FactoryBot.create(:user, :from_facebook)
     stub_omniauth_successful
 
     visit root_path

@@ -7,7 +7,7 @@ feature "user makes a post" do
     context "with text only" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         sign_in @bob
 
         visit root_path
@@ -33,7 +33,7 @@ feature "user makes a post" do
     context "with image only" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         sign_in @bob
 
         visit root_path
@@ -59,7 +59,7 @@ feature "user makes a post" do
     context "with text and an image" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         sign_in @bob
 
         visit root_path
@@ -89,7 +89,7 @@ feature "user makes a post" do
     context "without text or image" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         sign_in @bob
 
         visit root_path
@@ -107,7 +107,7 @@ feature "user makes a post" do
     context "with a non-image file" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         sign_in @bob
 
         visit root_path
@@ -129,7 +129,7 @@ feature "user makes a post" do
     context "with text only" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         sign_in @bob
 
         visit root_path
@@ -155,7 +155,7 @@ feature "user makes a post" do
     context "with image only" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         sign_in @bob
 
         visit root_path
@@ -181,7 +181,7 @@ feature "user makes a post" do
     context "with text and an image" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         sign_in @bob
 
         visit root_path
@@ -211,7 +211,7 @@ feature "user makes a post" do
     context "without text or an image" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         sign_in @bob
 
         visit root_path
@@ -229,7 +229,7 @@ feature "user makes a post" do
     context "with a non-image file" do 
 
       before(:each) do 
-        @bob = FactoryBot.create(:user, :with_profile, name: "bob", email: "bob@example.com")
+        @bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
         sign_in @bob
 
         visit root_path

@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "user sees new notifications" do 
 
   before(:each) do 
-    user = FactoryBot.create(:user, :with_profile)
+    user = FactoryBot.create(:user)
     @notification_1 = user.notifications.create(message: "hello there!")
     @notification_2 = user.notifications.create(message: "goodbye!")
 
