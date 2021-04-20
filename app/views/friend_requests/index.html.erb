@@ -7,43 +7,41 @@
 
     <% @incoming_friend_requests.each do |ifr| %>
 
-      <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
-        <div class="col-2">
-          <%= image_tag ifr.requestor.profile.picture.variant(resize_to_limit: [75,75]), class: "rounded-circle" %>
-        </div>
+      <div data-test="incoming-friend-request-<%= ifr.id %>">
+        <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
+          <div class="col-2">
+            <%= image_tag ifr.requestor.profile.picture.variant(resize_to_limit: [75,75]), class: "rounded-circle" %>
+          </div>
 
-        <div class="col-6 my-auto">
-          <h5><%= link_to ifr.requestor.name, user_profile_path(ifr.requestor.id), class: "link-dark" %></h5>
-        </div>
+          <div class="col-6 my-auto">
+            <h5><%= link_to ifr.requestor.name, user_profile_path(ifr.requestor.id), class: "link-dark" %></h5>
+          </div>
 
-        <div class="col-4 text-center my-auto">
-          <div data-test="incoming-friend-request-<%= ifr.id %>">
+          <div class="col-4 text-center my-auto">
             <%= link_to "accept", accept_friend_request_path(ifr.id), method: :delete, class: "btn btn-primary" %>
             <%= link_to "ignore", ignore_friend_request_path(ifr.id), method: :delete, class: "btn btn-primary" %>
           </div>
         </div>
-
       </div>
       
     <% end %>
 
     <% @sent_friend_requests.each do |sfr| %>
 
-      <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
-        <div class="col-2">
-          <%= image_tag sfr.requestee.profile.picture.variant(resize_to_limit: [75,75]), class: "rounded-circle" %>
-        </div>
+      <div data-test="sent-friend-request-<%= sfr.id %>">
+        <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
+          <div class="col-2">
+            <%= image_tag sfr.requestee.profile.picture.variant(resize_to_limit: [75,75]), class: "rounded-circle" %>
+          </div>
 
-        <div class="col-6 my-auto">
-          <h5><%= link_to sfr.requestee.name, user_profile_path(sfr.requestee.id), class: "link-dark" %></h5>
-        </div>
+          <div class="col-6 my-auto">
+            <h5><%= link_to sfr.requestee.name, user_profile_path(sfr.requestee.id), class: "link-dark" %></h5>
+          </div>
 
-        <div class="col-4 text-center my-auto">
-          <div data-test="sent-friend-request-<%= sfr.id %>">
+          <div class="col-4 text-center my-auto">
             <b>friend request sent</b>
           </div>
         </div>
-
       </div>
 
     <% end %>
