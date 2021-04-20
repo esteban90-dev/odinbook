@@ -5,22 +5,6 @@ class ProfilesController < ApplicationController
     @profile = Profile.find_by_user_id(params[:user_id])
   end
 
-  def new
-    @profile = current_user.build_profile
-  end
-
-  def create
-    @profile = current_user.build_profile(profile_params)
-
-    if @profile.save
-      flash[:notice] = "Successfully created profile"
-      current_user.notifications.create(message: "Welcome to Odinbook!")
-      redirect_to user_profile_path(current_user)
-    else
-      render :new
-    end
-  end
-
   def edit
   end
 
