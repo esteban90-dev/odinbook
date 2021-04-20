@@ -12,7 +12,7 @@ feature "facebook user signs in" do
   end
 
   scenario "they see a flash message" do 
-    expect(page).to have_content("signed in successfully")
+    expect(page).to have_content("Signed in successfully")
   end
 
   scenario "they see that they are signed in" do 
