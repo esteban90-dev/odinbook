@@ -16,7 +16,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       sign_in user
       flash[:notice] = "Signed in successfully"
-      redirect_to edit_profile_path(user)
+      redirect_to edit_user_profile_path(user)
     end
   end
 end
