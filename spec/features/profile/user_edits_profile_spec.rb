@@ -24,13 +24,6 @@ feature "user edits profile" do
       expect(page).to have_content("Successfully updated profile")
     end
 
-    scenario "they see a welcome notification" do 
-      visit root_path
-      click_on "notifications"
-      
-      expect(page).to have_content("Welcome to Odinbook!")
-    end
-
     scenario "they see their location" do 
       expect(page).to have_content("New York")
     end

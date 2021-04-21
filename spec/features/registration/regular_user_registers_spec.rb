@@ -23,6 +23,13 @@ feature "regular user registers" do
       user_appears_signed_in("somebody")
     end
 
+    scenario "they see a welcome notification" do 
+      visit root_path
+      click_on "notifications"
+      
+      expect(page).to have_content("Welcome to Odinbook!")
+    end
+
     scenario "they see the edit profile page" do 
       expect(page).to have_current_path(edit_user_profile_path(User.first))
     end
