@@ -36,4 +36,12 @@ feature "user sees new notifications" do
     expect(notifications_on_page.count).to eq(0)
   end
 
+  scenario "once viewed, 'no new notifications' is displayed" do 
+    click_on "notifications"
+    visit root_path
+    click_on "notifications"
+
+    expect(page).to have_content("no new notifications")
+  end
+
 end
