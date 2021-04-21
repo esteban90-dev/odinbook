@@ -4,35 +4,49 @@
 
 <div class="row justify-content-center">
   <div class="col-5 py-3 mb-3 bg-white shadow rounded">
-    <% @friendships.each do |friendship| %>
-      <div data-test="user-<%= friendship.friend.id %>">
 
-        <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
-          <div class="col-2">
-            <%= image_tag friendship.friend.profile.picture.variant(resize_to_limit: [75,75]), class: "rounded-circle" %>
+    <% if @friendships.any? %>
+
+      <% @friendships.each do |friendship| %>
+        <div data-test="user-<%= friendship.friend.id %>">
+
+          <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
+            <div class="col-2">
+              <%= image_tag friendship.friend.profile.picture.variant(resize_to_limit: [75,75]), class: "rounded-circle" %>
+            </div>
+          
+            <div class="col-8 my-auto">
+              <h5><%= link_to friendship.friend.name, user_profile_path(friendship.friend.id), class: "link-dark" %></h5>
+            </div>
+
+            <div class="col-2 my-auto">
+              <% if current_user == @user %>
+                <div class="dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    ...
+                  </a>
+
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><%= link_to "unfriend", friendship_path(friendship), method: :delete, class: "dropdown-item" %></li>
+                  </ul>
+                </div>
+              <% end %>
+            </div>
+
           </div>
-        
-          <div class="col-8 my-auto">
-            <h5><%= link_to friendship.friend.name, user_profile_path(friendship.friend.id), class: "link-dark" %></h5>
-          </div>
-
-          <div class="col-2 my-auto">
-            <% if current_user == @user %>
-              <div class="dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                  ...
-                </a>
-
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <li><%= link_to "unfriend", friendship_path(friendship), method: :delete, class: "dropdown-item" %></li>
-                </ul>
-              </div>
-            <% end %>
-          </div>
-
+          
         </div>
-        
+      <% end %>
+
+    <% else %>
+
+      <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
+        <div class="col text-muted">
+          no friends yet
+        </div>
       </div>
+
     <% end %>
+
   </div>
 </div>
