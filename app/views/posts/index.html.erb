@@ -1,7 +1,20 @@
 <div data-test="timeline"> 
   <%= render partial: 'shared/posts/form', locals: { model: [current_user, current_user.posts.new], post: current_user.posts.new, redirect: "timeline" } %>
 
-  <% @posts.each do |post| %>
-    <%= render partial: 'shared/posts/show', locals: { post: post, redirect: "timeline" } %>
+  <% if @posts.any? %>
+
+    <% @posts.each do |post| %>
+      <%= render partial: 'shared/posts/show', locals: { post: post, redirect: "timeline" } %>
+    <% end %>
+
+  <% else %>
+
+    <div class="row justify-content-center">
+      <div class="col-5 bg-white shadow rounded mb-3 pt-3 pb-3">
+        no posts yet
+      </div>
+    </div>
+
   <% end %>
+
 </div>

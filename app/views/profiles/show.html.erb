@@ -6,7 +6,19 @@
   <%= render partial: 'shared/posts/form', locals: { model: [current_user, current_user.posts.new], post: current_user.posts.new, redirect: "profile" } %>
 <% end %>
 
-<% @profile.user.posts.order(updated_at: :desc).each do |post| %>
-  <%= render partial: 'shared/posts/show', locals: { post: post, redirect: "profile" } %>
+<% if @profile.user.posts.any? %>
+
+  <% @profile.user.posts.order(updated_at: :desc).each do |post| %>
+    <%= render partial: 'shared/posts/show', locals: { post: post, redirect: "profile" } %>
+  <% end %>
+
+<% else %>
+
+  <div class="row justify-content-center">
+    <div class="col-5 bg-white shadow rounded mb-3 pt-3 pb-3">
+      no posts yet
+    </div>
+  </div>
+
 <% end %>
   
