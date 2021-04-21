@@ -5,6 +5,16 @@
 <div class="row justify-content-center">
   <div class="col-5 py-3 mb-3 shadow bg-white rounded">
 
+    <% if @incoming_friend_requests.none? && @sent_friend_requests.none? %>
+
+      <div class="row mx-3 my-3 px-2 py-2 shadow-sm rounded">
+        <div class="col">
+          no friend requests yet
+        </div>
+      </div>
+
+    <% end %>
+
     <% @incoming_friend_requests.each do |ifr| %>
 
       <div data-test="incoming-friend-request-<%= ifr.id %>">

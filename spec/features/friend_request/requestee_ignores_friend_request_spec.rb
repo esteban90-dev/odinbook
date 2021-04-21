@@ -65,6 +65,7 @@ feature "requestee ignores friend request" do
       click_on "friend requests"
 
       expect(sent_friend_requests.count).to eq(0)
+      expect(page).to have_content("no friend requests yet")
     end
 
   end
@@ -136,6 +137,7 @@ feature "requestee ignores friend request" do
       click_on "friend requests"
 
       expect(sent_friend_requests.count).to eq(0)
+      expect(page).to have_content("no friend requests yet")
     end
 
   end
@@ -202,6 +204,7 @@ feature "requestee ignores friend request" do
       click_on "friend requests"
 
       expect(sent_friend_requests.count).to eq(0)
+      expect(page).to have_content("no friend requests yet")
     end
 
   end
