@@ -23,15 +23,18 @@
 
         <div class="col-2 text-center my-auto">
           <% if current_user == post.user %>
-            <div class="dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                ...
-              </a>
+            <div class="row">
+              <div class="col text-end">
+                <%= link_to edit_post_path(post.id, post: { redirect: redirect } ), data: { test: "edit-post" }, class: "link-secondary" do %>
+                  <i class="far fa-edit"></i>
+                <% end %>
+              </div>
 
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><%= link_to "edit", edit_post_path(post.id, post: { redirect: redirect } ), class: "dropdown-item" %></li>
-                <li><%= link_to "delete", post_path(post.id, post: { redirect: redirect } ), method: :delete, data: {confirm: "Are you sure?"}, class: "dropdown-item" %></li>
-              </ul>
+              <div class="col text-start">  
+                <%= link_to post_path(post.id, post: { redirect: redirect } ), method: :delete, data: { confirm: "Are you sure?", test: "delete-post" }, class: "link-secondary" do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </div>  
             </div>
           <% end %>
         </div>

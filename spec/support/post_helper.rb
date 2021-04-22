@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 def delete_post(post)
-  find("[data-test=post-#{post.id}]").click_on "delete"
+  find(delete_post_selector).click
 end
 
 def edit_post_text(post, new_post_text)
-  find("[data-test=post-#{post.id}]").click_on "edit"
+  find(edit_post_selector).click
   fill_in "Body", with: new_post_text
   click_on "Update Post"
 end
 
 def edit_post_picture(post, new_file_path)
-  find("[data-test=post-#{post.id}]").click_on "edit"
+  find(edit_post_selector).click
   attach_file "Picture", new_file_path
   click_on "Update Post"
 end
@@ -45,4 +45,12 @@ def post_doesnt_appear_deletable(post)
   within("[data-test=post-#{post.id}]") do 
     expect(page).not_to have_link("delete")
   end
+end
+
+def edit_post_selector
+  '[data-test="edit-post"]'
+end
+
+def delete_post_selector
+  '[data-test="delete-post"]'
 end
