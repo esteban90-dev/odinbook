@@ -26,7 +26,7 @@ end
 
 def add_friend(user)
   within("[data-test=user-#{user.id}]") do 
-    find('[data-test="add-friend"]').click
+    find(add_friend_selector).click
   end
 end
 

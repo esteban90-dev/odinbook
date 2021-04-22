@@ -5,7 +5,7 @@ def have_user(user)
 end
 
 def have_user_appear_addable(user)
-  have_css("[data-test=user-#{user.id}]", text: "add friend")
+  have_css(add_friend_selector)
 end
 
 def have_user_appear_as_friend(user)

@@ -23,3 +23,7 @@ end
 def user_doesnt_appear_signed_in(user_name)
   expect(find(nav_section)).not_to have_content(user_name)
 end
+
+def add_friend_selector
+  '[data-test="add-friend"]'
+end
