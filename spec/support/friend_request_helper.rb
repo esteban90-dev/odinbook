@@ -25,7 +25,9 @@ def ignore_from_users(user)
 end
 
 def add_friend(user)
-  find("[data-test=user-#{user.id}]").click_on "add friend"
+  within("[data-test=user-#{user.id}]") do 
+    find('[data-test="add-friend"]').click
+  end
 end
 
 def have_sent_friend_request(request)
