@@ -17,7 +17,7 @@
       <div class="row">
 
         <% if profile.user == current_user %>
-          <%= link_to edit_user_profile_path(profile.user.id), data: { test: "edit-profile" } do %>
+          <%= link_to edit_user_profile_path(profile.user.id), data: { test: "edit-profile" }, class: "link-secondary" do %>
             <i class="far fa-edit"></i>
           <% end %>
         <% end %>
