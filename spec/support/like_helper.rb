@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 def like(post)
-  find("[data-test=post-#{post.id}]").click_on "like"
+  find(like_post_selector).click
 end
 
 def unlike(post)
-  find("[data-test=post-#{post.id}]").click_on "unlike"
+  find(unlike_post_selector).click
 end
 
 def click_post_link_in_notification(notification)
@@ -18,24 +18,32 @@ end
 
 def user_sees_post_like_button(post)
   within("[data-test=post-#{post.id}]") do 
-    expect(page).to have_link("like", exact: true)
+    expect(page).to have_css(like_post_selector)
   end
 end
 
 def user_doesnt_see_post_like_button(post)
   within("[data-test=post-#{post.id}]") do 
-    expect(page).not_to have_link("like", exact: true)
+    expect(page).not_to have_css(like_post_selector)
   end
 end
 
 def user_sees_post_unlike_button(post)
   within("[data-test=post-#{post.id}]") do 
-    expect(page).to have_link("unlike")
+    expect(page).to have_css(unlike_post_selector)
   end
 end
 
 def user_doesnt_see_post_unlike_button(post)
   within("[data-test=post-#{post.id}]") do 
-    expect(page).not_to have_link("unlike")
+    expect(page).not_to have_css(unlike_post_selector)
   end
+end
+
+def like_post_selector
+  '[data-test="like-post"]'
+end
+
+def unlike_post_selector
+  '[data-test="unlike-post"]'
 end
