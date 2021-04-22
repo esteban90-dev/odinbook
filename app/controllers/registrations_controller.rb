@@ -10,7 +10,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    current_user.notifications.create(message: "Welcome to Odinbook!")
     edit_user_profile_path(resource.id)
   end
 end

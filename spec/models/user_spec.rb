@@ -96,6 +96,12 @@ describe User do
       expect(bob.profile.picture.attached?).to eq(true)
     end
 
+    it "creates a welcome notification" do 
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+
+      expect(bob.notifications.first.message).to eq("Welcome to Odinbook!")
+    end
+
   end
 
   context "when destroyed" do 

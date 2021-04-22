@@ -16,6 +16,7 @@ class User < ApplicationRecord
 
   after_create :send_welcome_email, unless: :skip_email
   after_create :create_default_profile
+  after_create :create_welcome_notification
 
   validates :name, presence: true
 
@@ -49,5 +50,9 @@ class User < ApplicationRecord
 
   def create_default_profile
     create_profile(location: "unknown", education: "High School", relationship_status: "Single")
+  end
+
+  def create_welcome_notification
+    notifications.create(message: "Welcome to Odinbook!")
   end
 end

@@ -7,7 +7,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if user.save
         sign_in user
         flash[:notice] = "Signed in successfully"
-        user.notifications.create(message: "Welcome to Odinbook!")
         redirect_to edit_user_profile_path(user)
       else
         session["devise.user_attributes"] = user.attributes
