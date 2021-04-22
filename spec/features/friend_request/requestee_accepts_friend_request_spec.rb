@@ -97,8 +97,6 @@ feature "requestee accepts friend request" do
       visit root_path
       click_on "joe"
       click_on "notifications"
-
-      save_and_open_page
     
       accept_from_notifications(@joe.notifications.last)
     end
