@@ -86,7 +86,7 @@ feature "requestee ignores friend request" do
       visit root_path
       click_on "notifications"
 
-      ignore_from_notifications(@joe.notifications.first)
+      ignore_from_notifications(@joe.notifications.last)
     end
 
     scenario "and sees a flash message" do 

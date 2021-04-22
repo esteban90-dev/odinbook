@@ -50,7 +50,7 @@ feature "user likes a friend's post" do
       visit root_path
       click_on "notifications"
 
-      click_post_link_in_notification(@bob.notifications.first)
+      click_post_link_in_notification(@bob.notifications.last)
 
       expect(page).to have_content(@post.body)
     end
@@ -103,7 +103,7 @@ feature "user likes a friend's post" do
       visit root_path
       click_on "notifications"
 
-      click_post_link_in_notification(@bob.notifications.first)
+      click_post_link_in_notification(@bob.notifications.last)
 
       expect(page).to have_content(@post.body)
     end
