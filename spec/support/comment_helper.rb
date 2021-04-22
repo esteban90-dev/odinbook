@@ -16,11 +16,11 @@ def click_on_comment_user_name(comment)
 end
 
 def delete_comment(comment)
-  find("[data-test=comment-#{comment.id}]").click_on "delete"
+  find(delete_comment_selector).click
 end
 
 def edit_comment(comment, new_comment_text)
-  find("[data-test=comment-#{@comment.id}]").click_on "edit"
+  find(edit_comment_selector).click
   fill_in "comment_body", with: new_comment_text
   click_on "Update Comment"
 end
@@ -35,4 +35,12 @@ def comment_doesnt_appear_deletable(comment)
   within("[data-test=comment-#{comment.id}]") do 
     expect(page).not_to have_link("delete")
   end
+end
+
+def edit_comment_selector
+  '[data-test="edit-comment"]'
+end
+
+def delete_comment_selector
+  '[data-test="delete-comment"]'
 end
