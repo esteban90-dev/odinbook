@@ -4,14 +4,12 @@ feature "user edits profile" do
 
   context "with valid data" do 
     before(:each) do
+      bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
+      
+      sign_in bob
       visit root_path
-
-      click_on "sign up"
-      fill_in "Name", with: "somebody"
-      fill_in "Email", with: "somebody@example.com"
-      fill_in "Password", with: "testpassword"
-      fill_in "Password confirmation", with: "testpassword"
-      click_on "Sign up"
+      find(nav_section).click_on("bob")
+      find(edit_profile_selector).click
       fill_in "Location", with: "New York"
       select("Master's Degree", from: "Education")
       select('Single', from: "Relationship Status")
@@ -38,13 +36,6 @@ feature "user edits profile" do
   
     scenario "they see their profile picture" do 
       expect(page).to have_image("eiffel_tower.jpg")
-    end
-
-    scenario "they see their account credentials" do 
-      click_on "edit account"
-
-      expect(page).to have_field('user_name', with: "somebody")
-      expect(page).to have_field('user_email', with: "somebody@example.com")
     end
 
   end
