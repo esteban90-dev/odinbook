@@ -12,7 +12,7 @@ feature "user likes his/her own post" do
     like(@post)
     click_on "notifications" 
     
-    expect(notifications_on_page.count).to eq(0)
+    expect(page).not_to have_content("liked your post")
   end
 
 end
