@@ -86,7 +86,9 @@
         <% end %>
       <% end %>
 
-      <%= render partial: "shared/comments/form_no_errors", locals: { model: [post, post.comments.new], comment: post.comments.new, redirect: redirect } %>
+      <% if post.user == current_user || post.user.friends.include?(current_user) %>
+        <%= render partial: "shared/comments/form_no_errors", locals: { model: [post, post.comments.new], comment: post.comments.new, redirect: redirect } %>
+      <% end %>
     </div>
   </div>
 </div>
