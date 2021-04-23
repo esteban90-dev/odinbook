@@ -14,16 +14,20 @@
   </div>
 
   <div class="col-4 my-auto text-start">
-      <div class="row">
-
-        <% if profile.user == current_user %>
-          <%= link_to edit_user_profile_path(profile.user.id), data: { test: "edit-profile" }, class: "link-secondary" do %>
-            <i class="far fa-edit"></i>
-          <% end %>
+    <div class="row">
+      <% if profile.user == current_user %>
+        <%= link_to edit_user_profile_path(profile.user.id), data: { test: "edit-profile" }, class: "link-secondary" do %>
+          <i class="far fa-edit"></i>
         <% end %>
+      <% end %>
 
-      </div>
+      <% if !current_user.friends.include?(profile.user) && current_user != profile.user %>
+        <%= link_to friend_requests_path("friend_request" => { requestee_id: profile.user.id } ), data: { test: "add-friend" }, method: :post do %>
+          <i class="fas fa-user-plus"></i>
+        <% end %>
+      <% end %>
     </div>
+  </div>
 </div>
 
 <div class="row justify-content-center mb-3">
