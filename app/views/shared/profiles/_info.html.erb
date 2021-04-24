@@ -15,29 +15,15 @@
 
   <div class="col-4 my-auto text-start">
     <div class="row">
-      <div data-test="friend-status">
-
-        <% if profile.user == current_user %>
-          <%= link_to edit_user_profile_path(profile.user.id), data: { test: "edit-profile" }, class: "link-secondary" do %>
-            <i class="far fa-edit"></i>
-          <% end %>
+      
+      <% if profile.user == current_user %>
+        <%= link_to edit_user_profile_path(profile.user.id), data: { test: "edit-profile" }, class: "link-secondary" do %>
+          <i class="far fa-edit"></i>
         <% end %>
+      <% else %>
+        <%= render partial: "shared/friend_request_status_control", locals: { user: profile.user } %>
+      <% end %>
 
-        <% if !current_user.friends.include?(profile.user) && current_user != profile.user && !current_user.sent_friend_requests.map{ |fr| fr.requestee }.include?(profile.user) && !current_user.incoming_friend_requests.map{ |fr| fr.requestor }.include?(profile.user) %>
-          <%= link_to friend_requests_path("friend_request" => { requestee_id: profile.user.id } ), data: { test: "add-friend" }, method: :post do %>
-            <i class="fas fa-user-plus"></i>
-          <% end %>
-        <% elsif current_user.sent_friend_requests.map{ |fr| fr.requestee }.include?(profile.user) %>
-          <b>friend request sent</b>
-        <% elsif current_user.incoming_friend_requests.map{ |fr| fr.requestor }.include?(profile.user) %>
-          <% fr = current_user.incoming_friend_requests.where(requestor: profile.user).first %>
-          <%= link_to "accept", accept_friend_request_path(fr.id), method: :delete, class: "btn btn-primary" %>
-          <%= link_to "ignore", ignore_friend_request_path(fr.id), method: :delete, class: "btn btn-primary" %>
-        <% else %>
-          <b>friends</b>
-        <% end %>
-
-      </div>
     </div>
   </div>
 </div>

@@ -44,7 +44,7 @@ feature "requestee accepts friend request" do
       click_on "friends"
       click_on "bob"
 
-      friend_status_section = find('[data-test="friend-status"]')
+      friend_status_section = find('[data-test="friend-request-status-control"]')
       expect(friend_status_section).to have_content("friends")
     end
 
@@ -132,7 +132,7 @@ feature "requestee accepts friend request" do
       click_on "friends"
       click_on "bob"
 
-      friend_status_section = find('[data-test="friend-status"]')
+      friend_status_section = find('[data-test="friend-request-status-control"]')
       expect(friend_status_section).to have_content("friends")
     end
 
@@ -214,7 +214,7 @@ feature "requestee accepts friend request" do
       click_on "friends"
       click_on "bob"
 
-      friend_status_section = find('[data-test="friend-status"]')
+      friend_status_section = find('[data-test="friend-request-status-control"]')
       expect(friend_status_section).to have_content("friends")
     end
 
@@ -301,7 +301,7 @@ feature "requestee accepts friend request" do
       click_on "friends"
       click_on "bob"
 
-      friend_status_section = find('[data-test="friend-status"]')
+      friend_status_section = find('[data-test="friend-request-status-control"]')
       expect(friend_status_section).to have_content("friends")
     end
 

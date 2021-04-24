@@ -1,0 +1,21 @@
+<div data-test="friend-request-status-control">
+
+  <% if current_user.friends.include?(user) %>
+    <b>friends</b>
+
+  <% elsif current_user.sent_friend_requests.map{ |fr| fr.requestee }.include?(user) %>
+    <b>friend request sent</b>
+
+  <% elsif current_user.incoming_friend_requests.map{ |fr| fr.requestor }.include?(user) %>
+    <% fr = current_user.incoming_friend_requests.where(requestor: user).first %>
+    <%= link_to "accept", accept_friend_request_path(fr.id), method: :delete, class: "btn btn-primary" %>
+    <%= link_to "ignore", ignore_friend_request_path(fr.id), method: :delete, class: "btn btn-primary" %>
+
+  <% else %>
+    <%= link_to friend_requests_path("friend_request" => { requestee_id: user.id } ), data: { test: "add-friend" }, method: :post do %>
+      <i class="fas fa-user-plus"></i>
+    <% end %>
+
+  <% end %>
+
+</div>
