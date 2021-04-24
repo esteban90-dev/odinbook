@@ -29,6 +29,12 @@ feature "requestor sends friend request" do
       expect(page).to have_sent_friend_request(@bob.sent_friend_requests.first)
     end
 
+    scenario "and sees 'friend request sent' on the requestee's profile" do 
+      click_on "joe"
+      
+      expect(page).to have_content("friend request sent")
+    end
+
   end
 
   context "from a non friend's profile" do 
@@ -57,6 +63,12 @@ feature "requestor sends friend request" do
       click_on "friend requests"
   
       expect(page).to have_sent_friend_request(@bob.sent_friend_requests.first)
+    end
+    
+    scenario "and sees 'friend request sent' on the requestee's profile" do 
+      click_on "joe"
+      
+      expect(page).to have_content("friend request sent")
     end
 
   end
