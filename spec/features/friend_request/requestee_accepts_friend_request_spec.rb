@@ -39,6 +39,15 @@ feature "requestee accepts friend request" do
       expect(page).to have_user_appear_as_friend(@bob)
     end
 
+    scenario "and sees 'friends' on the requestor's profile" do 
+      click_on "joe"
+      click_on "friends"
+      click_on "bob"
+
+      friend_status_section = find('[data-test="friend-status"]')
+      expect(friend_status_section).to have_content("friends")
+    end
+
     scenario "and no longer sees incoming friend requests" do 
       click_on "joe"
       click_on "friend requests"
@@ -118,6 +127,15 @@ feature "requestee accepts friend request" do
       expect(page).to have_user_appear_as_friend(@bob)
     end
 
+    scenario "and sees 'friends' on the requestor's profile" do 
+      click_on "joe"
+      click_on "friends"
+      click_on "bob"
+
+      friend_status_section = find('[data-test="friend-status"]')
+      expect(friend_status_section).to have_content("friends")
+    end
+
     scenario "and no longer sees incoming friend requests" do 
       click_on "joe"
       click_on "friend requests"
@@ -189,6 +207,15 @@ feature "requestee accepts friend request" do
       click_on "users"
 
       expect(page).to have_user_appear_as_friend(@bob)
+    end
+
+    scenario "and sees 'friends' on the requestor's profile" do 
+      click_on "joe"
+      click_on "friends"
+      click_on "bob"
+
+      friend_status_section = find('[data-test="friend-status"]')
+      expect(friend_status_section).to have_content("friends")
     end
 
     scenario "and no longer sees incoming friend requests" do 
