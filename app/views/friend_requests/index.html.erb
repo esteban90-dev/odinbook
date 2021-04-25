@@ -28,8 +28,7 @@
           </div>
 
           <div class="col-4 text-center my-auto">
-            <%= link_to "accept", accept_friend_request_path(ifr.id), method: :delete, class: "btn btn-primary" %>
-            <%= link_to "ignore", ignore_friend_request_path(ifr.id), method: :delete, class: "btn btn-primary" %>
+            <%= render partial: "shared/friend_request_status_control", locals: { user: ifr.requestor } %>
           </div>
         </div>
       </div>
@@ -49,7 +48,7 @@
           </div>
 
           <div class="col-4 text-center my-auto">
-            <b>friend request sent</b>
+            <%= render partial: "shared/friend_request_status_control", locals: { user: sfr.requestee } %>
           </div>
         </div>
       </div>
