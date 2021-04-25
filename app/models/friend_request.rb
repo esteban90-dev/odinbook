@@ -6,7 +6,7 @@ class FriendRequest < ApplicationRecord
   validate :reverse_must_not_exist
 
   def reverse_must_not_exist
-    if FriendRequest.where(requestor_id: self.requestee.id, requestee_id: self.requestor.id)
+    if FriendRequest.where(requestor_id: self.requestee.id, requestee_id: self.requestor.id).any?
       errors.add(:base, "reverse request already exists")
     end
   end
