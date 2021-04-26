@@ -14,3 +14,7 @@ end
 def edit_profile_selector
   '[data-test="edit-profile"]'
 end
+
+def have_like_button
+  have_css(like_post_selector)
+end

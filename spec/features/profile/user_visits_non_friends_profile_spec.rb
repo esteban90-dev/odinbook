@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "user visits non friend's profile" do 
 
-  scenario "they don't see a comment form associated with the non friend's posts" do 
+  before(:each) do 
     bob = FactoryBot.create(:user, name: "bob", email: "bob@example.com")
     bob.posts.create(body: "this is a post")
     frank = FactoryBot.create(:user, name: "frank", email: "frank@example.com")
@@ -11,8 +11,14 @@ feature "user visits non friend's profile" do
     visit root_path
     click_on "users"
     click_on "bob"
+  end
 
+  scenario "they don't see a comment form associated with the non friend's posts" do 
     user_doesnt_see_comment_form
+  end
+
+  scenario "they don't see a like button associated with the non friend's posts" do 
+    expect(page).not_to have_like_button
   end
 
 end

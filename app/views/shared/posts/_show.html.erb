@@ -63,13 +63,15 @@
           likes: <%= post.likes.count %>
         </div>
         <div class="col-2 text-center">
-          <% if post.likers.include?(current_user) %>
-            <%= link_to like_path(post.likes.where(liker: current_user).first.id, redirect: redirect), data: { test: "unlike-post" }, method: :delete do %>
-              <i class="far fa-thumbs-down"></i>
-            <% end %>
-          <% else %>
-            <%= link_to post_likes_path(post.id, redirect: redirect), data: { test: "like-post" }, method: :post do %>
-              <i class="far fa-thumbs-up"></i>
+          <% if post.user.friends.include?(current_user) || post.user == current_user %>
+            <% if post.likers.include?(current_user) %>
+              <%= link_to like_path(post.likes.where(liker: current_user).first.id, redirect: redirect), data: { test: "unlike-post" }, method: :delete do %>
+                <i class="far fa-thumbs-down"></i>
+              <% end %>
+            <% else %>
+              <%= link_to post_likes_path(post.id, redirect: redirect), data: { test: "like-post" }, method: :post do %>
+                <i class="far fa-thumbs-up"></i>
+              <% end %>
             <% end %>
           <% end %>
         </div>
