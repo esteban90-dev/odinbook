@@ -27,3 +27,18 @@ end
 def add_friend_selector
   '[data-test="add-friend"]'
 end
+
+def user_appears_addable(user)
+  friend_status_section = find("[data-test=friend-request-status-control-#{user.id}]")
+  expect(friend_status_section).to have_css(add_friend_selector)
+end
+
+def user_appears_as_friend(user)
+  friend_status_section = find("[data-test=friend-request-status-control-#{user.id}]")
+  expect(friend_status_section).to have_content("friends")
+end
+
+def user_appears_pending(user)
+  friend_status_section = find("[data-test=friend-request-status-control-#{user.id}]")
+  expect(friend_status_section).to have_content("friend request sent")
+end

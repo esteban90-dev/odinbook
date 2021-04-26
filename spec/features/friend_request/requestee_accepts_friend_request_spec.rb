@@ -18,8 +18,7 @@ feature "requestee accepts friend request" do
       visit root_path
       click_on "joe"
       click_on "friend requests"
-    
-      accept_from_friend_requests(@joe.incoming_friend_requests.first)
+      click_on "accept"
     end
 
     scenario "and sees a flash message" do
@@ -36,7 +35,7 @@ feature "requestee accepts friend request" do
     scenario "and sees the requestor appear in the user index as a friend" do 
       click_on "users"
 
-      expect(page).to have_user_appear_as_friend(@bob)
+      user_appears_as_friend(@bob)
     end
 
     scenario "and sees 'friends' on the requestor's profile" do 
@@ -44,8 +43,7 @@ feature "requestee accepts friend request" do
       click_on "friends"
       click_on "bob"
 
-      friend_status_section = find('[data-test="friend-request-status-control"]')
-      expect(friend_status_section).to have_content("friends")
+      user_appears_as_friend(@bob)
     end
 
     scenario "and no longer sees incoming friend requests" do 
@@ -106,8 +104,7 @@ feature "requestee accepts friend request" do
       visit root_path
       click_on "joe"
       click_on "notifications"
-    
-      accept_from_notifications(@joe.notifications.last)
+      click_on "accept"
     end
 
     scenario "and sees a flash message" do
@@ -124,7 +121,7 @@ feature "requestee accepts friend request" do
     scenario "and sees the requestor appear in the user index as a friend" do 
       click_on "users"
 
-      expect(page).to have_user_appear_as_friend(@bob)
+      user_appears_as_friend(@bob)
     end
 
     scenario "and sees 'friends' on the requestor's profile" do 
@@ -132,8 +129,7 @@ feature "requestee accepts friend request" do
       click_on "friends"
       click_on "bob"
 
-      friend_status_section = find('[data-test="friend-request-status-control"]')
-      expect(friend_status_section).to have_content("friends")
+      user_appears_as_friend(@bob)
     end
 
     scenario "and no longer sees incoming friend requests" do 
@@ -188,8 +184,7 @@ feature "requestee accepts friend request" do
       sign_in @joe
       visit root_path
       click_on "users"
-    
-      accept_from_users(@bob)
+      click_on "accept"
     end
 
     scenario "and sees a flash message" do
@@ -206,7 +201,7 @@ feature "requestee accepts friend request" do
     scenario "and sees the requestor appear in the user index as a friend" do 
       click_on "users"
 
-      expect(page).to have_user_appear_as_friend(@bob)
+      user_appears_as_friend(@bob)
     end
 
     scenario "and sees 'friends' on the requestor's profile" do 
@@ -214,8 +209,7 @@ feature "requestee accepts friend request" do
       click_on "friends"
       click_on "bob"
 
-      friend_status_section = find('[data-test="friend-request-status-control"]')
-      expect(friend_status_section).to have_content("friends")
+      user_appears_as_friend(@bob)
     end
 
     scenario "and no longer sees incoming friend requests" do 
@@ -293,7 +287,7 @@ feature "requestee accepts friend request" do
     scenario "and sees the requestor appear in the user index as a friend" do 
       click_on "users"
 
-      expect(page).to have_user_appear_as_friend(@bob)
+      user_appears_as_friend(@bob)
     end
 
     scenario "and sees 'friends' on the requestor's profile" do 
@@ -301,8 +295,7 @@ feature "requestee accepts friend request" do
       click_on "friends"
       click_on "bob"
 
-      friend_status_section = find('[data-test="friend-request-status-control"]')
-      expect(friend_status_section).to have_content("friends")
+      user_appears_as_friend(@bob)
     end
 
     scenario "and no longer sees incoming friend requests" do 

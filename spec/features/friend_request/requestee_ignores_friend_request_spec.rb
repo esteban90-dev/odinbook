@@ -13,8 +13,7 @@ feature "requestee ignores friend request" do
       visit root_path
       click_on "joe"
       click_on "friend requests"
-
-      ignore_from_friend_requests(@friend_request)
+      click_on "ignore"
     end
 
     scenario "and sees a flash message" do 
@@ -53,7 +52,7 @@ feature "requestee ignores friend request" do
       visit root_path
       click_on "users"
 
-      expect(page).to have_user_appear_addable(@joe)
+      user_appears_addable(@joe)
     end
 
     scenario "the requestor no longer sees pending sent friend requests" do 
@@ -85,8 +84,7 @@ feature "requestee ignores friend request" do
       sign_in @joe
       visit root_path
       click_on "notifications"
-
-      ignore_from_notifications(@joe.notifications.last)
+      click_on "ignore"
     end
 
     scenario "and sees a flash message" do 
@@ -125,7 +123,7 @@ feature "requestee ignores friend request" do
       visit root_path
       click_on "users"
 
-      expect(page).to have_user_appear_addable(@joe)
+      user_appears_addable(@joe)
     end
 
     scenario "the requestor no longer sees pending sent friend requests" do 
@@ -152,8 +150,7 @@ feature "requestee ignores friend request" do
       sign_in @joe
       visit root_path
       click_on "users"
-
-      ignore_from_users(@bob)
+      click_on "ignore"
     end
 
     scenario "and sees a flash message" do 
@@ -192,7 +189,7 @@ feature "requestee ignores friend request" do
       visit root_path
       click_on "users"
 
-      expect(page).to have_user_appear_addable(@joe)
+      user_appears_addable(@joe)
     end
 
     scenario "the requestor no longer sees pending sent friend requests" do 
@@ -259,7 +256,7 @@ feature "requestee ignores friend request" do
       visit root_path
       click_on "users"
 
-      expect(page).to have_user_appear_addable(@joe)
+      user_appears_addable(@joe)
     end
 
     scenario "the requestor no longer sees pending sent friend requests" do 
