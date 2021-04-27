@@ -21,4 +21,8 @@ feature "user visits non friend's profile" do
     expect(page).not_to have_like_button
   end
 
+  scenario "they don't see the 'friends' link" do 
+    expect(page).not_to have_link("friends")
+  end
+
 end
