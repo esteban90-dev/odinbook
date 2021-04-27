@@ -11,6 +11,13 @@ require 'faker'
 EDUCATION_OPTIONS = ["High School", "Associate's Degree", "Bachelor's Degree", "Master's Degree", "Doctoral Degree"]
 RELATIONSHIP_STATUS_OPTIONS = ["Single", "In a Relationship", "Married"]
 
+TEST_PICTURES = [
+  [ ENV['test_picture_path_1'], ENV['test_picture_filename_1'] ],
+  [ ENV['test_picture_path_2'], ENV['test_picture_filename_2'] ],
+  [ ENV['test_picture_path_3'], ENV['test_picture_filename_3'] ],
+  [ ENV['test_picture_path_4'], ENV['test_picture_filename_4'] ],
+]
+
 def random_education
   EDUCATION_OPTIONS[(rand*EDUCATION_OPTIONS.length).to_i]
 end
@@ -21,6 +28,10 @@ end
 
 def random_user
   User.order('RANDOM()').first
+end
+
+def random_number(low_limit, high_limit)
+  (rand*high_limit).to_i + low_limit
 end
 
 #create 30 users
@@ -48,9 +59,18 @@ User.all.each do |user|
   puts "user #{user.id} profile created"
 end
 
-#create 10 posts per user
+#create 10 posts per user - some will have an attached picture
 User.all.each do |user|
-  10.times{ user.posts.create(body: Faker::Quote.famous_last_words) }
+  10.times do 
+    if random_number(1,4) == 1
+      post = user.posts.new(body: Faker::Quote.famous_last_words)
+      random_picture = TEST_PICTURES[random_number(0,3)]
+      post.picture.attach(io: File.open(random_picture[0]), filename: random_picture[1], content_type: 'image/png')
+      post.save
+    else
+      user.posts.create(body: Faker::Quote.famous_last_words)
+    end
+  end
 
   puts "user #{user.id} posts created"
 end
