@@ -55,9 +55,9 @@ class CommentsController < ApplicationController
 
   def comment_redirect(comment)
     if params[:comment][:redirect] == "timeline"
-      redirect_to posts_path
+      redirect_to posts_path(anchor: comment.post.id)
     else
-      redirect_to user_profile_path(comment.post.user.id) 
+      redirect_to user_profile_path(comment.post.user.id, anchor: comment.post.id) 
     end
   end
 

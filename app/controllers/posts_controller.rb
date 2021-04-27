@@ -47,9 +47,9 @@ class PostsController < ApplicationController
 
   def post_redirect(post)
     if params[:post][:redirect] == "timeline"
-      redirect_to posts_path
+      redirect_to posts_path(anchor: post.id)
     else
-      redirect_to user_profile_path(post.user.id)
+      redirect_to user_profile_path(post.user.id, anchor: post.id)
     end
   end
 
