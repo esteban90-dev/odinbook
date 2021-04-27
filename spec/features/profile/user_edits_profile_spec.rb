@@ -64,7 +64,7 @@ feature "user edits profile" do
 
   context "without a profile picture" do 
 
-    scenario "they see a generic user icon for a profile picture" do 
+    scenario "they see a generic profile picture uploaded for them" do 
       visit root_path
 
       click_on "sign up"
@@ -78,7 +78,8 @@ feature "user edits profile" do
       select('Single', from: "Relationship Status")
       click_on "Save Profile"
 
-      expect(page).to have_image("generic-user-icon-19.png")
+      #filename of default profile picture varies on each upload, so just check for presence of image
+      expect(page_has_any_image?).to eq(true)
     end
 
   end
