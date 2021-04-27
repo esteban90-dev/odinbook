@@ -30,6 +30,10 @@ def random_user
   User.order('RANDOM()').first
 end
 
+def random_friend_of_user(user)
+  user.friends.all.sample
+end
+
 def random_number(low_limit, high_limit)
   (rand*high_limit).to_i + low_limit
 end
@@ -59,22 +63,6 @@ User.all.each do |user|
   puts "user #{user.id} profile created"
 end
 
-#create 10 posts per user - some will have an attached picture
-User.all.each do |user|
-  10.times do 
-    if random_number(1,4) == 1
-      post = user.posts.new(body: Faker::Quote.famous_last_words)
-      random_picture = TEST_PICTURES[random_number(0,3)]
-      post.picture.attach(io: File.open(random_picture[0]), filename: random_picture[1], content_type: 'image/png')
-      post.save
-    else
-      user.posts.create(body: Faker::Quote.famous_last_words)
-    end
-  end
-
-  puts "user #{user.id} posts created"
-end
-
 #assign each user 5 random friends
 User.all.each do |user|
   while user.friends.count <= 5
@@ -85,3 +73,31 @@ User.all.each do |user|
     end
   end
 end
+
+#create 10 posts per user - some will have an attached picture, some will have comments
+User.all.each do |user|
+  10.times do 
+    #generate post
+    if random_number(1,4) == 1
+      post = user.posts.new(body: Faker::Quote.famous_last_words)
+      random_picture = TEST_PICTURES[random_number(0,3)]
+      post.picture.attach(io: File.open(random_picture[0]), filename: random_picture[1], content_type: 'image/png')
+      post.save
+    else
+      user.posts.create(body: Faker::Quote.famous_last_words)
+    end
+
+    #generate comments
+    post = user.posts.last
+    if random_number(1,3) == 1
+      number_of_comments = random_number(1,5)
+      number_of_comments.times do 
+        post.comments.create(commenter: random_friend_of_user(user), body: Faker::Quote.famous_last_words)
+      end
+    end
+
+  end
+
+  puts "user #{user.id} posts created"
+end
+
