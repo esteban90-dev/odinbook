@@ -13,7 +13,9 @@ class Profile < ApplicationRecord
 
   def attach_generic_picture
     unless picture.attached?
-      picture.attach(io: File.open(ENV['generic_profile_picture_path']), filename: ENV['generic_profile_picture_filename'], content_type: 'image/png')
+      image = Down.download(ENV['generic_profile_picture_url'])
+      filename = File.basename(image.path)
+      picture.attach(io: image, filename: filename, content_type: 'image/png')
     end
   end
 end

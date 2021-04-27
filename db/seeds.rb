@@ -11,11 +11,10 @@ require 'faker'
 EDUCATION_OPTIONS = ["High School", "Associate's Degree", "Bachelor's Degree", "Master's Degree", "Doctoral Degree"]
 RELATIONSHIP_STATUS_OPTIONS = ["Single", "In a Relationship", "Married"]
 
-TEST_PICTURES = [
-  [ ENV['test_picture_path_1'], ENV['test_picture_filename_1'] ],
-  [ ENV['test_picture_path_2'], ENV['test_picture_filename_2'] ],
-  [ ENV['test_picture_path_3'], ENV['test_picture_filename_3'] ],
-  [ ENV['test_picture_path_4'], ENV['test_picture_filename_4'] ],
+TEST_PICTURE_URLS = [ENV['test_picture_url_1'],
+  ENV['test_picture_url_2'],
+  ENV['test_picture_url_3'],
+  ENV['test_picture_url_4'],
 ]
 
 def random_education
@@ -78,17 +77,18 @@ end
 User.all.each do |user|
   10.times do 
     #generate post
+    post = user.posts.new(body: Faker::Quote.famous_last_words)
+
+    #maybe attach a picture
     if random_number(1,4) == 1
-      post = user.posts.new(body: Faker::Quote.famous_last_words)
-      random_picture = TEST_PICTURES[random_number(0,3)]
-      post.picture.attach(io: File.open(random_picture[0]), filename: random_picture[1], content_type: 'image/png')
-      post.save
-    else
-      user.posts.create(body: Faker::Quote.famous_last_words)
+      random_picture = Down.download(TEST_PICTURE_URLS[random_number(0,3)])
+      random_picture_filename = File.basename(random_picture.path)
+      post.picture.attach(io: random_picture, filename: random_picture_filename, content_type: 'image/png')
     end
 
+    post.save
+
     #generate comments
-    post = user.posts.last
     if random_number(1,3) == 1
       number_of_comments = random_number(1,5)
       number_of_comments.times do 
