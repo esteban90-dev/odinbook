@@ -19,4 +19,8 @@ feature "facebook user signs in" do
     user_appears_signed_in("somebody")
   end
 
+  scenario "they are redirected to the root path" do 
+    expect(page).to have_current_path(root_path)
+  end
+
 end

@@ -22,6 +22,10 @@ feature "regular user signs in" do
       user_appears_signed_in("#{@user.name}")
     end
 
+    scenario "they are redirected to the root path" do 
+      expect(page).to have_current_path(root_path)
+    end
+
   end
 
   context "with an invalid email/password" do
