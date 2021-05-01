@@ -4,7 +4,7 @@ This is a facebook clone app that is the [final project](https://www.theodinproj
 
 ## Features
 
-Users have the ability to register traditionally or with facebook.  Once a user registers, they are sent a welcome email and are prompted to create a profile that contains basic information.  They also have the option to upload a profile picture.  Users can create posts with either text or an image (or both).  Posts can be commented on and liked.  Users can send friend requests to other users.  Users can either accept or ignore friend requests.  An accepted friend request results in a friendship between two users.  Users can also 'unfriend' their friends.  Users will receive notifications when they register, when they recieve friend requests, and when their posts are either commented on or liked.  
+Users have the ability to register traditionally or with facebook.  Once a user registers, they are sent a welcome email and are prompted to create a profile that contains basic information.  They also have the option to upload a profile picture.  Users can create posts with either text or an image (or both).  Posts can be commented on and liked.  Users can send friend requests to other users.  Users can either accept or ignore friend requests.  An accepted friend request results in a friendship between two users.  Users can also 'unfriend' their friends.  Users will receive notifications when they register, when they receive friend requests, and when their posts are either commented on or liked.  
 
 ## Testing
 
